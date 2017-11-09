@@ -48,11 +48,6 @@ public class Restaurant
     public String getName() { return mName; }
 
     /**
-     * Get the link of the restaurant
-     */
-    public String getLink() { return mLink; }
-
-    /**
      * Get the image
      */
     public int getImageResourceId()
