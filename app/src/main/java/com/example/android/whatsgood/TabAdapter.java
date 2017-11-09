@@ -51,8 +51,8 @@ public class TabAdapter extends FragmentPagerAdapter
     public CharSequence getPageTitle(int position)
     {
         if (position == 0)
-            return "Lists";
+            return "";
         else
-            return "Map";
+            return "";
     }
 }

@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity
         //      by calling onPageTitle()
         tabLayout.setupWithViewPager(viewPager);
 
+        tabLayout.getTabAt(0).setIcon(R.drawable.icon_list);
+
+        tabLayout.getTabAt(1).setIcon(R.drawable.icon_maps);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
