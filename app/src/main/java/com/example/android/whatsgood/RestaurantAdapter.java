@@ -14,7 +14,10 @@ import android.widget.TextView;
 import com.example.android.whatsgood.R;
 import com.example.android.whatsgood.Restaurant;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /*
 * {@link RestaurantAdapter} is an {@link ArrayAdapter} that can provide the layout for each list
@@ -67,7 +70,13 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         TextView specialsTextView = (TextView) listItemView.findViewById(R.id.specials_text_view);
         // Get the English translation from the currentWord object and set this text on the englishTextView
         //specialsTextView.setText(currentRestaurant.toString());
-        specialsTextView.setText("Specials");
+
+        // Get the current day to know which specials to display
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date date = new Date();
+        String dayOfTheWeek = sdf.format(date);
+
+        specialsTextView.setText(currentRestaurant.getSpecial(dayOfTheWeek));
 
         // Find the ImageView in the list_item.xml layout with the ID image
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);

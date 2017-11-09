@@ -1,5 +1,6 @@
 package com.example.android.whatsgood;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -46,6 +47,14 @@ public class Restaurant
      * Get the name of the Restaurant
      */
     public String getName() { return mName; }
+
+    /**
+     * Get the specials for a specific day
+     */
+    public String getSpecial(String key)
+    {
+        return mSpecialsHashMap.get(key);
+    }
 
     /**
      * Get the link of the restaurant
