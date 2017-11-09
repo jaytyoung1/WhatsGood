@@ -39,10 +39,11 @@
             android:id="@+id/specials_text_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center_vertical"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@android:color/white"
+            android:textSize="14sp"
             tools:text="specials here"/>
 
     </LinearLayout>
