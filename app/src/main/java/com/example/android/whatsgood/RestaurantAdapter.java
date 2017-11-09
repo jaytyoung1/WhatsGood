@@ -1,6 +1,8 @@
 package com.example.android.whatsgood;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +56,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         }
 
         // Get the {@link Word} object located at this position in the list
-        Restaurant currentRestaurant = getItem(position);
+        final Restaurant currentRestaurant = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID restaurant_name_text_view
         TextView restaurantNameTextView = (TextView) listItemView.findViewById(R.id.restaurant_name_text_view);
@@ -69,6 +71,19 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
         // Find the ImageView in the list_item.xml layout with the ID image
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+
+        // Add a click listener to the image to open the site's url
+        imageView.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(currentRestaurant.getLink()));
+                getContext().startActivity(intent);
+            }
+        });
 
         if (currentRestaurant.hasImage())
         {
