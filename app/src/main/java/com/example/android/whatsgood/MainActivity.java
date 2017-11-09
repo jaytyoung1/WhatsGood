@@ -41,12 +41,16 @@ public class MainActivity extends AppCompatActivity
         //      by calling onPageTitle()
         tabLayout.setupWithViewPager(viewPager);
 
+        // Use icons for the tabs
         tabLayout.getTabAt(0).setIcon(R.drawable.icon_list);
-
         tabLayout.getTabAt(1).setIcon(R.drawable.icon_maps);
 
+        // Set up the action bar, but get rid of the title
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
