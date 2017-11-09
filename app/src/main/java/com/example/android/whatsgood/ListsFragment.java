@@ -44,7 +44,7 @@ public class ListsFragment extends Fragment
         detzis.mSpecialsHashMap.put("Monday", "");
         detzis.mSpecialsHashMap.put("Tuesday", "");
         detzis.mSpecialsHashMap.put("Wednesday", "$0.55 wings, $2 Michelob Ultra pints");
-        detzis.mSpecialsHashMap.put("Thursday", "");
+        detzis.mSpecialsHashMap.put("Thursday", "Beer Feature: Miller Lite");
         detzis.mSpecialsHashMap.put("Friday", "");
         detzis.mSpecialsHashMap.put("Saturday", "");
         detzis.mSpecialsHashMap.put("Sunday", "");
