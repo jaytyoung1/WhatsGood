@@ -3,6 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello World!</string>
 
+    <!-- Title for the Restaurant activity -->
+    <string name="restaurant_activity_title">Restaurant Activity</string>
+
     <!-- Days of the week -->
     <string name="select_day"></string>
     <string name="day_monday">Monday</string>

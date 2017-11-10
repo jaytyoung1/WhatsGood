@@ -82,10 +82,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         {
             public void onClick(View v)
             {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(currentRestaurant.getLink()));
+                Intent intent = new Intent(getContext(), RestaurantActivity.class);
                 getContext().startActivity(intent);
             }
         });
