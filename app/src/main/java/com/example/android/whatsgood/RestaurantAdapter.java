@@ -66,11 +66,11 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         TextView specialsTextView = (TextView) listItemView.findViewById(R.id.specials_text_view);
 
         // Get the current day to know which specials to display
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        Date date = new Date();
-        String dayOfTheWeek = sdf.format(date);
+        //SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        //Date date = new Date();
+        //String dayOfTheWeek = sdf.format(date);
 
-        specialsTextView.setText(currentRestaurant.getSpecial(dayOfTheWeek));
+        specialsTextView.setText(currentRestaurant.getSpecial(MainActivity.dayString));
 
         // Find the ImageView in the list_item.xml layout with the ID image
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);

@@ -7,16 +7,28 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
 {
+    /**
+     * Spinner drop down arrow to enter day of the week
+     */
+    private Spinner mDaySpinner;
+
+    /**
+     * Day of the week
+     */
+    private int mDayOfTheWeek;
+
+    public static String dayString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,12 +69,16 @@ public class MainActivity extends AppCompatActivity
         toolbar.setSubtitle("");
 
         // Get the current day to know which day to display
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        Date date = new Date();
-        String dayOfTheWeek = sdf.format(date);
+        //SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        //Date date = new Date();
+        //String dayOfTheWeek = sdf.format(date);
+
+        mDaySpinner = (Spinner) findViewById(R.id.spinner_day_of_the_week);
+
+        setupSpinner();
 
         TextView dayOfWeekTextView = (TextView) findViewById(R.id.day_of_week_text);
-        dayOfWeekTextView.setText(dayOfTheWeek);
+        dayOfWeekTextView.setText(dayString);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
@@ -72,6 +88,75 @@ public class MainActivity extends AppCompatActivity
             {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+    }
+
+    /**
+     * Setup the dropdown spinner that allows the user to select the day of the week
+     */
+    private void setupSpinner()
+    {
+        // Create adapter for spinner. The list options are from the String array it will use
+        // the spinner will use the default layout
+        ArrayAdapter daySpinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.array_days_of_the_week, android.R.layout.simple_spinner_item);
+
+        // Specify dropdown layout style - simple list view with 1 item per line
+        daySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        // Apply the adapter to the spinner
+        mDaySpinner.setAdapter(daySpinnerAdapter);
+
+        // Set the integer mSelected to the constant values
+        mDaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                String selection = (String) parent.getItemAtPosition(position);
+                if (!TextUtils.isEmpty(selection))
+                {
+                    if (selection.equals(getString(R.string.day_monday)))
+                    {
+                        mDayOfTheWeek = 1;
+                        dayString = getString(R.string.day_monday);
+                    } else if (selection.equals(getString(R.string.day_tuesday)))
+                    {
+                        mDayOfTheWeek = 2;
+                        dayString = getString(R.string.day_tuesday);
+
+                    } else if (selection.equals(getString(R.string.day_wednesday)))
+                    {
+                        mDayOfTheWeek = 3;
+                        dayString = getString(R.string.day_wednesday);
+                    } else if (selection.equals(getString(R.string.day_thursday)))
+                    {
+                        mDayOfTheWeek = 4;
+                        dayString = getString(R.string.day_thursday);
+                    } else if (selection.equals(getString(R.string.day_friday)))
+                    {
+                        mDayOfTheWeek = 5;
+                        dayString = getString(R.string.day_friday);
+                    } else if (selection.equals(getString(R.string.day_saturday)))
+                    {
+                        mDayOfTheWeek = 6;
+                        dayString = getString(R.string.day_saturday);
+                    } else if (selection.equals(getString(R.string.day_sunday)))
+                    {
+                        mDayOfTheWeek = 7;
+                        dayString = getString(R.string.day_sunday);
+                    }
+                    finish();
+                    startActivity(getIntent());
+                }
+            }
+
+            // Because AdapterView is an abstract class, onNothingSelected must be defined
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+                mDayOfTheWeek = 0;
             }
         });
     }
