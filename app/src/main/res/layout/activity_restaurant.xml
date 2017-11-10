@@ -43,19 +43,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_monday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 
@@ -66,19 +66,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_tuesday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 
@@ -89,19 +89,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_wednesday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 
@@ -112,19 +112,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_thursday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 
@@ -135,19 +135,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_friday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 
@@ -158,19 +158,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_saturday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 
@@ -181,19 +181,19 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/day_sunday"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_weight="1"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="specials"/>
 
             </LinearLayout>
 

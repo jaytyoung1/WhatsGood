@@ -19,11 +19,11 @@ public class RestaurantActivity extends AppCompatActivity
         setContentView(R.layout.activity_restaurant);
 
         Intent intent = getIntent();
-        Restaurant currentRestaurant = (Restaurant)intent.getSerializableExtra("currentRestaurant");
+        Restaurant currentRestaurant = (Restaurant) intent.getSerializableExtra("currentRestaurant");
 
         TextView restaurantTextView = (TextView) findViewById(R.id.restaurant_name);
         restaurantTextView.setText(currentRestaurant.getName());
-        
+
         ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_photo);
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
     }
