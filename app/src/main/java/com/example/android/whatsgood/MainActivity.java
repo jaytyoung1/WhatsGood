@@ -10,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -51,6 +55,14 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle("");
         toolbar.setSubtitle("");
+
+        // Get the current day to know which day to display
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date date = new Date();
+        String dayOfTheWeek = sdf.format(date);
+
+        TextView dayOfWeekTextView = (TextView) findViewById(R.id.day_of_week_text);
+        dayOfWeekTextView.setText(dayOfTheWeek);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()

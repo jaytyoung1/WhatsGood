@@ -29,6 +29,8 @@
                     android:id="@+id/icon_image"
                     android:layout_width="66dp"
                     android:layout_height="66dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:src="@mipmap/ic_launcher"/>
 
                 <LinearLayout
@@ -40,6 +42,7 @@
                     android:layout_toRightOf="@+id/image">
 
                     <TextView
+                        android:id="@+id/day_of_week_text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
