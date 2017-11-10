@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by jyoun on 11/10/2017.
@@ -20,6 +21,9 @@ public class RestaurantActivity extends AppCompatActivity
         Intent intent = getIntent();
         Restaurant currentRestaurant = (Restaurant)intent.getSerializableExtra("currentRestaurant");
 
+        TextView restaurantTextView = (TextView) findViewById(R.id.restaurant_name);
+        restaurantTextView.setText(currentRestaurant.getName());
+        
         ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_photo);
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
     }
