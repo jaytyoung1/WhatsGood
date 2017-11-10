@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         TextView restaurantNameTextView = (TextView) listItemView.findViewById(R.id.restaurant_name_text_view);
         // Get the Restaurant name from the currentRestaurant object and set this text on the text view
         restaurantNameTextView.setText(currentRestaurant.getName());
+        restaurantNameTextView.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.slide_in_left));
 
         // Find the TextView in the list_item.xml layout with the specials
         TextView specialsTextView = (TextView) listItemView.findViewById(R.id.specials_text_view);
