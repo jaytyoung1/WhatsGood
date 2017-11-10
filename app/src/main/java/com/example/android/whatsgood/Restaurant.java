@@ -1,5 +1,6 @@
 package com.example.android.whatsgood;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
  * Created by jyoun on 11/9/2017.
  */
 
-public class Restaurant
+public class Restaurant implements Serializable
 {
     // Name of the restaurant
     private String mName;

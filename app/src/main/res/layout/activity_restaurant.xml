@@ -203,7 +203,7 @@
     </RelativeLayout>
 
     <ImageButton
-        android:id="@+id/user_profile_photo"
+        android:id="@+id/restaurant_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@+id/restaurant_name"
