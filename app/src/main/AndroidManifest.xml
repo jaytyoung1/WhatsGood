@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".RestaurantActivity"
-            android:label="@string/restaurant_activity_title"
+            android:label=""
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
             <!-- Parent activity meta-data to support 4.0 and lower -->
