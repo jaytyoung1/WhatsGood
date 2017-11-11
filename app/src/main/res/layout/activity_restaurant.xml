@@ -50,6 +50,7 @@
                     android:text="@string/day_monday"/>
 
                 <TextView
+                    android:id="@+id/monday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -58,6 +59,11 @@
                     android:text="specials"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,6 +79,7 @@
                     android:text="@string/day_tuesday"/>
 
                 <TextView
+                    android:id="@+id/tuesday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -81,6 +88,11 @@
                     android:text="specials"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,6 +108,7 @@
                     android:text="@string/day_wednesday"/>
 
                 <TextView
+                    android:id="@+id/wednesday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -104,6 +117,11 @@
                     android:text="specials"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,6 +137,7 @@
                     android:text="@string/day_thursday"/>
 
                 <TextView
+                    android:id="@+id/thursday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -127,6 +146,11 @@
                     android:text="specials"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,6 +166,7 @@
                     android:text="@string/day_friday"/>
 
                 <TextView
+                    android:id="@+id/friday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -150,6 +175,11 @@
                     android:text="specials"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,6 +195,7 @@
                     android:text="@string/day_saturday"/>
 
                 <TextView
+                    android:id="@+id/saturday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -173,6 +204,11 @@
                     android:text="specials"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -188,6 +224,7 @@
                     android:text="@string/day_sunday"/>
 
                 <TextView
+                    android:id="@+id/sunday_specials_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
