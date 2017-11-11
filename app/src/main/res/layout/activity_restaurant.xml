@@ -46,7 +46,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_monday"/>
+                    android:text="@string/day_monday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/monday_specials_text"
@@ -73,7 +75,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_tuesday"/>
+                    android:text="@string/day_tuesday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tuesday_specials_text"
@@ -100,7 +104,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_wednesday"/>
+                    android:text="@string/day_wednesday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/wednesday_specials_text"
@@ -127,7 +133,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_thursday"/>
+                    android:text="@string/day_thursday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/thursday_specials_text"
@@ -154,7 +162,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_friday"/>
+                    android:text="@string/day_friday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/friday_specials_text"
@@ -181,7 +191,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_saturday"/>
+                    android:text="@string/day_saturday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/saturday_specials_text"
@@ -208,7 +220,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/day_sunday"/>
+                    android:text="@string/day_sunday"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/sunday_specials_text"
