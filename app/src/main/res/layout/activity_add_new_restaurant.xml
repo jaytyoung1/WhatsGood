@@ -23,13 +23,13 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Name"/>
+                android:text="@string/name"/>
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/add_new_restaurant_name"
                 style="@style/EditorFieldStyle"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:inputType="textCapWords"/>
         </LinearLayout>
 
@@ -42,13 +42,13 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="website link"/>
+                android:text="@string/website_link"/>
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/add_new_restaurant_website_link"
                 style="@style/EditorFieldStyle"
-                android:hint="https://..."
+                android:hint="@string/website_link_hint"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
@@ -62,18 +62,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="image link"/>
+                android:text="@string/image_link"/>
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/add_new_restaurant_link"
                 style="@style/EditorFieldStyle"
-                android:hint="..."
+                android:hint="@string/image_link_hint"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Monday specials -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,18 +82,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Mon. specials"/>
+                android:text="@string/day_monday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_monday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Tuesday specials -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,18 +102,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Tue. specials"/>
+                android:text="@string/day_tuesday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_tuesday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Wednesday specials -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,18 +122,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Wed. specials"/>
+                android:text="@string/day_wednesday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_wednesday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Thursday specials -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,18 +142,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Thur. specials"/>
+                android:text="@string/day_thursday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_thursday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Friday specials -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,18 +162,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Fri. specials"/>
+                android:text="@string/day_friday"/>
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/add_new_restaurant_friday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Saturday specials -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -182,18 +182,18 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Sat. specials"/>
+                android:text="@string/day_saturday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_saturday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
 
-        <!-- Link category -->
+        <!-- Sunday specials -->
         <LinearLayout
             android:id="@+id/container_gender"
             android:layout_width="match_parent"
@@ -204,13 +204,13 @@
             <!-- Label -->
             <TextView
                 style="@style/CategoryStyle"
-                android:text="Sun. specials"/>
+                android:text="@string/day_sunday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_sunday"
                 style="@style/EditorFieldStyle"
-                android:hint="specials"
+                android:hint="@string/specials"
                 android:inputType="textCapWords"/>
 
         </LinearLayout>
@@ -220,7 +220,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/colorAccent"
-            android:text="Submit"
+            android:text="@string/submit_button_text"
             android:textColor="@color/colorWhite"/>
 
     </LinearLayout>

@@ -16,4 +16,13 @@
     <string name="day_saturday">Saturday</string>
     <string name="day_sunday">Sunday</string>
 
+    <!-- Text to fill the EditText fields -->
+    <string name="name">Name</string>
+    <string name="website_link">website link</string>
+    <string name="website_link_hint">https://...</string>
+    <string name="image_link">image link</string>
+    <string name="image_link_hint">.png, .jpg, jpeg, etc.</string>
+    <string name="specials">specials</string>
+    <string name="submit_button_text">Submit</string>
+
 </resources>
