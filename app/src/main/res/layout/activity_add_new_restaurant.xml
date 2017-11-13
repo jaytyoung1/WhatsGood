@@ -1,213 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Layout for the editor -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_margin"
-    tools:context=".AddNewRestaurantActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <!-- Restaurant name category -->
     <LinearLayout
-        android:id="@+id/container_restaurant_name"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_margin"
+        tools:context=".AddNewRestaurantActivity">
 
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Name"/>
+        <!-- Restaurant name category -->
+        <LinearLayout
+            android:id="@+id/container_restaurant_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_name"
-            style="@style/EditorFieldStyle"
-            android:hint="Name"
-            android:inputType="textCapWords"/>
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Name"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_name"
+                style="@style/EditorFieldStyle"
+                android:hint="Name"
+                android:inputType="textCapWords"/>
+        </LinearLayout>
+
+        <!-- Website link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="website link"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_website_link"
+                style="@style/EditorFieldStyle"
+                android:hint="https://..."
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Image link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="image link"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_link"
+                style="@style/EditorFieldStyle"
+                android:hint="..."
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Mon. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_monday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Tue. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_tuesday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Wed. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_wednesday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Thur. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_thursday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Fri. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_friday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Sat. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_saturday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- Link category -->
+        <LinearLayout
+            android:id="@+id/container_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Sun. specials"/>
+
+            <!-- Breed field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_sunday"
+                style="@style/EditorFieldStyle"
+                android:hint="specials"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:text="Submit"
+            android:textColor="@color/colorWhite"/>
+
     </LinearLayout>
 
-    <!-- Website link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="website link"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_website_link"
-            style="@style/EditorFieldStyle"
-            android:hint="https://..."
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Image link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="image link"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_link"
-            style="@style/EditorFieldStyle"
-            android:hint="..."
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Mon. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_monday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Tue. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_tuesday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Wed. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_wednesday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Thur. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_thursday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Fri. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_friday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Sat. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_saturday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-    <!-- Link category -->
-    <LinearLayout
-        android:id="@+id/container_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="Sun. specials"/>
-
-        <!-- Breed field -->
-        <EditText
-            android:id="@+id/add_new_restaurant_sunday"
-            style="@style/EditorFieldStyle"
-            android:hint="specials"
-            android:inputType="textCapWords"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
