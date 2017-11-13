@@ -14,6 +14,9 @@ public class Restaurant implements Serializable
     // Name of the restaurant
     private String mName;
 
+    // Address of the restaurant
+    private String mAddress;
+
     // Link to the restaurant's website
     private String mLink;
 
@@ -28,19 +31,21 @@ public class Restaurant implements Serializable
     /**
      * Create a Restaurant object
      */
-    public Restaurant(String name, String link)
+    public Restaurant(String name, String link, String addess)
     {
         mName = name;
         mLink = link;
+        mAddress = addess;
     }
 
     /**
      * Create a Restaurant object with an image
      */
-    public Restaurant(String name, String link, int imageResourceId)
+    public Restaurant(String name, String link, String address, int imageResourceId)
     {
         mName = name;
         mLink = link;
+        mAddress = address;
         mImageResourceId = imageResourceId;
     }
 
@@ -61,6 +66,11 @@ public class Restaurant implements Serializable
      * Get the link of the restaurant
      */
     public String getLink() { return mLink; }
+
+    /**
+     * Get the address of the restaurant
+     */
+    public String getAddress() { return mAddress; }
 
     /**
      * Get the image
@@ -86,6 +96,7 @@ public class Restaurant implements Serializable
     {
         String str = "Restaurant: " + mName + "\n";
         str += "link: " + mLink + "\n";
+        str += "address: " + mAddress + "\n";
         for (Map.Entry m : mSpecialsHashMap.entrySet())
         {
             str += String.format("%-10s %s\n", m.getKey(), m.getValue());

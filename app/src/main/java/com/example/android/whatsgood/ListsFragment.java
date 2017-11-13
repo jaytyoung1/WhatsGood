@@ -30,7 +30,7 @@ public class ListsFragment extends Fragment
         //Create an ArrayList of restaurants
         final ArrayList<Restaurant> restaurants = new ArrayList<>();
 
-        Restaurant slate = new Restaurant("The Slate Pub", "http://slatepub.com", R.drawable.the_slate_logo);
+        Restaurant slate = new Restaurant("The Slate Pub", "http://slatepub.com", "509 E Main St. Pen Argyl, PA", R.drawable.the_slate_logo);
         slate.mSpecialsHashMap.put("Monday", "$0.50 wings");
         slate.mSpecialsHashMap.put("Tuesday", "");
         slate.mSpecialsHashMap.put("Wednesday", "");
@@ -40,7 +40,7 @@ public class ListsFragment extends Fragment
         slate.mSpecialsHashMap.put("Sunday", "$0.50 wings");
         restaurants.add(slate);
 
-        Restaurant detzis = new Restaurant("Detzi's Tavern", "http://www.detzistavern.com", R.drawable.detzis_logo);
+        Restaurant detzis = new Restaurant("Detzi's Tavern", "http://www.detzistavern.com", "570 N Lehigh Ave. Wind Gap, PA", R.drawable.detzis_logo);
         detzis.mSpecialsHashMap.put("Monday", "");
         detzis.mSpecialsHashMap.put("Tuesday", "");
         detzis.mSpecialsHashMap.put("Wednesday", "$0.55 wings, $2 Michelob Ultra pints");
@@ -50,7 +50,7 @@ public class ListsFragment extends Fragment
         detzis.mSpecialsHashMap.put("Sunday", "");
         restaurants.add(detzis);
 
-        Restaurant scorecard = new Restaurant("Scorecard Sports Bar & Grill", "http://www.scorecardbar.com", R.drawable.scorecard_logo);
+        Restaurant scorecard = new Restaurant("Scorecard Sports Bar & Grill", "http://www.scorecardbar.com", "130 N Broadway, Wind Gap, PA", R.drawable.scorecard_logo);
         scorecard.mSpecialsHashMap.put("Monday", "$0.55 wings, $2 Bud Light drafts");
         scorecard.mSpecialsHashMap.put("Tuesday", "$1.59 tacos, $3 Landshark drafts");
         scorecard.mSpecialsHashMap.put("Wednesday", "$1.75 sloppy joes, $6 Coors Light pitchers, Team Trivia at 8pm");
