@@ -31,11 +31,11 @@ public class Restaurant implements Serializable
     /**
      * Create a Restaurant object
      */
-    public Restaurant(String name, String link, String addess)
+    public Restaurant(String name, String link, String address)
     {
         mName = name;
         mLink = link;
-        mAddress = addess;
+        mAddress = address;
     }
 
     /**
