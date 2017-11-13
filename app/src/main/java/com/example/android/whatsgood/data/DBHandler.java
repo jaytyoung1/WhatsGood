@@ -26,7 +26,7 @@ public class DBHandler extends SQLiteOpenHelper
     private static final String KEY_ID = "id";
     private static final String KEY_RESTAURANT_OBJECT = "object";
     private static final String KEY_RESTAURANT_NAME = "name";
-    private static final String KEY_RESTAURANT_ADDESS = "address";
+    private static final String KEY_RESTAURANT_ADDRESS = "address";
     private static final String KEY_RESTAURANT_LINK = "link";
     private static final String KEY_RESTAURANT_IMAGE = "image";
     private static final String KEY_RESTAURANT_MONDAY = "monday_specials";
@@ -58,7 +58,7 @@ public class DBHandler extends SQLiteOpenHelper
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_RESTAURANT_OBJECT + "BLOB NOT NULL,"
                 + KEY_RESTAURANT_NAME + "TEXT NOT NULL,"
-                + KEY_RESTAURANT_ADDESS + "TEXT NOT NULL,"
+                + KEY_RESTAURANT_ADDRESS + "TEXT NOT NULL,"
                 + KEY_RESTAURANT_LINK + "TEXT NOT NULL,"
                 + KEY_RESTAURANT_IMAGE + "TEXT NOT NULL,"
                 + KEY_RESTAURANT_MONDAY + "TEXT NOT NULL,"
