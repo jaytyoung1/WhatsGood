@@ -80,6 +80,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback
         mMap = map;
         LatLng penArgyl = new LatLng(40.8687, -75.2549);
         CameraPosition target = CameraPosition.builder().target(penArgyl).zoom(14).build();
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 2000, null);
     }
 }
