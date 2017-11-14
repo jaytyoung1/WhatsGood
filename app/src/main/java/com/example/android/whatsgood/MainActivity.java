@@ -85,13 +85,42 @@ public class MainActivity extends AppCompatActivity
         TextView dayOfWeekTextView = (TextView) findViewById(R.id.day_of_week_text);
         dayOfWeekTextView.setText(dayString);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                switch (position)
+                {
+                    case 0:
+                        fab.show();
+                        break;
+                    case 1:
+                        fab.hide();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                CharSequence options[] = new CharSequence[] {"Add new restaurant", "Edit existing restaurant"};
+                CharSequence options[] = new CharSequence[]{"Add new restaurant", "Edit existing restaurant"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Select an option.");
