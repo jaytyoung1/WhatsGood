@@ -11,13 +11,12 @@
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
-        map:cameraBearing="112.5"
-        map:cameraTargetLat="40.7484"
-        map:cameraTargetLng="-73.9857"
-        map:cameraTilt="65"
-        map:cameraZoom="17"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        map:cameraTargetLat="40.8687"
+        map:cameraTargetLng="-75.2549"
+        map:cameraTilt="65"
+        map:cameraZoom="13"/>
 
 
 </LinearLayout>
