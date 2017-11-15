@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setupWithViewPager(viewPager);
 
         // Use icons for the tabs
-        tabLayout.getTabAt(0).setIcon(R.drawable.icon_list);
-        tabLayout.getTabAt(1).setIcon(R.drawable.icon_maps);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_list_white);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_location_on_white);
 
         // Set up the action bar, but get rid of the title
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
