@@ -7,12 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.android.whatsgood.data.CreateRestaurants;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 /**
  * Created by jyoun on 11/9/2017.
@@ -23,6 +27,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback
 {
     GoogleMap mMap;
     boolean mapReady = false;
+
+    ArrayList<MarkerOptions> markerOptionsArrayList = new ArrayList<>();
 
     public MapFragment()
     {
@@ -70,6 +76,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // Create an instance of the object that creates restaurants
+        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
+
+        // Get it's ArrayList of restaurants
+        ArrayList<Restaurant> restaurants = createRestaurantsObject.getArrayList();
+
+        for (Restaurant r : restaurants)
+        {
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(new LatLng(r.getLatitude(), r.getLongitude()))
+                    .snippet(r.getAddress())
+                    .title(r.getName());
+
+            markerOptionsArrayList.add(markerOptions);
+        }
         return rootView;
     }
 
@@ -78,8 +99,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback
     {
         mapReady = true;
         mMap = map;
+
+        for (MarkerOptions m : markerOptionsArrayList)
+            mMap.addMarker(m);
+
         LatLng penArgyl = new LatLng(40.8687, -75.2549);
-        CameraPosition target = CameraPosition.builder().target(penArgyl).zoom(14).build();
+        CameraPosition target = CameraPosition.builder().target(penArgyl).zoom(12).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 2000, null);
     }
 }

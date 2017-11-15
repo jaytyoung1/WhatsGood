@@ -31,8 +31,10 @@ public class ListsFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.restaurant_list, container, false);
 
+        // Create an instance of the object that creates restaurants
         CreateRestaurants createRestaurantsObject = new CreateRestaurants();
 
+        // Get it's ArrayList of restaurants
         ArrayList<Restaurant> restaurants = createRestaurantsObject.getArrayList();
 
         // Create an {@link RestaurantAdapter}, whose data source is a list of {@link Restaurant}s.
