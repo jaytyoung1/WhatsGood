@@ -1,8 +1,11 @@
 package com.example.android.whatsgood;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +23,7 @@ public class RestaurantActivity extends AppCompatActivity
 
         // Get the currentRestaurant object
         Intent intent = getIntent();
-        Restaurant currentRestaurant = (Restaurant) intent.getSerializableExtra("currentRestaurant");
+        final Restaurant currentRestaurant = (Restaurant) intent.getSerializableExtra("currentRestaurant");
 
         // Set the restaurant name text view
         TextView restaurantTextView = (TextView) findViewById(R.id.restaurant_name);
@@ -29,6 +32,21 @@ public class RestaurantActivity extends AppCompatActivity
         // Set the restaurant image
         ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_photo);
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
+
+        // Set the on click listener for the link image
+        ImageView linkImage = (ImageView) findViewById(R.id.link);
+        linkImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(currentRestaurant.getLink()));
+                startActivity(intent);
+            }
+        });
 
         // Set the specials text views for each day of the week
         TextView mondaySpecialsTextView = (TextView) findViewById(R.id.monday_specials_text);
