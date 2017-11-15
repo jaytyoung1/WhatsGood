@@ -17,6 +17,12 @@ public class Restaurant implements Serializable
     // Address of the restaurant
     private String mAddress;
 
+    // Latitude of the restaurant
+    private double mLatitude;
+
+    // Longitude of the restaurant
+    private double mLongitude;
+
     // Link to the restaurant's website
     private String mLink;
 
@@ -26,33 +32,40 @@ public class Restaurant implements Serializable
     private static final int NO_IMAGE_PROVIDED = -1;
 
     // LinkedHashMap for the weekly specials
-    LinkedHashMap<String,String> mSpecialsHashMap = new LinkedHashMap<>();
+    public LinkedHashMap<String,String> mSpecialsHashMap = new LinkedHashMap<>();
 
     /**
      * Create a Restaurant object
      */
-    public Restaurant(String name, String link, String address)
+    public Restaurant(String name, String link, String address, double latitude, double longitude)
     {
         mName = name;
         mLink = link;
         mAddress = address;
+        mLatitude = latitude;
+        mLongitude = longitude;
     }
 
     /**
      * Create a Restaurant object with an image
      */
-    public Restaurant(String name, String link, String address, int imageResourceId)
+    public Restaurant(String name, String link, String address, double latitude, double longitude, int imageResourceId)
     {
         mName = name;
         mLink = link;
         mAddress = address;
+        mLatitude = latitude;
+        mLongitude = longitude;
         mImageResourceId = imageResourceId;
     }
 
     /**
      * Get the name of the Restaurant
      */
-    public String getName() { return mName; }
+    public String getName()
+    {
+        return mName;
+    }
 
     /**
      * Get the specials for a specific day
@@ -65,12 +78,34 @@ public class Restaurant implements Serializable
     /**
      * Get the link of the restaurant
      */
-    public String getLink() { return mLink; }
+    public String getLink()
+    {
+        return mLink;
+    }
 
     /**
      * Get the address of the restaurant
      */
-    public String getAddress() { return mAddress; }
+    public String getAddress()
+    {
+        return mAddress;
+    }
+
+    /**
+     * Get the latitude of the restaurant
+     */
+    public double getLatitude()
+    {
+        return mLatitude;
+    }
+
+    /**
+     * Get the longitude of the restaurant
+     */
+    public double getLongitude()
+    {
+        return mLongitude;
+    }
 
     /**
      * Get the image
