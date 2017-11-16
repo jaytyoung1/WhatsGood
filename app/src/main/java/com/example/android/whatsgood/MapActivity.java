@@ -28,7 +28,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by jyoun on 11/15/2017.
@@ -48,6 +51,7 @@ public class MapActivity extends AppCompatActivity
     Location mLastLocation;
     Marker mCurrLocationMarker;
     ArrayList<MarkerOptions> mMarkerOptionsArrayList = new ArrayList<>();
+    ArrayList<Restaurant> mRestaurants;
     boolean mapReady = false;
     TextView locationTextView;
 
@@ -66,13 +70,19 @@ public class MapActivity extends AppCompatActivity
         CreateRestaurants createRestaurantsObject = new CreateRestaurants();
 
         // Get it's ArrayList of restaurants
-        ArrayList<Restaurant> restaurants = createRestaurantsObject.getArrayList();
+        mRestaurants = createRestaurantsObject.getArrayList();
 
-        for (Restaurant r : restaurants)
+        for (Restaurant r : mRestaurants)
         {
+            String weekDay;
+            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+
+            Calendar calendar = Calendar.getInstance();
+            weekDay = dayFormat.format(calendar.getTime());
+
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(new LatLng(r.getLatitude(), r.getLongitude()))
-                    .snippet(r.getAddress())
+                    .snippet(r.getSpecial(weekDay))
                     .title(r.getName());
 
             mMarkerOptionsArrayList.add(markerOptions);
@@ -180,9 +190,6 @@ public class MapActivity extends AppCompatActivity
         markerOptions.visible(false);
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
-
-        // Set current location text view
-        locationTextView.setText(Double.toString(location.getLatitude()));
 
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
