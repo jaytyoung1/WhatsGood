@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.whatsgood.data.CreateRestaurants;
@@ -48,6 +49,7 @@ public class MapActivity extends AppCompatActivity
     Marker mCurrLocationMarker;
     ArrayList<MarkerOptions> mMarkerOptionsArrayList = new ArrayList<>();
     boolean mapReady = false;
+    TextView locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +59,8 @@ public class MapActivity extends AppCompatActivity
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+
+        locationTextView = (TextView) findViewById(R.id.location_text);
 
         // Create an instance of the object that creates restaurants
         CreateRestaurants createRestaurantsObject = new CreateRestaurants();
@@ -133,11 +137,9 @@ public class MapActivity extends AppCompatActivity
     public void onConnected(Bundle bundle)
     {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+        mLocationRequest.setInterval(1000); // Update location every second
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED)
         {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -155,25 +157,35 @@ public class MapActivity extends AppCompatActivity
     }
 
     @Override
+    public void onStop()
+    {
+        // Disconnect the client
+        mGoogleApiClient.disconnect();
+
+        super.onStop();
+    }
+
+    @Override
     public void onLocationChanged(Location location)
     {
         mLastLocation = location;
         if (mCurrLocationMarker != null)
-        {
             mCurrLocationMarker.remove();
-        }
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        markerOptions.visible(false);
+        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
+
+        // Set current location text view
+        locationTextView.setText(Double.toString(location.getLatitude()));
 
         //move map camera
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
-
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -188,7 +200,6 @@ public class MapActivity extends AppCompatActivity
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION))
             {
-
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
@@ -208,8 +219,6 @@ public class MapActivity extends AppCompatActivity
                         })
                         .create()
                         .show();
-
-
             } else
             {
                 // No explanation needed, we can request the permission.
@@ -249,17 +258,14 @@ public class MapActivity extends AppCompatActivity
 
                 } else
                 {
-
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
-
             // other 'case' lines to check for other
             // permissions this app might request
         }
     }
-
 }
