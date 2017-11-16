@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -92,6 +93,18 @@ public class MainActivity extends AppCompatActivity
 
         TextView dayOfWeekTextView = (TextView) findViewById(R.id.day_of_week_text);
         dayOfWeekTextView.setText(dayString);
+
+        ImageView mapButton = (ImageView) findViewById(R.id.action_button_map);
+
+        // Add a click listener to go to the Map activity
+        mapButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
