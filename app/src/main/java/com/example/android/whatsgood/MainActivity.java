@@ -19,9 +19,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity
+//        implements OnMapReadyCallback,
+//        GoogleApiClient.ConnectionCallbacks,
+//        GoogleApiClient.OnConnectionFailedListener,
+//        LocationListener
 {
     /**
      * Spinner drop down arrow to enter day of the week
@@ -42,6 +50,13 @@ public class MainActivity extends AppCompatActivity
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
+
+        // Set up the action bar, but get rid of the title
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -65,13 +80,6 @@ public class MainActivity extends AppCompatActivity
         // Use icons for the tabs
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_list_white);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_location_on_white);
-
-        // Set up the action bar, but get rid of the title
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("");
-        toolbar.setSubtitle("");
 
         // Get the current day to know which day to display
         //SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
