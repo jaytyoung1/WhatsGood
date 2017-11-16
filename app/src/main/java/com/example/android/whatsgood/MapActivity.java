@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.example.android.whatsgood.data.CreateRestaurants;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -25,6 +26,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 /**
  * Created by jyoun on 11/15/2017.
@@ -43,6 +46,8 @@ public class MapActivity extends AppCompatActivity
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    ArrayList<MarkerOptions> mMarkerOptionsArrayList = new ArrayList<>();
+    boolean mapReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +57,22 @@ public class MapActivity extends AppCompatActivity
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+
+        // Create an instance of the object that creates restaurants
+        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
+
+        // Get it's ArrayList of restaurants
+        ArrayList<Restaurant> restaurants = createRestaurantsObject.getArrayList();
+
+        for (Restaurant r : restaurants)
+        {
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(new LatLng(r.getLatitude(), r.getLongitude()))
+                    .snippet(r.getAddress())
+                    .title(r.getName());
+
+            mMarkerOptionsArrayList.add(markerOptions);
+        }
     }
 
     @Override
@@ -69,11 +90,11 @@ public class MapActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap)
     {
+        mapReady = true;
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Initialize Google Play Services
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             if (ContextCompat.checkSelfPermission(this,
@@ -93,6 +114,9 @@ public class MapActivity extends AppCompatActivity
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
+
+        for (MarkerOptions m : mMarkerOptionsArrayList)
+            mGoogleMap.addMarker(m);
     }
 
     protected synchronized void buildGoogleApiClient()
