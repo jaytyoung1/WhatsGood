@@ -94,6 +94,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
         // Get the {@link Word} object located at this position in the list
         currentRestaurant = getItem(position);
+        final Restaurant rest = currentRestaurant;
 
         // Find the TextView in the list_item.xml layout with the ID restaurant_name_text_view
         TextView restaurantNameTextView = (TextView) listItemView.findViewById(R.id.restaurant_name_text_view);
@@ -123,7 +124,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             public void onClick(View v)
             {
                 Intent intent = new Intent(getContext(), RestaurantActivity.class);
-                intent.putExtra("currentRestaurant", currentRestaurant);
+                intent.putExtra("currentRestaurant", rest);
                 getContext().startActivity(intent);
             }
         });
