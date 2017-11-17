@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +61,39 @@ public class MapActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        Button buttonMap = (Button) findViewById(R.id.button_map);
+        buttonMap.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (mapReady)
+                    mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            }
+        });
+
+        Button buttonSatellite = (Button) findViewById(R.id.button_satellite);
+        buttonSatellite.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (mapReady)
+                    mGoogleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            }
+        });
+
+        Button buttonHybrid = (Button) findViewById(R.id.button_hybrid);
+        buttonHybrid.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (mapReady)
+                    mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            }
+        });
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
