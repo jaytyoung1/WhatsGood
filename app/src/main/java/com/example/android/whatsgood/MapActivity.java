@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -186,6 +187,15 @@ public class MapActivity extends AppCompatActivity
         {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
+
+        // Get the current location when the map connects and fly to it
+        Location loc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (loc != null)
+        {
+            LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+            CameraPosition target = CameraPosition.builder().target(latLng).zoom(12).build();
+            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 2000, null);
+        }
     }
 
     @Override
@@ -222,9 +232,6 @@ public class MapActivity extends AppCompatActivity
         markerOptions.visible(false);
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
-
-        //move map camera
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
