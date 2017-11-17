@@ -88,6 +88,18 @@ public class RestaurantActivity extends AppCompatActivity
 
         milesAwayText = (TextView) findViewById(R.id.restaurant_miles_text_view);
 
+        // Add on click listener to the miles away container to go to the Map activity
+        View miles_away_view = findViewById(R.id.restaurant_miles_away_container);
+        miles_away_view.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RestaurantActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -134,30 +146,5 @@ public class RestaurantActivity extends AppCompatActivity
         String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
 
         milesAwayText.setText(txt);
-        /*
-        // Create an instance of the object that creates restaurants
-        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
-
-        // Get it's ArrayList of restaurants
-
-        ArrayList<Restaurant> mRestaurants = createRestaurantsObject.getArrayList();
-
-        int i = 0;
-        for (Restaurant r : mRestaurants)
-        {
-            Location restLocation = new Location("");
-            restLocation.setLatitude(r.getLatitude());
-            restLocation.setLongitude(r.getLongitude());
-
-            float distance = mLastLocation.distanceTo(restLocation);
-            distance = distance * 0.00062137f; // in mi
-
-            String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
-
-            milesAwayTextViews.get(i).setText(txt);
-
-            i++;
-        }
-        */
     }
 }

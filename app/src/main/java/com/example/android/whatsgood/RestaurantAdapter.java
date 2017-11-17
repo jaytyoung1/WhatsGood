@@ -118,13 +118,25 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         // Find the ImageView in the list_item.xml layout with the ID image
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
 
-        // Add a click listener to the image to open the site's url
+        // Add a click listener to the image to go to the Restaurant activity
         imageView.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 Intent intent = new Intent(getContext(), RestaurantActivity.class);
                 intent.putExtra("currentRestaurant", rest);
+                getContext().startActivity(intent);
+            }
+        });
+
+        // Add on click listener to the miles away container to go to the Map activity
+        View miles_away_view = listItemView.findViewById(R.id.miles_away_container);
+        miles_away_view.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(), MapActivity.class);
                 getContext().startActivity(intent);
             }
         });
