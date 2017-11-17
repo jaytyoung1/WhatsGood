@@ -277,12 +277,39 @@
         android:background="@drawable/restaurant_image_background"
         android:elevation="4dp"/>
 
-    <ImageView
-        android:id="@+id/link"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/relativeLayout"
         android:layout_alignTop="@+id/restaurant_photo"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="26dp"
-        app:srcCompat="@drawable/ic_link_white"/>
+        android:layout_toEndOf="@+id/restaurant_photo"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/link"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/ic_link_white"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_location_on_white"/>
+
+        <TextView
+            android:id="@+id/restaurant_miles_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="0.0 mi."
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
