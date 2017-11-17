@@ -53,7 +53,6 @@ public class MapActivity extends AppCompatActivity
     ArrayList<MarkerOptions> mMarkerOptionsArrayList = new ArrayList<>();
     ArrayList<Restaurant> mRestaurants;
     boolean mapReady = false;
-    TextView locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,8 +62,6 @@ public class MapActivity extends AppCompatActivity
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
-
-        locationTextView = (TextView) findViewById(R.id.location_text);
 
         // Create an instance of the object that creates restaurants
         CreateRestaurants createRestaurantsObject = new CreateRestaurants();
