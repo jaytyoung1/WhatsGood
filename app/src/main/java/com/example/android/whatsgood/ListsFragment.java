@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.android.whatsgood.data.CreateRestaurants;
+import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class ListsFragment extends Fragment
 {
-    //private static final ArrayList<Restaurant> restaurants = new ArrayList<>();
+    ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
     public ListsFragment()
     {
@@ -31,15 +31,20 @@ public class ListsFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.restaurant_list, container, false);
 
-        // Create an instance of the object that creates restaurants
-        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
+        try
+        {
+            restaurantsArrayList = new GetRestaurantsAsyncTask(getContext()).execute().get();
+        } catch (java.lang.InterruptedException e)
+        {
 
-        // Get it's ArrayList of restaurants
-        ArrayList<Restaurant> restaurants = createRestaurantsObject.getArrayList();
+        } catch (java.util.concurrent.ExecutionException e)
+        {
+
+        }
 
         // Create an {@link RestaurantAdapter}, whose data source is a list of {@link Restaurant}s.
         // The adapter knows how to create list items for each item in the list.
-        RestaurantAdapter adapter = new RestaurantAdapter(getActivity(), restaurants, R.color.colorBackground);
+        RestaurantAdapter adapter = new RestaurantAdapter(getActivity(), restaurantsArrayList, R.color.colorBackground);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the

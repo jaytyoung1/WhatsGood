@@ -162,6 +162,7 @@ public class MapActivity extends AppCompatActivity
             mGoogleMap.setMyLocationEnabled(true);
         }
 
+        // Add all markers in the array list
         for (MarkerOptions m : mMarkerOptionsArrayList)
             mGoogleMap.addMarker(m);
     }
