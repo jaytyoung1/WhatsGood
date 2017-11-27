@@ -63,6 +63,11 @@
                 android:value=".MainActivity"/>
         </activity>
 
+        <provider
+            android:name=".data.WhatsGoodProvider"
+            android:authorities="com.example.android.whatsgood"
+            android:exported="false"/>
+
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
