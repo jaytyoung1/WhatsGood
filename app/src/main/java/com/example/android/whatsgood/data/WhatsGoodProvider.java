@@ -259,7 +259,23 @@ public class WhatsGoodProvider extends ContentProvider
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs)
     {
-        return 0;
+        // Get writable database
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
+        final int match = sUriMatcher.match(uri);
+        switch (match)
+        {
+            case RESTAURANTS:
+                // Delete all rows that match the selection and selection args
+                return database.delete(RestaurantEntry.TABLE_NAME, selection, selectionArgs);
+            case RESTAURANT_ID:
+                // Delete a single row given by the ID in the URI
+                selection = RestaurantEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return database.delete(RestaurantEntry.TABLE_NAME, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
     }
 
     /**
@@ -268,6 +284,15 @@ public class WhatsGoodProvider extends ContentProvider
     @Override
     public String getType(Uri uri)
     {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        switch (match)
+        {
+            case RESTAURANTS:
+                return RestaurantEntry.CONTENT_LIST_TYPE;
+            case RESTAURANT_ID:
+                return RestaurantEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
     }
 }
