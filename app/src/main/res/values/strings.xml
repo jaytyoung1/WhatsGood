@@ -25,4 +25,7 @@
     <string name="specials">specials</string>
     <string name="submit_button_text">Submit</string>
 
+    <!-- Title text for the empty view -->
+    <string name="empty_view_title_text">No restaurants added</string>
+
 </resources>
