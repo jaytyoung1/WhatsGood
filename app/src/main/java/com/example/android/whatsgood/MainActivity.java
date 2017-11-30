@@ -1,17 +1,9 @@
 package com.example.android.whatsgood;
 
-import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,19 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
-import com.example.android.whatsgood.data.WhatsGoodContract;
-import com.example.android.whatsgood.data.WhatsGoodDbHelper;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.OnMapReadyCallback;
-
-import static java.security.AccessController.getContext;
-
-import com.example.android.whatsgood.data.WhatsGoodContract.RestaurantEntry;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity //implements LoaderManager.LoaderCallbacks<Cursor>
+public class MainActivity extends AppCompatActivity
 {
     private static final int WHATSGOOD_LOADER = 0;
 
