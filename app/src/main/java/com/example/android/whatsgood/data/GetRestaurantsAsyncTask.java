@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,6 +29,8 @@ public class GetRestaurantsAsyncTask extends AsyncTask<Void, Void, ArrayList<Res
 
     private String googleSheetURL = "https://spreadsheets.google.com/feeds/list/1QDaoKuaGocEzWXKM_IhRFua3mIaAglknARyooptIz40/od6/public/values?alt=json";
 
+    private String googleSheetQuery = "https://spreadsheets.google.com/tq?tqx=out:JSON&tq=select%20%2A&key=1QDaoKuaGocEzWXKM_IhRFua3mIaAglknARyooptIz40";
+
     public GetRestaurantsAsyncTask(Context context)
     {
         super();
@@ -40,7 +43,7 @@ public class GetRestaurantsAsyncTask extends AsyncTask<Void, Void, ArrayList<Res
         HttpURLConnection urlConnection = null;
         try
         {
-            URL url = new URL(googleSheetURL);
+            URL url = new URL(googleSheetQuery);
 
             urlConnection = (HttpURLConnection) url.openConnection();
             inputStream = new BufferedInputStream(urlConnection.getInputStream());
@@ -51,10 +54,29 @@ public class GetRestaurantsAsyncTask extends AsyncTask<Void, Void, ArrayList<Res
                 BufferedReader bReader = new BufferedReader(new InputStreamReader(inputStream), 8);
                 StringBuilder sBuilder = new StringBuilder();
 
-                String line = bReader.readLine();
-                sBuilder.append(line);
+                String line;
+                try
+                {
+                    while ((line = bReader.readLine()) != null)
+                        sBuilder.append(line + "\n");
+                } catch (IOException e)
+                {
+                    e.printStackTrace();
+                } finally
+                {
+                    try
+                    {
+                        inputStream.close();
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
 
-                inputStream.close();
+//                String line = bReader.readLine();
+//                sBuilder.append(line);
+//
+//                inputStream.close();
                 result = sBuilder.toString();
 
             } catch (Exception e)
@@ -73,32 +95,73 @@ public class GetRestaurantsAsyncTask extends AsyncTask<Void, Void, ArrayList<Res
             urlConnection.disconnect();
         }
 
+        // Remove the unnecessary parts from the response
+        int start = result.indexOf("{", result.indexOf("{") + 1);
+        int end = result.lastIndexOf("}");
+        String jsonResponse = result.substring(start, end);
+
         // Parse the result
+        JSONObject table;
+        JSONArray rows;
         try
         {
-            JSONObject feed = new JSONObject(result).getJSONObject("feed");
-            JSONArray arr = feed.getJSONArray("entry");
+            table = new JSONObject(jsonResponse);
+            rows = table.getJSONArray("rows");
 
-            // For each Restaurant entry
-            for (int i = 0; i < arr.length(); i++)
+            for (int i = 0; i < rows.length(); i++)
             {
-                JSONObject o = new JSONObject(arr.getString(i));
+                JSONObject row = rows.getJSONObject(i);
+                JSONArray columns = row.getJSONArray("c");
 
-                String name = o.getJSONObject("gsx$name").getString("$t");
-                String link = o.getJSONObject("gsx$link").getString("$t");
-                String address = o.getJSONObject("gsx$address").getString("$t");
-                double latitude = Double.parseDouble(o.getJSONObject("gsx$latitude").getString("$t"));
-                double longitude = Double.parseDouble(o.getJSONObject("gsx$longitude").getString("$t"));
-                String imageID = o.getJSONObject("gsx$imageid").getString("$t");
+                String name = columns.getJSONObject(0).getString("v");
+                String link = columns.getJSONObject(6).getString("v");
+                String address = columns.getJSONObject(3).getString("v");
+                double latitude = columns.getJSONObject(4).getDouble("v");
+                double longitude = columns.getJSONObject(5).getDouble("v");
+                String imageID = columns.getJSONObject(8).getString("v");
                 int resID = mContext.getResources().getIdentifier(imageID, "drawable", mContext.getPackageName());
 
-                String mondaySpecials = o.getJSONObject("gsx$mondayspecials").getString("$t");
-                String tuesdaySpecials = o.getJSONObject("gsx$tuesdayspecials").getString("$t");
-                String wednesdaySpecials = o.getJSONObject("gsx$wednesdayspecials").getString("$t");
-                String thursdaySpecials = o.getJSONObject("gsx$thursdayspecials").getString("$t");
-                String fridaySpecials = o.getJSONObject("gsx$fridayspecials").getString("$t");
-                String saturdaySpecials = o.getJSONObject("gsx$saturdayspecials").getString("$t");
-                String sundaySpecials = o.getJSONObject("gsx$sundayspecials").getString("$t");
+                String mondaySpecials;
+                if (!columns.get(9).equals(null))
+                    mondaySpecials = columns.getJSONObject(9).getString("v");
+                else
+                    mondaySpecials = "";
+
+                String tuesdaySpecials;
+                if (!columns.get(10).equals(null))
+                    tuesdaySpecials = columns.getJSONObject(10).getString("v");
+                else
+                    tuesdaySpecials = "";
+
+                String wednesdaySpecials;
+                if (!columns.get(11).equals(null))
+                    wednesdaySpecials = columns.getJSONObject(11).getString("v");
+                else
+                    wednesdaySpecials = "";
+
+                String thursdaySpecials;
+                if (!columns.get(12).equals(null))
+                    thursdaySpecials = columns.getJSONObject(12).getString("v");
+                else
+                    thursdaySpecials = "";
+
+                String fridaySpecials;
+                if (!columns.get(13).equals(null))
+                    fridaySpecials = columns.getJSONObject(13).getString("v");
+                else
+                    fridaySpecials = "";
+
+                String saturdaySpecials;
+                if (!columns.get(14).equals(null))
+                    saturdaySpecials = columns.getJSONObject(14).getString("v");
+                else
+                    saturdaySpecials = "";
+
+                String sundaySpecials;
+                if (!columns.get(15).equals(null))
+                    sundaySpecials = columns.getJSONObject(15).getString("v");
+                else
+                    sundaySpecials = "";
 
                 Restaurant rest = new Restaurant(
                         name,
@@ -117,9 +180,9 @@ public class GetRestaurantsAsyncTask extends AsyncTask<Void, Void, ArrayList<Res
                 rest.mSpecialsHashMap.put("Sunday", sundaySpecials);
                 arrList.add(rest);
             }
-        } catch (JSONException e)
+        } catch (org.json.JSONException e)
         {
-            Log.e("JSONException", "Error: " + e.toString());
+            e.printStackTrace();
         }
 
         // Return the ArrayList of Restaurants
