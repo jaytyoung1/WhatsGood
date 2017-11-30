@@ -20,16 +20,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Label -->
+            <!-- Name Label -->
             <TextView
                 style="@style/CategoryStyle"
                 android:text="@string/name"/>
 
-            <!-- Breed field -->
+            <!-- Name edit text field -->
             <EditText
                 android:id="@+id/add_new_restaurant_name"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/name"
+                android:hint="@string/restaurant_name_hint"
                 android:inputType="textCapWords"/>
         </LinearLayout>
 
@@ -39,17 +39,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Label -->
+            <!-- Website Link Label -->
             <TextView
                 style="@style/CategoryStyle"
                 android:text="@string/website_link"/>
 
-            <!-- Breed field -->
+            <!-- Website Link edit text field -->
             <EditText
                 android:id="@+id/add_new_restaurant_website_link"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/website_link_hint"
-                android:inputType="textCapWords"/>
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -59,17 +59,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Label -->
+            <!-- Image Link label -->
             <TextView
                 style="@style/CategoryStyle"
                 android:text="@string/image_link"/>
 
-            <!-- Breed field -->
+            <!-- Image Link field -->
             <EditText
                 android:id="@+id/add_new_restaurant_link"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/image_link_hint"
-                android:inputType="textCapWords"/>
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -89,7 +89,7 @@
                 android:id="@+id/add_new_restaurant_monday"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -108,8 +108,8 @@
             <EditText
                 android:id="@+id/add_new_restaurant_tuesday"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:hint="@string/dots"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -128,8 +128,8 @@
             <EditText
                 android:id="@+id/add_new_restaurant_wednesday"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:hint="@string/dots"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -148,8 +148,8 @@
             <EditText
                 android:id="@+id/add_new_restaurant_thursday"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:hint="@string/dots"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -164,12 +164,12 @@
                 style="@style/CategoryStyle"
                 android:text="@string/day_friday"/>
 
-            <!-- Breed field -->
+            <!-- EditText field -->
             <EditText
                 android:id="@+id/add_new_restaurant_friday"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:hint="@string/dots"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -188,8 +188,8 @@
             <EditText
                 android:id="@+id/add_new_restaurant_saturday"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:hint="@string/dots"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -210,16 +210,18 @@
             <EditText
                 android:id="@+id/add_new_restaurant_sunday"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/specials"
-                android:inputType="textCapWords"/>
+                android:hint="@string/dots"
+                android:inputType="text"/>
 
         </LinearLayout>
 
         <Button
+            android:id="@+id/submit_new_restaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/colorAccent"
+            android:onClick="submitNewRestaurant"
             android:text="@string/submit_button_text"
             android:textColor="@color/colorWhite"/>
 
