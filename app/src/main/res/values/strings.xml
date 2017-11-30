@@ -19,6 +19,8 @@
     <!-- Text to fill the EditText fields in the AddNewRestaurantActivity -->
     <string name="name">Name</string>
     <string name="restaurant_name_hint">Restaurant Name</string>
+    <string name="address">Address</string>
+    <string name="address_hint">4 Yawkey Way, Boston, MA</string>
     <string name="website_link">website link</string>
     <string name="website_link_hint">https://...</string>
     <string name="image_link">image link</string>

@@ -33,6 +33,26 @@
                 android:inputType="textCapWords"/>
         </LinearLayout>
 
+        <!-- Address category -->
+        <LinearLayout
+            android:id="@+id/container_restaurant_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Address Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/address"/>
+
+            <!-- Address edit text field -->
+            <EditText
+                android:id="@+id/add_new_restaurant_address"
+                style="@style/EditorFieldStyle"
+                android:hint="@string/address_hint"
+                android:inputType="textCapWords"/>
+        </LinearLayout>
+
         <!-- Website link category -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,7 +86,7 @@
 
             <!-- Image Link field -->
             <EditText
-                android:id="@+id/add_new_restaurant_link"
+                android:id="@+id/add_new_restaurant_image_link"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/image_link_hint"
                 android:inputType="text"/>
