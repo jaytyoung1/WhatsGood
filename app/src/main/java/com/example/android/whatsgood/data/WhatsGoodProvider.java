@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.whatsgood.Restaurant;
 import com.example.android.whatsgood.data.WhatsGoodContract.RestaurantEntry;
 
 /**
@@ -106,6 +107,12 @@ public class WhatsGoodProvider extends ContentProvider
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
+
+        // Set notification URI on the Cursor so we know what content URI the cursor was created for.
+        // If the data at this URI changes, then we know we need to update the Cursor.
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        // Return the cursor
         return cursor;
     }
 
@@ -167,6 +174,9 @@ public class WhatsGoodProvider extends ContentProvider
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
         }
+
+        // Notify all listeners that the data has changed for the restaurant content URI
+        getContext().getContentResolver().notifyChange(uri, null);
 
         // Once we know the ID of the new row in the table, return the new URI with the ID appended
         return ContentUris.withAppendedId(uri, id);
@@ -249,8 +259,15 @@ public class WhatsGoodProvider extends ContentProvider
         // Otherwise, get writable database to update the data
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Returns the number of database rows affected by the update statement
-        return database.update(RestaurantEntry.TABLE_NAME, values, selection, selectionArgs);
+        // Perform the update on the database and get the number of rows affected
+        int rowsUpdated = database.update(RestaurantEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        // If one or more rows were updated, then notify all listeners that the data has changed
+        if (rowsUpdated != 0)
+            getContext().getContentResolver().notifyChange(uri, null);
+
+        // Return the number of rows updated
+        return rowsUpdated;
     }
 
     /**
@@ -262,20 +279,32 @@ public class WhatsGoodProvider extends ContentProvider
         // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
+        // Track the number of rows that were deleted
+        int rowsDeleted;
+
         final int match = sUriMatcher.match(uri);
         switch (match)
         {
             case RESTAURANTS:
                 // Delete all rows that match the selection and selection args
-                return database.delete(RestaurantEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(RestaurantEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             case RESTAURANT_ID:
                 // Delete a single row given by the ID in the URI
                 selection = RestaurantEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return database.delete(RestaurantEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(RestaurantEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
+
+        // If one or more rows were deleted, then notify all listeners that the data has changed
+        if (rowsDeleted != 0)
+            getContext().getContentResolver().notifyChange(uri, null);
+
+        // Return the number of rows deleted
+        return rowsDeleted;
     }
 
     /**
