@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:scaleX="0.8"
             android:scaleY="0.8"
-            android:src="@drawable/ic_explore_white_48dp"/>
+            android:src="@drawable/ic_map_white_48dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
