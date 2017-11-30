@@ -53,6 +53,7 @@ public class AddNewRestaurantActivity extends AppCompatActivity
         String saturday = saturdayField.getText().toString();
         String sunday = sundayField.getText().toString();
 
+        // Get the message to be sent in the email
         String message = createMessage(
                 name,
                 address,
@@ -66,6 +67,7 @@ public class AddNewRestaurantActivity extends AppCompatActivity
                 saturday,
                 sunday);
 
+        // Send the email by using an Intent
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:jaytyoung1@gmail.com"));
         intent.putExtra(Intent.EXTRA_SUBJECT, "New Restaurant");
@@ -74,6 +76,22 @@ public class AddNewRestaurantActivity extends AppCompatActivity
             startActivity(intent);
     }
 
+    /**
+     * Create the message with all the new restaurant info
+     *
+     * @param name          of the restaurant
+     * @param address       of the restaurant
+     * @param websiteLink   link to restaurant's homepage
+     * @param imageLink     link to restaurant's logo
+     * @param monday        monday specials
+     * @param tuesday       tuesday specials
+     * @param wednesday     wednesday specials
+     * @param thursday      thursday specials
+     * @param friday        friday specials
+     * @param saturday      saturday specials
+     * @param sunday        sunday specials
+     * @return msg          message to be attached to the email
+     */
     private String createMessage(
             String name,
             String address,
