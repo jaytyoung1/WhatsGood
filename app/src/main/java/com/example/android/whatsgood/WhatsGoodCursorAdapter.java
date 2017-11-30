@@ -172,30 +172,30 @@ public class WhatsGoodCursorAdapter extends CursorAdapter
     @Override
     public void onLocationChanged(Location location)
     {
-        mLastLocation = location;
-
-        // Create an instance of the object that creates restaurants
-        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
-
-        // Get it's ArrayList of restaurants
-
-        ArrayList<Restaurant> mRestaurants = createRestaurantsObject.getArrayList();
-
-        int i = 0;
-        for (Restaurant r : mRestaurants)
-        {
-            Location restLocation = new Location("");
-            restLocation.setLatitude(r.getLatitude());
-            restLocation.setLongitude(r.getLongitude());
-
-            float distance = mLastLocation.distanceTo(restLocation);
-            distance = distance * 0.00062137f; // in mi
-
-            String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
-
-            milesAwayTextViews.get(i).setText(txt);
-
-            i++;
-        }
+//        mLastLocation = location;
+//
+//        // Create an instance of the object that creates restaurants
+//        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
+//
+//        // Get it's ArrayList of restaurants
+//
+//        ArrayList<Restaurant> mRestaurants = createRestaurantsObject.getArrayList();
+//
+//        int i = 0;
+//        for (Restaurant r : mRestaurants)
+//        {
+//            Location restLocation = new Location("");
+//            restLocation.setLatitude(r.getLatitude());
+//            restLocation.setLongitude(r.getLongitude());
+//
+//            float distance = mLastLocation.distanceTo(restLocation);
+//            distance = distance * 0.00062137f; // in mi
+//
+//            String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
+//
+//            milesAwayTextViews.get(i).setText(txt);
+//
+//            i++;
+//        }
     }
 }
