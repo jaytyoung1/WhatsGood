@@ -292,6 +292,7 @@
             android:src="@drawable/ic_phone_white_24dp"/>
 
         <ImageView
+            android:id="@+id/edit_restaurant_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -72,7 +72,7 @@ public class GetRestaurantsAsyncTask extends AsyncTask<Void, Void, ArrayList<Res
                         e.printStackTrace();
                     }
                 }
-                
+
                 result = sBuilder.toString();
 
             } catch (Exception e)

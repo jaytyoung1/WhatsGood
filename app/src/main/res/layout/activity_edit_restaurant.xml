@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout for the editor -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_margin"
+        tools:context=".EditRestaurantActivity">
+
+        <!-- Restaurant name category -->
+        <LinearLayout
+            android:id="@+id/container_restaurant_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Name Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/name"/>
+
+            <!-- Name edit text field -->
+            <EditText
+                android:id="@+id/edit_restaurant_name"
+                style="@style/EditorFieldStyle"
+                android:inputType="textCapWords"/>
+        </LinearLayout>
+
+        <!-- Monday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_monday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_monday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Tuesday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_tuesday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_tuesday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Wednesday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_wednesday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_wednesday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Thursday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_thursday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_thursday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Friday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_friday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_friday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Saturday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_saturday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_saturday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Sunday specials -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/day_sunday"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_sunday"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <!-- Comments -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/activity_margin">
+
+            <!-- Label -->
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/comments"/>
+
+            <!-- EditText field -->
+            <EditText
+                android:id="@+id/edit_restaurant_comments"
+                style="@style/EditorFieldStyle"
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_edited_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:onClick="submitEditedRestaurant"
+            android:text="@string/submit_button_text"
+            android:textColor="@color/colorWhite"/>
+
+    </LinearLayout>
+
+</ScrollView>

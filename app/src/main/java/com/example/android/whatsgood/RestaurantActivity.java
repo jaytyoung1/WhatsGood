@@ -51,21 +51,6 @@ public class RestaurantActivity extends AppCompatActivity
         ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_photo);
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
 
-        // Set the on click listener for the link image
-        ImageView linkImage = (ImageView) findViewById(R.id.link);
-        linkImage.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(currentRestaurant.getLink()));
-                startActivity(intent);
-            }
-        });
-
         // Set the specials text views for each day of the week
         TextView mondaySpecialsTextView = (TextView) findViewById(R.id.monday_specials_text);
         mondaySpecialsTextView.setText(currentRestaurant.getSpecial("Monday"));
@@ -81,6 +66,34 @@ public class RestaurantActivity extends AppCompatActivity
         saturdaySpecialsTextView.setText(currentRestaurant.getSpecial("Saturday"));
         TextView sundaySpecialsTextView = (TextView) findViewById(R.id.sunday_specials_text);
         sundaySpecialsTextView.setText(currentRestaurant.getSpecial("Sunday"));
+
+        // Set the on click listener for the link image
+        ImageView linkImage = (ImageView) findViewById(R.id.link);
+        linkImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(currentRestaurant.getLink()));
+                startActivity(intent);
+            }
+        });
+
+        // Set the on click listener for the edit icon
+        ImageView editIcon = (ImageView) findViewById(R.id.edit_restaurant_icon);
+        editIcon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RestaurantActivity.this, EditRestaurantActivity.class);
+                intent.putExtra("currentRestaurant", currentRestaurant);
+                startActivity(intent);
+            }
+        });
 
         milesAwayText = (TextView) findViewById(R.id.restaurant_miles_text_view);
 
