@@ -12,10 +12,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.whatsgood.data.CreateRestaurants;
+import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -25,7 +24,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -54,7 +52,7 @@ public class MapActivity extends AppCompatActivity
     Location mLastLocation;
     Marker mCurrLocationMarker;
     ArrayList<MarkerOptions> mMarkerOptionsArrayList = new ArrayList<>();
-    ArrayList<Restaurant> mRestaurants;
+    ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
     boolean mapReady = false;
 
     @Override
@@ -99,13 +97,18 @@ public class MapActivity extends AppCompatActivity
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
-        // Create an instance of the object that creates restaurants
-        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
+        try
+        {
+            restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
+        } catch (java.lang.InterruptedException e)
+        {
 
-        // Get it's ArrayList of restaurants
-        mRestaurants = createRestaurantsObject.getArrayList();
+        } catch (java.util.concurrent.ExecutionException e)
+        {
 
-        for (Restaurant r : mRestaurants)
+        }
+
+        for (Restaurant r : restaurantsArrayList)
         {
             String weekDay;
             SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);

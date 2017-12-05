@@ -7,7 +7,6 @@
 //import android.view.ViewGroup;
 //import android.widget.Button;
 //
-//import com.example.android.whatsgood.data.CreateRestaurants;
 //import com.google.android.gms.maps.CameraUpdateFactory;
 //import com.google.android.gms.maps.GoogleMap;
 //import com.google.android.gms.maps.OnMapReadyCallback;
@@ -76,11 +75,6 @@
 //        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
 //
-//        // Create an instance of the object that creates restaurants
-//        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
-//
-//        // Get it's ArrayList of restaurants
-//        ArrayList<Restaurant> restaurants = createRestaurantsObject.getArrayList();
 //
 //        for (Restaurant r : restaurants)
 //        {

@@ -2,15 +2,11 @@ package com.example.android.whatsgood;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +14,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.android.whatsgood.data.CreateRestaurants;
+import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /*
 * {@link RestaurantAdapter} is an {@link ArrayAdapter} that can provide the layout for each list
@@ -54,6 +43,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
     Restaurant currentRestaurant = null;
     TextView milesAwayText;
     ArrayList<TextView> milesAwayTextViews = new ArrayList<>();
+
+    ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
     /**
      * Create a new {@link RestaurantAdapter} object
@@ -193,15 +184,19 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
     {
         mLastLocation = location;
 
-        // Create an instance of the object that creates restaurants
-        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
+        try
+        {
+            restaurantsArrayList = new GetRestaurantsAsyncTask(getContext()).execute().get();
+        } catch (java.lang.InterruptedException e)
+        {
 
-        // Get it's ArrayList of restaurants
+        } catch (java.util.concurrent.ExecutionException e)
+        {
 
-        ArrayList<Restaurant> mRestaurants = createRestaurantsObject.getArrayList();
+        }
 
         int i = 0;
-        for (Restaurant r : mRestaurants)
+        for (Restaurant r : restaurantsArrayList)
         {
             Location restLocation = new Location("");
             restLocation.setLatitude(r.getLatitude());

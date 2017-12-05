@@ -2,7 +2,6 @@ package com.example.android.whatsgood;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
@@ -16,7 +15,6 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.whatsgood.data.CreateRestaurants;
 import com.example.android.whatsgood.data.WhatsGoodContract;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -174,12 +172,6 @@ public class WhatsGoodCursorAdapter extends CursorAdapter
     {
 //        mLastLocation = location;
 //
-//        // Create an instance of the object that creates restaurants
-//        CreateRestaurants createRestaurantsObject = new CreateRestaurants();
-//
-//        // Get it's ArrayList of restaurants
-//
-//        ArrayList<Restaurant> mRestaurants = createRestaurantsObject.getArrayList();
 //
 //        int i = 0;
 //        for (Restaurant r : mRestaurants)
