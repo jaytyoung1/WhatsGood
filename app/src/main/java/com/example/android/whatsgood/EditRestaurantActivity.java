@@ -51,6 +51,6 @@ public class EditRestaurantActivity extends AppCompatActivity
      */
     public void submitEditedRestaurant(View view)
     {
-        
+
     }
 }

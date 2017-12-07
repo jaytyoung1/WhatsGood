@@ -109,8 +109,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
 //        // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
 //        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
 //        {
@@ -139,6 +137,7 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
 
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
