@@ -77,17 +77,17 @@ public class AddNewRestaurantActivity extends AppCompatActivity
     /**
      * Create the message with all the new restaurant info
      *
-     * @param name          of the restaurant
-     * @param address       of the restaurant
-     * @param websiteLink   link to restaurant's homepage
-     * @param imageLink     link to restaurant's logo
-     * @param monday        monday specials
-     * @param tuesday       tuesday specials
-     * @param wednesday     wednesday specials
-     * @param thursday      thursday specials
-     * @param friday        friday specials
-     * @param saturday      saturday specials
-     * @param sunday        sunday specials
+     * @param name        of the restaurant
+     * @param address     of the restaurant
+     * @param websiteLink link to restaurant's homepage
+     * @param imageLink   link to restaurant's logo
+     * @param monday      monday specials
+     * @param tuesday     tuesday specials
+     * @param wednesday   wednesday specials
+     * @param thursday    thursday specials
+     * @param friday      friday specials
+     * @param saturday    saturday specials
+     * @param sunday      sunday specials
      * @return msg          message to be attached to the email
      */
     private String createMessage(
@@ -103,19 +103,36 @@ public class AddNewRestaurantActivity extends AppCompatActivity
             String saturday,
             String sunday)
     {
-        String msg = "Name: " + name;
-        msg += "\n" + "Address: " + address;
-        msg += "\n" + "Website Link: " + websiteLink;
-        msg += "\n" + "Image Link: " + imageLink;
-        msg += "\n" + "Monday Specials: " + monday;
-        msg += "\n" + "Tuesday Specials: " + tuesday;
-        msg += "\n" + "Wednesday Specials: " + wednesday;
-        msg += "\n" + "Thursday Specials: " + thursday;
-        msg += "\n" + "Friday Specials: " + friday;
-        msg += "\n" + "Saturday Specials: " + saturday;
-        msg += "\n" + "Sunday Specials: " + sunday;
+        String msg = "";
+
+        // Append restaurant info to the message
+        if (!name.isEmpty())
+            msg = "Name: " + name;
+        if (!address.isEmpty())
+            msg += "\n" + "Address: " + address;
+        if (!websiteLink.isEmpty())
+            msg += "\n" + "Website Link: " + websiteLink;
+        if (!imageLink.isEmpty())
+            msg += "\n" + "Image Link: " + imageLink;
+        if (!monday.isEmpty())
+            msg += "\n" + "Monday Specials: " + monday;
+        if (!tuesday.isEmpty())
+            msg += "\n" + "Tuesday Specials: " + tuesday;
+        if (!wednesday.isEmpty())
+            msg += "\n" + "Wednesday Specials: " + wednesday;
+        if (!thursday.isEmpty())
+            msg += "\n" + "Thursday Specials: " + thursday;
+        if (!friday.isEmpty())
+            msg += "\n" + "Friday Specials: " + friday;
+        if (!saturday.isEmpty())
+            msg += "\n" + "Saturday Specials: " + saturday;
+        if (!sunday.isEmpty())
+            msg += "\n" + "Sunday Specials: " + sunday;
+
+        // If no restaurant info was added in the EditText fields
+        if (msg.isEmpty())
+            msg = "No new restaurant info added.";
 
         return msg;
     }
-
 }
