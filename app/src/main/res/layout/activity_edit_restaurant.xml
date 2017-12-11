@@ -181,6 +181,7 @@
             <EditText
                 android:id="@+id/edit_restaurant_comments"
                 style="@style/EditorFieldStyle"
+                android:hint="@string/comments_hint"
                 android:inputType="text"/>
 
         </LinearLayout>

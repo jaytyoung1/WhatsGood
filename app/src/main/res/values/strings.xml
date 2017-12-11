@@ -31,5 +31,6 @@
 
     <!-- Text to fill the comments EditText in the EditRestaurantActivity -->
     <string name="comments">Comments</string>
+    <string name="comments_hint">Address change, logo change, etc.</string>
 
 </resources>
