@@ -97,9 +97,8 @@ public class MainActivity extends AppCompatActivity
         TextView dayOfWeekTextView = (TextView) findViewById(R.id.day_of_week_text);
         dayOfWeekTextView.setText(dayString);
 
+        // Get the map icon and add a click listener to go to the Map activity
         ImageView mapButton = (ImageView) findViewById(R.id.action_button_map);
-
-        // Add a click listener to go to the Map activity
         mapButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -137,31 +136,15 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
 
+        // Get the floating action button by ID and set the on click listener
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                CharSequence options[] = new CharSequence[]{"Add new restaurant", "Edit existing restaurant"};
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Select an option.");
-                builder.setItems(options, new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        switch (which)
-                        {
-                            case 0:
-                                Intent intent = new Intent(MainActivity.this, AddNewRestaurantActivity.class);
-                                //intent.putExtra("currentRestaurant", currentRestaurant);
-                                startActivity(intent);
-                        }
-                    }
-                });
-                builder.show();
+                Intent intent = new Intent(MainActivity.this, AddNewRestaurantActivity.class);
+                startActivity(intent);
             }
         });
 
