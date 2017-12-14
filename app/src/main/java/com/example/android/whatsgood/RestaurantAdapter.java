@@ -57,6 +57,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         super(context, 0, restaurants);
         mColorResourceId = colorResourceId;
 
+        restaurantsArrayList = restaurants;
+
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -184,23 +186,11 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
     {
         mLastLocation = location;
 
-        try
-        {
-            restaurantsArrayList = new GetRestaurantsAsyncTask(getContext()).execute().get();
-        } catch (java.lang.InterruptedException e)
-        {
-
-        } catch (java.util.concurrent.ExecutionException e)
-        {
-
-        }
-
-        int i = 0;
-        for (Restaurant r : restaurantsArrayList)
+        for (int i = 0; i < restaurantsArrayList.size(); i++)
         {
             Location restLocation = new Location("");
-            restLocation.setLatitude(r.getLatitude());
-            restLocation.setLongitude(r.getLongitude());
+            restLocation.setLatitude(restaurantsArrayList.get(i).getLatitude());
+            restLocation.setLongitude(restaurantsArrayList.get(i).getLongitude());
 
             float distance = mLastLocation.distanceTo(restLocation);
             distance = distance * 0.00062137f; // in mi
@@ -208,8 +198,6 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
 
             milesAwayTextViews.get(i).setText(txt);
-
-            i++;
         }
     }
 }
