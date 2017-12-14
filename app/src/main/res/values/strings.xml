@@ -5,6 +5,7 @@
     <!-- Options menu strings -->
     <string name="action_maps">Map view</string>
     <string name="action_sort_by_name">Sort by name</string>
+    <string name="action_reset">Reset</string>
 
     <!-- Title for the Restaurant activity -->
     <string name="restaurant_activity_title">Restaurant Activity</string>

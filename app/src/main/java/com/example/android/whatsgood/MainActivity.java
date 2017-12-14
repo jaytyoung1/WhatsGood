@@ -291,6 +291,27 @@ public class MainActivity extends AppCompatActivity
 
             return true;
         }
+        if (id == R.id.action_reset)
+        {
+            try
+            {
+                restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
+            } catch (java.lang.InterruptedException e)
+            {
+
+            } catch (java.util.concurrent.ExecutionException e)
+            {
+
+            }
+            
+            RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+
+            ListView listView = (ListView) findViewById(R.id.list);
+
+            listView.setAdapter(adapter);
+
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
