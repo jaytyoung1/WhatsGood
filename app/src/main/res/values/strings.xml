@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">What\'s Good</string>
-    <string name="action_maps">Map view</string>
     <string name="hello_world">Hello World!</string>
+
+    <!-- Options menu strings -->
+    <string name="action_maps">Map view</string>
+    <string name="action_sort_by_name">Sort by name</string>
 
     <!-- Title for the Restaurant activity -->
     <string name="restaurant_activity_title">Restaurant Activity</string>

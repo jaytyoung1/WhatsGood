@@ -1,10 +1,8 @@
 package com.example.android.whatsgood;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -21,10 +19,11 @@ import android.widget.TextView;
 import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity
 {
-    private static final int WHATSGOOD_LOADER = 0;
+    //private static final int WHATSGOOD_LOADER = 0;
 
     //WhatsGoodCursorAdapter mCursorAdapter;
 
@@ -273,11 +272,23 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_maps)
         {
             Intent intent = new Intent(MainActivity.this, MapActivity.class);
             startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_sort_by_name)
+        {
+            // Sort the ArrayList of restaurants by name
+            Collections.sort(restaurantsArrayList, new NameComparator());
+
+            RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+
+            ListView listView = (ListView) findViewById(R.id.list);
+
+            listView.setAdapter(adapter);
+
             return true;
         }
 
