@@ -1,8 +1,12 @@
 package com.example.android.whatsgood;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -17,15 +21,27 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity
+        implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener
 {
     //private static final int WHATSGOOD_LOADER = 0;
 
     //WhatsGoodCursorAdapter mCursorAdapter;
+
+    GoogleApiClient mGoogleApiClient;
+    LocationRequest mLocationRequest;
+    Location mCurrentLocation;
 
     ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
@@ -46,6 +62,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
 
         //WhatsGoodDbHelper mDbHelper = new WhatsGoodDbHelper(this);
 
@@ -291,6 +314,19 @@ public class MainActivity extends AppCompatActivity
 
             return true;
         }
+        if (id == R.id.action_sort_by_location)
+        {
+            // Sort the ArrayList of restaurants by location
+            Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
+
+            RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+
+            ListView listView = (ListView) findViewById(R.id.list);
+
+            listView.setAdapter(adapter);
+
+            return true;
+        }
         if (id == R.id.action_reset)
         {
             try
@@ -303,7 +339,7 @@ public class MainActivity extends AppCompatActivity
             {
 
             }
-            
+
             RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
 
             ListView listView = (ListView) findViewById(R.id.list);
@@ -314,6 +350,37 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle)
+    {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000); // Update location every second
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED)
+        {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i)
+    {
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult)
+    {
+    }
+
+    @Override
+    public void onLocationChanged(Location location)
+    {
+        mCurrentLocation = location;
+
+        Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
     }
 
 //    @Override
