@@ -107,31 +107,31 @@ public class AddNewRestaurantActivity extends AppCompatActivity
 
         // Append restaurant info to the message
         if (!name.isEmpty())
-            msg = "Name: " + name;
+            msg += "Name: " + name;
         if (!address.isEmpty())
-            msg += "\n" + "Address: " + address;
+            msg += "\nAddress: " + address;
         if (!websiteLink.isEmpty())
-            msg += "\n" + "Website Link: " + websiteLink;
+            msg += "\nWebsite Link: " + websiteLink;
         if (!imageLink.isEmpty())
-            msg += "\n" + "Image Link: " + imageLink;
+            msg += "\nImage Link: " + imageLink;
         if (!monday.isEmpty())
-            msg += "\n" + "Monday Specials: " + monday;
+            msg += "\nMonday Specials: " + monday;
         if (!tuesday.isEmpty())
-            msg += "\n" + "Tuesday Specials: " + tuesday;
+            msg += "\nTuesday Specials: " + tuesday;
         if (!wednesday.isEmpty())
-            msg += "\n" + "Wednesday Specials: " + wednesday;
+            msg += "\nWednesday Specials: " + wednesday;
         if (!thursday.isEmpty())
-            msg += "\n" + "Thursday Specials: " + thursday;
+            msg += "\nThursday Specials: " + thursday;
         if (!friday.isEmpty())
-            msg += "\n" + "Friday Specials: " + friday;
+            msg += "\nFriday Specials: " + friday;
         if (!saturday.isEmpty())
-            msg += "\n" + "Saturday Specials: " + saturday;
+            msg += "\nSaturday Specials: " + saturday;
         if (!sunday.isEmpty())
-            msg += "\n" + "Sunday Specials: " + sunday;
+            msg += "\nSunday Specials: " + sunday;
 
         // If no restaurant info was added in the EditText fields
         if (msg.isEmpty())
-            msg = "No new restaurant info added.";
+            msg = "You did not enter any new restaurant info.";
 
         return msg;
     }
