@@ -1,0 +1,18 @@
+<!--
+    Custom spinner item used for the day of the week spinner in the Main Activity.
+    The only difference between this file and android.R.layout.simple_spinner_item is the white text color.
+ -->
+
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:textColor="@color/colorWhite"
+    />
