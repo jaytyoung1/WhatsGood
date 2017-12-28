@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -162,7 +161,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
     public void onConnected(Bundle bundle)
     {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setSmallestDisplacement(10); // 10 meters
+        mLocationRequest.setSmallestDisplacement(25); // 10 meters
         mLocationRequest.setInterval(1000); // Update location every second
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
