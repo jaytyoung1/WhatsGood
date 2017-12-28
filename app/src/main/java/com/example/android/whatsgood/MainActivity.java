@@ -356,6 +356,7 @@ public class MainActivity extends AppCompatActivity
     public void onConnected(Bundle bundle)
     {
         mLocationRequest = new LocationRequest();
+        mLocationRequest.setSmallestDisplacement(10); // 10 meters
         mLocationRequest.setInterval(1000); // Update location every second
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -381,6 +382,12 @@ public class MainActivity extends AppCompatActivity
         mCurrentLocation = location;
 
         Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
+
+        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+
+        ListView listView = (ListView) findViewById(R.id.list);
+
+        listView.setAdapter(adapter);
     }
 
 //    @Override

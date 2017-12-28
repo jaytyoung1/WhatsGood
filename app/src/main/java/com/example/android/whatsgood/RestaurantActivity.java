@@ -121,6 +121,7 @@ public class RestaurantActivity extends AppCompatActivity
     public void onConnected(Bundle bundle)
     {
         mLocationRequest = new LocationRequest();
+        mLocationRequest.setSmallestDisplacement(10); // 10 meters
         mLocationRequest.setInterval(1000); // Update location every second
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
