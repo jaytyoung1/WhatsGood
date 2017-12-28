@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 import com.google.android.gms.common.ConnectionResult;
@@ -52,10 +51,9 @@ public class MainActivity extends AppCompatActivity
     private Spinner mDaySpinner;
 
     /**
-     * Day of the week
+     * String set when day is selected from spinner
+     * public because the Restaurant Adapter uses it to set the correct specials
      */
-    private int mDayOfTheWeek;
-
     public static String dayString = "";
 
     @Override
@@ -115,9 +113,6 @@ public class MainActivity extends AppCompatActivity
         mDaySpinner = (Spinner) findViewById(R.id.spinner_day_of_the_week);
 
         setupSpinner();
-
-        TextView dayOfWeekTextView = (TextView) findViewById(R.id.day_of_week_text);
-        dayOfWeekTextView.setText(dayString);
 
         // Get the map icon and add a click listener to go to the Map activity
         ImageView mapButton = (ImageView) findViewById(R.id.action_button_map);
@@ -183,16 +178,17 @@ public class MainActivity extends AppCompatActivity
 
         // Create an {@link RestaurantAdapter}, whose data source is a list of {@link Restaurant}s.
         // The adapter knows how to create list items for each item in the list.
-        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+        //RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+        //restAdapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
-        ListView listView = (ListView) findViewById(R.id.list);
+        //ListView listView = (ListView) findViewById(R.id.list);
 
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
 
 //        // Find the ListView which will be populated with the restaurants data
 //        ListView restaurantsListView = (ListView) findViewById(R.id.list);
@@ -218,7 +214,7 @@ public class MainActivity extends AppCompatActivity
         // Create adapter for spinner. The list options are from the String array it will use
         // the spinner will use the default layout
         ArrayAdapter daySpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_days_of_the_week, android.R.layout.simple_spinner_item);
+                R.array.array_days_of_the_week, R.layout.spinner_item);
 
         // Specify dropdown layout style - simple list view with 1 item per line
         daySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -236,37 +232,28 @@ public class MainActivity extends AppCompatActivity
                 if (!TextUtils.isEmpty(selection))
                 {
                     if (selection.equals(getString(R.string.day_monday)))
-                    {
-                        mDayOfTheWeek = 1;
                         dayString = getString(R.string.day_monday);
-                    } else if (selection.equals(getString(R.string.day_tuesday)))
-                    {
-                        mDayOfTheWeek = 2;
+                    else if (selection.equals(getString(R.string.day_tuesday)))
                         dayString = getString(R.string.day_tuesday);
-
-                    } else if (selection.equals(getString(R.string.day_wednesday)))
-                    {
-                        mDayOfTheWeek = 3;
+                    else if (selection.equals(getString(R.string.day_wednesday)))
                         dayString = getString(R.string.day_wednesday);
-                    } else if (selection.equals(getString(R.string.day_thursday)))
-                    {
-                        mDayOfTheWeek = 4;
+                    else if (selection.equals(getString(R.string.day_thursday)))
                         dayString = getString(R.string.day_thursday);
-                    } else if (selection.equals(getString(R.string.day_friday)))
-                    {
-                        mDayOfTheWeek = 5;
+                    else if (selection.equals(getString(R.string.day_friday)))
                         dayString = getString(R.string.day_friday);
-                    } else if (selection.equals(getString(R.string.day_saturday)))
-                    {
-                        mDayOfTheWeek = 6;
+                    else if (selection.equals(getString(R.string.day_saturday)))
                         dayString = getString(R.string.day_saturday);
-                    } else if (selection.equals(getString(R.string.day_sunday)))
-                    {
-                        mDayOfTheWeek = 7;
+                    else if (selection.equals(getString(R.string.day_sunday)))
                         dayString = getString(R.string.day_sunday);
+
+                    if (!selection.equals("Pick a day"))
+                    {
+                        RestaurantAdapter adapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+
+                        ListView listView = (ListView) findViewById(R.id.list);
+
+                        listView.setAdapter(adapter);
                     }
-                    finish();
-                    startActivity(getIntent());
                 }
             }
 
@@ -274,7 +261,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
-                mDayOfTheWeek = 0;
             }
         });
     }
