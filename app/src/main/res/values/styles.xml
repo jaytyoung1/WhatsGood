@@ -17,6 +17,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <!-- Main Font - used for Restaurant name in the main activity -->
+    <style name="MainFont">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Style for the Restaurant specials for a list item -->
+    <style name="ListRestaurantSpecials">
+        <item name="android:fontFamily">sans-serif-condensed-light</item>
+    </style>
+
     <!-- Style for a category in the editor -->
     <style name="CategoryStyle">
         <item name="android:layout_height">wrap_content</item>
