@@ -3,7 +3,6 @@
     <string name="hello_world">Hello World!</string>
 
     <!-- Options menu strings -->
-    <string name="action_maps">Map view</string>
     <string name="action_sort_by_name">Sort by name</string>
     <string name="action_sort_by_location">Sort by location</string>
     <string name="action_reset">Reset</string>

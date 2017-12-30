@@ -284,12 +284,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_maps)
-        {
-            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-            startActivity(intent);
-            return true;
-        }
         if (id == R.id.action_sort_by_name)
         {
             // Sort the ArrayList of restaurants by name
