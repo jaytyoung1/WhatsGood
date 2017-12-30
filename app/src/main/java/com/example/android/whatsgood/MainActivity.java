@@ -138,17 +138,6 @@ public class MainActivity extends AppCompatActivity
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_list_white);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_location_on_white);
 
-        // Get the map icon and add a click listener to go to the Map activity
-        ImageView mapButton = (ImageView) findViewById(R.id.action_button_map);
-        mapButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                startActivity(intent);
-            }
-        });
-
 //        // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
 //        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
 //        {
