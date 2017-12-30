@@ -138,36 +138,37 @@ public class MainActivity extends AppCompatActivity
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_list_white);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_location_on_white);
 
-//        // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-//        {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-//            {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position)
-//            {
-//                switch (position)
-//                {
-//                    case 0:
-//                        fab.show();
-//                        break;
-//                    case 1:
-//                        fab.hide();
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state)
-//            {
-//            }
-//        });
+        // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                switch (position)
+                {
+                    case 0:
+                        fab.show();
+                        break;
+                    case 1:
+                        fab.hide();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+            }
+        });
 
         // Get the floating action button by ID and set the on click listener
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
