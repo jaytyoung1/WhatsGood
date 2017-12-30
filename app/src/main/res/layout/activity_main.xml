@@ -57,7 +57,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/restaurant_list"/>
+    <!-- <include layout="@layout/restaurant_list"/> -->
+    <include layout="@layout/tab_layout_and_view_pager"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
