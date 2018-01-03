@@ -77,6 +77,10 @@ public class MapFragment extends Fragment
      */
     ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
+    public static MapFragment newInstance()
+    {
+        return new MapFragment();
+    }
 
     /**
      * Empty Constructor

@@ -7,9 +7,13 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -189,6 +193,34 @@ public class MainActivity extends AppCompatActivity
         {
 
         }
+
+        // Set up Bottom Navigation Bar to create new instances of the fragments when clicked
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_bar);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                Fragment selectedFragment = null;
+                switch (item.getItemId())
+                {
+                    case R.id.action_list:
+                        selectedFragment = MainFragment.newInstance();
+                        break;
+                    case R.id.action_map:
+                        selectedFragment = MapFragment.newInstance();
+                        break;
+                    case R.id.action_profile:
+                        selectedFragment = MainFragment.newInstance();
+                        break;
+                }
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
+                return true;
+            }
+        });
 
 //        // Setup an Adapter to create a list item for each row of restaurant data in the Cursor.
 //        // There is no restaurant data yet (until the loader finishes) so pass in null for the Cursor.

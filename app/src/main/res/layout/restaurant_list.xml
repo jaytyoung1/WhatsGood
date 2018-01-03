@@ -10,4 +10,5 @@
     android:orientation="vertical"
     android:paddingBottom="?attr/actionBarSize"
     android:scrollbarStyle="outsideOverlay"
+    android:scrollingCache="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
