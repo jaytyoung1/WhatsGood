@@ -115,58 +115,58 @@ public class MainActivity extends AppCompatActivity
         mDaySpinner = (Spinner) findViewById(R.id.spinner_day_of_the_week);
         setupSpinner();
 
-        // Find the view pager that will allow the user to swipe between fragments
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-
-        // Create an adapter that knows which fragment should be shown on each page
-        TabAdapter adapter = new TabAdapter(this, getSupportFragmentManager());
-
-        // Set the adapter onto the view pager
-        viewPager.setAdapter(adapter);
-
-        // Find the tab layout that shows the tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        // Connect the tab layout with the view pager. This will
-        //   1. Update the tab layout when the view pager is swiped
-        //   2. Update the view pager when a tab is selected
-        //   3. Set the tab layout's tab names with the view pager's adapter's titles
-        //      by calling onPageTitle()
-        tabLayout.setupWithViewPager(viewPager);
-
-        // Use icons for the tabs
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_list_white);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_location_on_white);
+//        // Find the view pager that will allow the user to swipe between fragments
+//        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+//
+//        // Create an adapter that knows which fragment should be shown on each page
+//        TabAdapter adapter = new TabAdapter(this, getSupportFragmentManager());
+//
+//        // Set the adapter onto the view pager
+//        viewPager.setAdapter(adapter);
+//
+//        // Find the tab layout that shows the tabs
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+//
+//        // Connect the tab layout with the view pager. This will
+//        //   1. Update the tab layout when the view pager is swiped
+//        //   2. Update the view pager when a tab is selected
+//        //   3. Set the tab layout's tab names with the view pager's adapter's titles
+//        //      by calling onPageTitle()
+//        tabLayout.setupWithViewPager(viewPager);
+//
+//        // Use icons for the tabs
+//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_list_white);
+//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_location_on_white);
 
         // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-            {
-            }
-
-            @Override
-            public void onPageSelected(int position)
-            {
-                switch (position)
-                {
-                    case 0:
-                        fab.show();
-                        break;
-                    case 1:
-                        fab.hide();
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state)
-            {
-            }
-        });
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+//        {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+//            {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position)
+//            {
+//                switch (position)
+//                {
+//                    case 0:
+//                        fab.show();
+//                        break;
+//                    case 1:
+//                        fab.hide();
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state)
+//            {
+//            }
+//        });
 
         // Get the floating action button by ID and set the on click listener
         fab.setOnClickListener(new View.OnClickListener()

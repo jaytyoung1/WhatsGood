@@ -5,6 +5,9 @@
     android:id="@+id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
     android:drawSelectorOnTop="true"
     android:orientation="vertical"
+    android:paddingBottom="?attr/actionBarSize"
+    android:scrollbarStyle="outsideOverlay"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

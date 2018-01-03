@@ -2,10 +2,15 @@ package com.example.android.whatsgood;
 
 import android.Manifest;
 import android.app.Activity;
+//import android.app.Fragment;
+//import android.app.FragmentManager;
+//import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +19,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.*;
+//import com.google.android.gms.maps.MapFragment;
 
 import java.util.ArrayList;
 
@@ -45,6 +56,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
     ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
+    Context mContext;
+
     /**
      * Create a new {@link RestaurantAdapter} object
      *
@@ -54,6 +67,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
     public RestaurantAdapter(Activity context, ArrayList<Restaurant> restaurants, int colorResourceId)
     {
         super(context, 0, restaurants);
+        mContext = context;
+
         mColorResourceId = colorResourceId;
 
         restaurantsArrayList = restaurants;
@@ -122,7 +137,28 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
         // Add on click listener to the miles away container to go to the Map activity
         //TODO: this listener should take you to the MapFragment, not the MapActivity
-//        View miles_away_view = listItemView.findViewById(R.id.miles_away_container);
+        View miles_away_view = listItemView.findViewById(R.id.miles_away_container);
+
+        miles_away_view.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment mapFragment = new MapFragment();
+                FragmentTransaction transaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.activity_map, mapFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+                //FragmentManager manager = getSupportFragmentManager();
+                //FragmentTransaction transaction = manager
+//                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.content_main, mapFragment)
+//                        .commit();
+            }
+        });
+
 //        miles_away_view.setOnClickListener(new View.OnClickListener()
 //        {
 //            @Override

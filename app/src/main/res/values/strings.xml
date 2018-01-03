@@ -7,6 +7,11 @@
     <string name="action_sort_by_location">Sort by location</string>
     <string name="action_reset">Reset</string>
 
+    <!-- Bottom Navigation Bar Items -->
+    <string name="nav_bar_list">List</string>
+    <string name="nav_bar_map">Map</string>
+    <string name="nav_bar_profile">Profile</string>
+
     <!-- Title for the Restaurant activity -->
     <string name="restaurant_activity_title">Restaurant Activity</string>
 
