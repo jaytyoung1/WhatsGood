@@ -7,15 +7,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +24,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,6 +37,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
@@ -62,6 +61,16 @@ public class MainActivity extends AppCompatActivity
      * ArrayList of restaurants
      */
     ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
+
+    /**
+     * RestaurantAdapter extends ArrayAdapter and provides the layout for each list
+     */
+    RestaurantAdapter restaurantAdapter;
+
+    /**
+     * Restaurant ListView used to set the Adapter
+     */
+    ListView listView;
 
 
     /**
@@ -183,6 +192,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        // Get the restaurants ArrayList using an AsyncTask
         try
         {
             restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
@@ -194,6 +204,9 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+        // Find the ListView layout for the restaurants
+        listView = (ListView) findViewById(R.id.list);
+
         // Set up Bottom Navigation Bar to create new instances of the fragments when clicked
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_bar);
 
@@ -202,22 +215,31 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item)
             {
-                Fragment selectedFragment = null;
+                // For navigating to the MapFragment
+                Fragment selectedFragment;
+
+                // For navigating to the MainFragment and ProfileFragment (Main)
+                Intent intent;
+
                 switch (item.getItemId())
                 {
                     case R.id.action_list:
-                        selectedFragment = MainFragment.newInstance();
+                        //selectedFragment = MainFragment.newInstance();
+                        intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_map:
                         selectedFragment = MapFragment.newInstance();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
                         break;
                     case R.id.action_profile:
-                        selectedFragment = MainFragment.newInstance();
+                        //selectedFragment = MainFragment.newInstance();
+                        intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
                         break;
                 }
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.commit();
                 return true;
             }
         });
@@ -286,9 +308,9 @@ public class MainActivity extends AppCompatActivity
 
                     if (!selection.equals("Pick a day"))
                     {
-                        RestaurantAdapter adapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
-                        ListView listView = (ListView) findViewById(R.id.list);
-                        listView.setAdapter(adapter);
+                        restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+                        //listView = (ListView) findViewById(R.id.list);
+                        listView.setAdapter(restaurantAdapter);
                     }
                 }
             }
@@ -321,20 +343,18 @@ public class MainActivity extends AppCompatActivity
         {
             // Sort the ArrayList of restaurants by name
             Collections.sort(restaurantsArrayList, new NameComparator());
-            RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
-            ListView listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(adapter);
-
+            restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+            //listView = (ListView) findViewById(R.id.list);
+            listView.setAdapter(restaurantAdapter);
             return true;
         }
         if (id == R.id.action_sort_by_location)
         {
             // Sort the ArrayList of restaurants by location
             Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
-            RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
-            ListView listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(adapter);
-
+            restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+            //listView = (ListView) findViewById(R.id.list);
+            listView.setAdapter(restaurantAdapter);
             return true;
         }
         if (id == R.id.action_reset)
@@ -350,10 +370,9 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-            RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
-            ListView listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(adapter);
-
+            restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+            //listView = (ListView) findViewById(R.id.list);
+            listView.setAdapter(restaurantAdapter);
             return true;
         }
 
@@ -393,16 +412,16 @@ public class MainActivity extends AppCompatActivity
 
         // Create an {@link RestaurantAdapter}, whose data source is a list of {@link Restaurant}s.
         // The adapter knows how to create list items for each item in the list.
-        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantsArrayList, R.color.colorBackground);
+        restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
-        ListView listView = (ListView) findViewById(R.id.list);
+        //listView = (ListView) findViewById(R.id.list);
 
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.
-        listView.setAdapter(adapter);
+        listView.setAdapter(restaurantAdapter);
     }
 
     /**
@@ -471,7 +490,6 @@ public class MainActivity extends AppCompatActivity
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
-                return;
             }
             // other 'case' lines to check for other
             // permissions this app might request

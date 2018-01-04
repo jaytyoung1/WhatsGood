@@ -144,10 +144,15 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             @Override
             public void onClick(View v)
             {
+//                Fragment mapFragment = new MapFragment();
+//                FragmentTransaction transaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.activity_map, mapFragment);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+
                 Fragment mapFragment = new MapFragment();
-                FragmentTransaction transaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activity_map, mapFragment);
-                transaction.addToBackStack(null);
+                FragmentTransaction transaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, mapFragment);
                 transaction.commit();
 
 
@@ -222,18 +227,25 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
     {
         mLastLocation = location;
 
-        for (int i = 0; i < restaurantsArrayList.size(); i++)
+        FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+
+        if (fragmentManager.findFragmentById(R.id.action_map) == null)
         {
-            Location restLocation = new Location("");
-            restLocation.setLatitude(restaurantsArrayList.get(i).getLatitude());
-            restLocation.setLongitude(restaurantsArrayList.get(i).getLongitude());
 
-            float distance = mLastLocation.distanceTo(restLocation);
-            distance = distance * 0.00062137f; // in mi
 
-            String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
+            for (int i = 0; i < restaurantsArrayList.size(); i++)
+            {
+                Location restLocation = new Location("");
+                restLocation.setLatitude(restaurantsArrayList.get(i).getLatitude());
+                restLocation.setLongitude(restaurantsArrayList.get(i).getLongitude());
 
-            milesAwayTextViews.get(i).setText(txt);
+                float distance = mLastLocation.distanceTo(restLocation);
+                distance = distance * 0.00062137f; // in mi
+
+                String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
+
+                milesAwayTextViews.get(i).setText(txt);
+            }
         }
     }
 }
