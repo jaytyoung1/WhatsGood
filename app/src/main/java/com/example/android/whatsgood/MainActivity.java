@@ -13,6 +13,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -84,6 +86,8 @@ public class MainActivity extends AppCompatActivity
      */
     public static String dayString = "";
 
+    public static boolean isActive;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -153,6 +157,13 @@ public class MainActivity extends AppCompatActivity
 
         // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        if (fragmentManager.findFragmentById(R.id.action_map) != null)
+//            fab.hide();
+//        else
+//            fab.show();
 
 //        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
 //        {
@@ -251,6 +262,18 @@ public class MainActivity extends AppCompatActivity
 //
 //        // Kick off the loader
 //        getLoaderManager().initLoader(WHATSGOOD_LOADER, null, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isActive = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isActive = false;
     }
 
     /**

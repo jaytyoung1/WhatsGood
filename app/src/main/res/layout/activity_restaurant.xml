@@ -1,346 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark"
-                android:orientation="vertical"
-                android:scrollbarAlwaysDrawVerticalTrack="true">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/restaurant_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:gravity="center_horizontal"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:text="Restaurant Name"
-        android:textColor="#fff"
-        android:textSize="26sp"
-        android:textStyle="bold"/>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/restaurant_name"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="70dp"
-        android:background="#fff"
-        android:elevation="4dp"
-        android:orientation="vertical"
-        android:padding="20dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="30dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_monday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/monday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_tuesday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/tuesday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_wednesday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/wednesday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_thursday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/thursday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_friday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/friday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_saturday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/saturday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/day_sunday"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/sunday_specials_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="specials"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/restaurant_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/restaurant_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/restaurant_image_background"
-        android:elevation="4dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/restaurant_photo"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="26dp"
-        android:layout_toStartOf="@+id/restaurant_photo">
-
-        <ImageView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_phone_white_24dp"/>
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/edit_restaurant_icon"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_edit_white_24dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/restaurant_photo"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="26dp"
-        android:layout_toEndOf="@+id/restaurant_photo"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/link"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            app:srcCompat="@drawable/ic_link_white"/>
-
-        <LinearLayout
-            android:id="@+id/restaurant_miles_away_container"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3">
-
+            <!-- Restaurant logo ImageView -->
             <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_location_on_white"/>
+                android:id="@+id/restaurant_image"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@color/colorWhite"
+                android:scaleType="fitXY"
+                android:src="@drawable/detzis_logo"/>
 
-            <TextView
-                android:id="@+id/restaurant_miles_text_view"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:text="0.0 mi."
-                android:textColor="@color/colorWhite"
-                android:textSize="14sp"/>
+            <!-- RelativeLayout to hold the Restaurant info -->
+            <RelativeLayout
+                android:id="@+id/restaurant_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal">
+
+                <!-- Restaurant name TextView -->
+                <TextView
+                    android:id="@+id/restaurant_name"
+                    style="@style/MainFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin"
+                    android:layout_marginEnd="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:layout_marginTop="32dp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Scorecard Sports Bar and Grille"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="32sp"/>
+
+                <LinearLayout
+                    android:id="@+id/restaurant_miles_away_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/activity_margin"
+                    android:layout_marginStart="225dp"
+                    android:layout_marginTop="76dp">
+
+                    <ImageView
+                        android:id="@+id/link"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_link_white"
+                        android:tint="@color/colorPrimary"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_location_on_white"
+                        android:tint="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/restaurant_miles_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="0.0 mi."
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <!-- Monday header -->
+                <TextView
+                    android:id="@+id/monday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/restaurant_name"
+                    android:text="@string/day_monday"/>
+
+                <!-- Monday specials -->
+                <TextView
+                    android:id="@+id/monday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/monday_header"
+                    android:text="Monday's specials"/>
+
+                <!-- Tuesday header -->
+                <TextView
+                    android:id="@+id/tuesday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/monday_specials_text_view"
+                    android:text="@string/day_tuesday"/>
+
+                <!-- Tuesday specials -->
+                <TextView
+                    android:id="@+id/tuesday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/tuesday_header"
+                    android:text="Tuesday's specials"/>
+
+                <!-- Wednesday header -->
+                <TextView
+                    android:id="@+id/wednesday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/tuesday_specials_text_view"
+                    android:text="@string/day_wednesday"/>
+
+                <!-- Wednesday specials -->
+                <TextView
+                    android:id="@+id/wednesday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/wednesday_header"
+                    android:text="Wednesday's specials"/>
+
+                <!-- Thursday header -->
+                <TextView
+                    android:id="@+id/thursday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/wednesday_specials_text_view"
+                    android:text="@string/day_thursday"/>
+
+                <!-- Thursday specials -->
+                <TextView
+                    android:id="@+id/thursday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/thursday_header"
+                    android:text="Thursday's specials"/>
+
+                <!-- Friday header -->
+                <TextView
+                    android:id="@+id/friday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/thursday_specials_text_view"
+                    android:text="@string/day_friday"/>
+
+                <!-- Friday specials -->
+                <TextView
+                    android:id="@+id/friday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/friday_header"
+                    android:text="Friday's specials"/>
+
+                <!-- Saturday header -->
+                <TextView
+                    android:id="@+id/saturday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/friday_specials_text_view"
+                    android:text="@string/day_saturday"/>
+
+                <!-- Saturday specials -->
+                <TextView
+                    android:id="@+id/saturday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/saturday_header"
+                    android:text="Saturday's specials"/>
+
+                <!-- Sunday header -->
+                <TextView
+                    android:id="@+id/sunday_header"
+                    style="@style/header_day_of_week"
+                    android:layout_below="@+id/saturday_specials_text_view"
+                    android:text="@string/day_sunday"/>
+
+                <!-- Sunday specials -->
+                <TextView
+                    android:id="@+id/sunday_specials_text_view"
+                    style="@style/specials_text_view"
+                    android:layout_below="@+id/sunday_header"
+                    android:layout_marginBottom="@dimen/activity_margin"
+                    android:text="Sunday's specials"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/restaurant_activity_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_edit_white_24dp"
+        app:layout_anchor="@id/restaurant_image"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -17,6 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <!--
+        MainFragment styles
+    -->
     <!-- Main Font - used for Restaurant name in the main activity -->
     <style name="MainFont">
         <item name="android:fontFamily">sans-serif</item>
@@ -26,6 +29,30 @@
     <style name="ListRestaurantSpecials">
         <item name="android:fontFamily">sans-serif-condensed-light</item>
     </style>
+
+    <!--
+        RestaurantActivity Styles
+    -->
+    <!-- Day of the week header -->
+    <style name="header_day_of_week">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/activity_margin</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Specials TextView -->
+    <style name="specials_text_view">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+    </style>
+
 
     <!-- Style for a category in the editor -->
     <style name="CategoryStyle">

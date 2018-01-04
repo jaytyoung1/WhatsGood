@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -48,23 +49,23 @@ public class RestaurantActivity extends AppCompatActivity
         restaurantTextView.setText(currentRestaurant.getName());
 
         // Set the restaurant image
-        ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_photo);
+        ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_image);
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
 
         // Set the specials text views for each day of the week
-        TextView mondaySpecialsTextView = (TextView) findViewById(R.id.monday_specials_text);
+        TextView mondaySpecialsTextView = (TextView) findViewById(R.id.monday_specials_text_view);
         mondaySpecialsTextView.setText(currentRestaurant.getSpecial("Monday"));
-        TextView tuesdaySpecialsTextView = (TextView) findViewById(R.id.tuesday_specials_text);
+        TextView tuesdaySpecialsTextView = (TextView) findViewById(R.id.tuesday_specials_text_view);
         tuesdaySpecialsTextView.setText(currentRestaurant.getSpecial("Tuesday"));
-        TextView wednesdaySpecialsTextView = (TextView) findViewById(R.id.wednesday_specials_text);
+        TextView wednesdaySpecialsTextView = (TextView) findViewById(R.id.wednesday_specials_text_view);
         wednesdaySpecialsTextView.setText(currentRestaurant.getSpecial("Wednesday"));
-        TextView thursdaySpecialsTextView = (TextView) findViewById(R.id.thursday_specials_text);
+        TextView thursdaySpecialsTextView = (TextView) findViewById(R.id.thursday_specials_text_view);
         thursdaySpecialsTextView.setText(currentRestaurant.getSpecial("Thursday"));
-        TextView fridaySpecialsTextView = (TextView) findViewById(R.id.friday_specials_text);
+        TextView fridaySpecialsTextView = (TextView) findViewById(R.id.friday_specials_text_view);
         fridaySpecialsTextView.setText(currentRestaurant.getSpecial("Friday"));
-        TextView saturdaySpecialsTextView = (TextView) findViewById(R.id.saturday_specials_text);
+        TextView saturdaySpecialsTextView = (TextView) findViewById(R.id.saturday_specials_text_view);
         saturdaySpecialsTextView.setText(currentRestaurant.getSpecial("Saturday"));
-        TextView sundaySpecialsTextView = (TextView) findViewById(R.id.sunday_specials_text);
+        TextView sundaySpecialsTextView = (TextView) findViewById(R.id.sunday_specials_text_view);
         sundaySpecialsTextView.setText(currentRestaurant.getSpecial("Sunday"));
 
         // Set the on click listener for the link image
@@ -82,9 +83,10 @@ public class RestaurantActivity extends AppCompatActivity
             }
         });
 
-        // Set the on click listener for the edit icon
-        ImageView editIcon = (ImageView) findViewById(R.id.edit_restaurant_icon);
-        editIcon.setOnClickListener(new View.OnClickListener()
+        // Set the on click listener for the edit floating action button
+        FloatingActionButton editFab = (FloatingActionButton) findViewById(R.id.restaurant_activity_fab);
+        //ImageView editIcon = (ImageView) findViewById(R.id.edit_restaurant_icon);
+        editFab.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)

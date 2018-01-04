@@ -229,7 +229,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
         FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
 
-        if (fragmentManager.findFragmentById(R.id.action_map) == null)
+        if (fragmentManager.findFragmentById(R.id.action_map) == null && MainActivity.isActive)
         {
 
 
