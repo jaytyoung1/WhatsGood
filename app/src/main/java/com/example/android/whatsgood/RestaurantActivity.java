@@ -48,6 +48,10 @@ public class RestaurantActivity extends AppCompatActivity
         TextView restaurantTextView = (TextView) findViewById(R.id.restaurant_name);
         restaurantTextView.setText(currentRestaurant.getName());
 
+        // Set the restaurant address
+        TextView addressTextView = (TextView) findViewById(R.id.address_text_view);
+        addressTextView.setText(currentRestaurant.getAddress());
+
         // Set the restaurant image
         ImageView restaurantImageView = (ImageView) findViewById(R.id.restaurant_image);
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
