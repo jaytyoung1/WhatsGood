@@ -160,7 +160,6 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         });
 
         // Add on click listener to the miles away container to go to the MapFragment
-        //TODO: this listener should take you to the MapFragment, not the MapActivity
         View miles_away_view = listItemView.findViewById(R.id.miles_away_container);
 
         miles_away_view.setOnClickListener(new View.OnClickListener()

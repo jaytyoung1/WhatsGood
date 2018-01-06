@@ -105,16 +105,20 @@ public class RestaurantActivity extends AppCompatActivity
 
         // Add on click listener to the miles away container to go to the Map activity
         //TODO: this listener should take you to the MapFragment, not the MapActivity
-//        View miles_away_view = findViewById(R.id.restaurant_miles_away_container);
-//        miles_away_view.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                Intent intent = new Intent(RestaurantActivity.this, MapActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        // Add on click listener to the miles away container to go to the MapFragment
+        View miles_away_view = findViewById(R.id.restaurant_miles_away_container);
+
+        miles_away_view.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String mapFragment = "mapFragment";
+                Intent intent = new Intent(RestaurantActivity.this, MainActivity.class);
+                intent.putExtra("fragmentToLoad", mapFragment);
+                startActivity(intent);
+            }
+        });
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)

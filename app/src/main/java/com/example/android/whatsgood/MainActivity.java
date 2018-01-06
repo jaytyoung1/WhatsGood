@@ -7,14 +7,11 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -39,7 +36,6 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
@@ -86,12 +82,40 @@ public class MainActivity extends AppCompatActivity
      */
     public static String dayString = "";
 
+    /**
+     * Boolean set when MainActivity is active or not active (see onPause() and onResume())
+     */
     public static boolean isActive;
+
+    /**
+     * String used when starting the mapFragment from the RestaurantActivity
+     */
+    final String mapFragmentString = "mapFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // If the MainActivity was started from the RestaurantActivity, get the extra which contains the fragment to start
+        try
+        {
+            String intentFragment = getIntent().getExtras().getString("fragmentToLoad");
+
+            switch (intentFragment)
+            {
+                case mapFragmentString:
+                    // Load corresponding fragment
+                    Fragment mapFragment = new MapFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, mapFragment);
+                    transaction.commit();
+            }
+        } catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
 
         //Initialize Google Play Services, ask user for permission
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -265,13 +289,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         isActive = true;
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         isActive = false;
     }
