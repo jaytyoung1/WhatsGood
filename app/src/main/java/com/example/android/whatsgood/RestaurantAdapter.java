@@ -244,7 +244,14 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
                 String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
 
-                milesAwayTextViews.get(i).setText(txt);
+                try
+                {
+                    milesAwayTextViews.get(i).setText(txt);
+                } catch (IndexOutOfBoundsException e)
+                {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
