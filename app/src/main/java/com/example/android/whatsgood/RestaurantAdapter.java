@@ -159,7 +159,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             }
         });
 
-        // Add on click listener to the miles away container to go to the Map activity
+        // Add on click listener to the miles away container to go to the MapFragment
         //TODO: this listener should take you to the MapFragment, not the MapActivity
         View miles_away_view = listItemView.findViewById(R.id.miles_away_container);
 
@@ -168,35 +168,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             @Override
             public void onClick(View v)
             {
-//                Fragment mapFragment = new MapFragment();
-//                FragmentTransaction transaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.activity_map, mapFragment);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-
                 Fragment mapFragment = new MapFragment();
                 FragmentTransaction transaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, mapFragment);
                 transaction.commit();
-
-
-                //FragmentManager manager = getSupportFragmentManager();
-                //FragmentTransaction transaction = manager
-//                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.content_main, mapFragment)
-//                        .commit();
             }
         });
-
-//        miles_away_view.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                Intent intent = new Intent(getContext(), MapActivity.class);
-//                getContext().startActivity(intent);
-//            }
-//        });
 
         if (currentRestaurant.hasImage())
         {
