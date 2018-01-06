@@ -121,6 +121,30 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         milesAwayText = (TextView) listItemView.findViewById(R.id.miles_text_view);
         milesAwayTextViews.add(milesAwayText);
 
+        // Set the milesAwayText when the list item comes into view
+        if (mLastLocation != null && MainActivity.isActive)
+        {
+            Location restLocation = new Location("");
+            restLocation.setLatitude(currentRestaurant.getLatitude());
+            restLocation.setLongitude(currentRestaurant.getLongitude());
+
+            float distance = mLastLocation.distanceTo(restLocation);
+            distance = distance * 0.00062137f; // in mi
+
+            String txt = String.format(java.util.Locale.US, "%.1f mi", distance);
+
+            try
+            {
+                milesAwayText.setText(txt);
+            } catch (IndexOutOfBoundsException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        // Set the text of the milesAwayTextView
+        //milesAwayText.setText();
+
         // Find the ImageView in the list_item.xml layout with the ID image
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
 
