@@ -107,6 +107,17 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         TextView restaurantNameTextView = (TextView) listItemView.findViewById(R.id.restaurant_name_text_view);
         // Get the Restaurant name from the currentRestaurant object and set this text on the text view
         restaurantNameTextView.setText(currentRestaurant.getName());
+        // Add an onClickListener to go to the RestaurantActivity
+        restaurantNameTextView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getContext(), RestaurantActivity.class);
+                intent.putExtra("currentRestaurant", rest);
+                getContext().startActivity(intent);
+            }
+        });
 
         // Find the TextView in the list_item.xml layout with the specials
         TextView specialsTextView = (TextView) listItemView.findViewById(R.id.specials_text_view);
