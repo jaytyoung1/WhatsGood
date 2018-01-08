@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,9 +79,19 @@ public class MapFragment extends Fragment
     ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
     /**
+     * Restaurant object for the restaurant that was clicked
+     */
+    Restaurant restaurantClicked = null;
+
+    /**
      * Boolean set when MapFragment is active or not active (see onPause() and onResume())
      */
     public static boolean isActive;
+
+    /**
+     * Boolean used to determine if map should fly to a restaurant or current location
+     */
+    private boolean isFlyingToRestaurant;
 
     public static MapFragment newInstance()
     {
@@ -99,6 +110,16 @@ public class MapFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
+
+        // If a restaurant was clicked, get it in order to fly to it
+        try
+        {
+            restaurantClicked = (Restaurant) getArguments().getSerializable("restaurantClicked");
+            isFlyingToRestaurant = true;
+        } catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
 
         // Map button sets map type to normal
         Button buttonMap = (Button) rootView.findViewById(R.id.button_map);
@@ -255,14 +276,32 @@ public class MapFragment extends Fragment
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
 
-        // Get the current location when the map connects and fly to it
-        Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (currentLocation != null)
+        // If the user clicked a miles away textView, fly to the restaurant
+        if (isFlyingToRestaurant)
         {
-            LatLng currentPositionLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-            CameraPosition currentLocationCameraPosition = getCameraPosition(currentPositionLatLng);
-            flyTo(currentLocationCameraPosition);
-            //mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(currentLocationCameraPosition), 1000, null);
+            // Get the latitude and longitude of the restaurant that was clicked
+            LatLng restaurantLatLng = new LatLng(restaurantClicked.getLatitude(), restaurantClicked.getLongitude());
+
+            // Get the camera position of the restaurant that was clicked
+            CameraPosition restaurantCameraPosition = getCameraPosition(restaurantLatLng, 17);
+
+            // Fly to the restaurant that was clicked
+            flyTo(restaurantCameraPosition);
+        } else
+        {
+            // Get the current location when the map connects and fly to it
+            Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (currentLocation != null)
+            {
+                // Get the latitude and longitude of the user's current location
+                LatLng currentPositionLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+
+                // Get the camera position of the user's current location
+                CameraPosition currentLocationCameraPosition = getCameraPosition(currentPositionLatLng, 12);
+
+                // Fly to current location
+                flyTo(currentLocationCameraPosition);
+            }
         }
     }
 
@@ -386,9 +425,9 @@ public class MapFragment extends Fragment
     /**
      * Get a CameraPosition based on latitude and longitude
      */
-    private CameraPosition getCameraPosition(LatLng latLng)
+    private CameraPosition getCameraPosition(LatLng latLng, int zoom)
     {
-        return CameraPosition.builder().target(latLng).zoom(12).build();
+        return CameraPosition.builder().target(latLng).zoom(zoom).build();
     }
 
     /**

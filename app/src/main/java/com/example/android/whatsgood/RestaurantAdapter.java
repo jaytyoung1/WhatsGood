@@ -187,6 +187,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
                 if (!MapFragment.isActive)
                 {
                     Fragment mapFragment = new MapFragment();
+
+                    // Bundle the restaurant that was clicked in order to fly to it
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("restaurantClicked", rest);
+                    mapFragment.setArguments(bundle);
+
                     FragmentTransaction transaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, mapFragment);
                     transaction.commit();

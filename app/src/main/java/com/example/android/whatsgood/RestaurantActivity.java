@@ -145,9 +145,11 @@ public class RestaurantActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String mapFragment = "mapFragment";
+                // Start the MainActivity by intent
                 Intent intent = new Intent(RestaurantActivity.this, MainActivity.class);
-                intent.putExtra("loadMapFragment", mapFragment);
+
+                // Pass the current restaurant in order to fly to it
+                intent.putExtra("restaurantClicked", currentRestaurant);
                 startActivity(intent);
             }
         });

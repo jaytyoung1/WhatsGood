@@ -100,10 +100,20 @@ public class MainActivity extends AppCompatActivity
             dayString = extras.getString("dayString");
 
         // This code is executed when going from the RestaurantActivity to the MapFragment in the MainActivity
-        if (getIntent().getStringExtra("loadMapFragment") != null)
+        if (getIntent().getSerializableExtra("restaurantClicked") != null)
         {
-            // Start the MapFragment
+            // Get the Restaurant object that was clicked
+            Restaurant restaurantClicked = (Restaurant) getIntent().getSerializableExtra("restaurantClicked");
+
+            // Create a new MapFragment
             Fragment mapFragment = new MapFragment();
+
+            // Bundle the restaurant that was clicked in order to fly to it
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("restaurantClicked", restaurantClicked);
+            mapFragment.setArguments(bundle);
+
+            // Start the MapFragment
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_layout, mapFragment);
             transaction.commit();
