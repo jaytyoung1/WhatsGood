@@ -42,4 +42,7 @@
     <string name="comments">Comments</string>
     <string name="comments_hint">Address change, logo change, etc.</string>
 
+    <!-- RestaurantActivity: text to fill for specials if none are provided -->
+    <string name="no_specials_added">No specials added for this day.</string>
+
 </resources>

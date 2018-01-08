@@ -57,20 +57,54 @@ public class RestaurantActivity extends AppCompatActivity
         restaurantImageView.setImageResource(currentRestaurant.getImageResourceId());
 
         // Set the specials text views for each day of the week
+        // Monday
         TextView mondaySpecialsTextView = (TextView) findViewById(R.id.monday_specials_text_view);
-        mondaySpecialsTextView.setText(currentRestaurant.getSpecial("Monday"));
+        if (currentRestaurant.getSpecial("Monday").isEmpty())
+            mondaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            mondaySpecialsTextView.setText(currentRestaurant.getSpecial("Monday"));
+
+        // Tuesday
         TextView tuesdaySpecialsTextView = (TextView) findViewById(R.id.tuesday_specials_text_view);
-        tuesdaySpecialsTextView.setText(currentRestaurant.getSpecial("Tuesday"));
+        if (currentRestaurant.getSpecial("Tuesday").isEmpty())
+            tuesdaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            tuesdaySpecialsTextView.setText(currentRestaurant.getSpecial("Tuesday"));
+
+        // Wednesday
         TextView wednesdaySpecialsTextView = (TextView) findViewById(R.id.wednesday_specials_text_view);
-        wednesdaySpecialsTextView.setText(currentRestaurant.getSpecial("Wednesday"));
+        if (currentRestaurant.getSpecial("Wednesday").isEmpty())
+            wednesdaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            wednesdaySpecialsTextView.setText(currentRestaurant.getSpecial("Wednesday"));
+
+        // Thursday
         TextView thursdaySpecialsTextView = (TextView) findViewById(R.id.thursday_specials_text_view);
-        thursdaySpecialsTextView.setText(currentRestaurant.getSpecial("Thursday"));
+        if (currentRestaurant.getSpecial("Thursday").isEmpty())
+            thursdaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            thursdaySpecialsTextView.setText(currentRestaurant.getSpecial("Thursday"));
+
+        // Friday
         TextView fridaySpecialsTextView = (TextView) findViewById(R.id.friday_specials_text_view);
-        fridaySpecialsTextView.setText(currentRestaurant.getSpecial("Friday"));
+        if (currentRestaurant.getSpecial("Friday").isEmpty())
+            fridaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            fridaySpecialsTextView.setText(currentRestaurant.getSpecial("Friday"));
+
+        // Saturday
         TextView saturdaySpecialsTextView = (TextView) findViewById(R.id.saturday_specials_text_view);
-        saturdaySpecialsTextView.setText(currentRestaurant.getSpecial("Saturday"));
+        if (currentRestaurant.getSpecial("Saturday").isEmpty())
+            saturdaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            saturdaySpecialsTextView.setText(currentRestaurant.getSpecial("Saturday"));
+
+        // Sunday
         TextView sundaySpecialsTextView = (TextView) findViewById(R.id.sunday_specials_text_view);
-        sundaySpecialsTextView.setText(currentRestaurant.getSpecial("Sunday"));
+        if (currentRestaurant.getSpecial("Sunday").isEmpty())
+            sundaySpecialsTextView.setText(R.string.no_specials_added);
+        else
+            sundaySpecialsTextView.setText(currentRestaurant.getSpecial("Sunday"));
 
         // Set the on click listener for the link image
         ImageView linkImage = (ImageView) findViewById(R.id.link);
@@ -103,8 +137,6 @@ public class RestaurantActivity extends AppCompatActivity
 
         milesAwayText = (TextView) findViewById(R.id.restaurant_miles_text_view);
 
-        // Add on click listener to the miles away container to go to the Map activity
-        //TODO: this listener should take you to the MapFragment, not the MapActivity
         // Add on click listener to the miles away container to go to the MapFragment
         View miles_away_view = findViewById(R.id.restaurant_miles_away_container);
 
