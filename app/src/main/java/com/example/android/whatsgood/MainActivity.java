@@ -18,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -87,35 +88,26 @@ public class MainActivity extends AppCompatActivity
      */
     public static boolean isActive;
 
-    /**
-     * String used when starting the mapFragment from the RestaurantActivity
-     */
-    final String mapFragmentString = "mapFragment";
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        // If the MainActivity was started from the RestaurantActivity, get the extra which contains the fragment to start
-        try
-        {
-            String intentFragment = getIntent().getExtras().getString("fragmentToLoad");
+        // This code is executed when restarting the MainFragment
+        // If the drop down spinner has previously been set, get the day of the week to pre set the spinner
+        Bundle extras = getIntent().getExtras();
+        if (getIntent().getStringExtra("dayString") != null)
+            dayString = extras.getString("dayString");
 
-            switch (intentFragment)
-            {
-                case mapFragmentString:
-                    // Load corresponding fragment
-                    Fragment mapFragment = new MapFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, mapFragment);
-                    transaction.commit();
-            }
-        } catch (NullPointerException e)
+        // This code is executed when going from the RestaurantActivity to the MapFragment in the MainActivity
+        if (getIntent().getStringExtra("loadMapFragment") != null)
         {
-            e.printStackTrace();
+            // Start the MapFragment
+            Fragment mapFragment = new MapFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, mapFragment);
+            transaction.commit();
         }
-
 
         //Initialize Google Play Services, ask user for permission
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -258,20 +250,29 @@ public class MainActivity extends AppCompatActivity
 
                 switch (item.getItemId())
                 {
+                    // Restart the MainActivity
                     case R.id.action_list:
-                        //selectedFragment = MainFragment.newInstance();
                         intent = new Intent(MainActivity.this, MainActivity.class);
+                        // If the spinner has been set to a day of the week, add it as an extra
+                        if (!dayString.isEmpty())
+                            intent.putExtra("dayString", dayString);
                         startActivity(intent);
                         break;
+
+                    // Start the MapFragment
                     case R.id.action_map:
                         selectedFragment = MapFragment.newInstance();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.commit();
                         break;
+
+                    // For now, restart the MainActivity
                     case R.id.action_profile:
-                        //selectedFragment = MainFragment.newInstance();
                         intent = new Intent(MainActivity.this, MainActivity.class);
+                        // If the spinner has been set to a day of the week, add it as an extra
+                        if (!dayString.isEmpty())
+                            intent.putExtra("dayString", dayString);
                         startActivity(intent);
                         break;
                 }
@@ -330,6 +331,13 @@ public class MainActivity extends AppCompatActivity
 
         // Apply the adapter to the spinner
         mDaySpinner.setAdapter(daySpinnerAdapter);
+
+        // If the day spinner has been set previously, set the spinner to the appropriate selection
+        if (!dayString.isEmpty())
+        {
+            int spinnerPosition = daySpinnerAdapter.getPosition(dayString);
+            mDaySpinner.setSelection(spinnerPosition);
+        }
 
         // Set the integer mSelected to the constant values
         mDaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()

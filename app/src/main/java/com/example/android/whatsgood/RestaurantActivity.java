@@ -115,7 +115,7 @@ public class RestaurantActivity extends AppCompatActivity
             {
                 String mapFragment = "mapFragment";
                 Intent intent = new Intent(RestaurantActivity.this, MainActivity.class);
-                intent.putExtra("fragmentToLoad", mapFragment);
+                intent.putExtra("loadMapFragment", mapFragment);
                 startActivity(intent);
             }
         });
