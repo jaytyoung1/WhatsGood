@@ -77,6 +77,11 @@ public class MapFragment extends Fragment
      */
     ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
+    /**
+     * Boolean set when MapFragment is active or not active (see onPause() and onResume())
+     */
+    public static boolean isActive;
+
     public static MapFragment newInstance()
     {
         return new MapFragment();
@@ -165,9 +170,17 @@ public class MapFragment extends Fragment
     }
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+        isActive = true;
+    }
+
+    @Override
     public void onPause()
     {
         super.onPause();
+        isActive = false;
 
         //stop location updates when Activity is no longer active
         if (mGoogleApiClient != null)

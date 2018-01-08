@@ -113,9 +113,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(), RestaurantActivity.class);
-                intent.putExtra("currentRestaurant", rest);
-                getContext().startActivity(intent);
+                if (!MapFragment.isActive)
+                {
+                    Intent intent = new Intent(getContext(), RestaurantActivity.class);
+                    intent.putExtra("currentRestaurant", rest);
+                    getContext().startActivity(intent);
+                }
             }
         });
 
@@ -164,9 +167,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         {
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(), RestaurantActivity.class);
-                intent.putExtra("currentRestaurant", rest);
-                getContext().startActivity(intent);
+                if (!MapFragment.isActive)
+                {
+                    Intent intent = new Intent(getContext(), RestaurantActivity.class);
+                    intent.putExtra("currentRestaurant", rest);
+                    getContext().startActivity(intent);
+                }
             }
         });
 
@@ -178,10 +184,13 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             @Override
             public void onClick(View v)
             {
-                Fragment mapFragment = new MapFragment();
-                FragmentTransaction transaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, mapFragment);
-                transaction.commit();
+                if (!MapFragment.isActive)
+                {
+                    Fragment mapFragment = new MapFragment();
+                    FragmentTransaction transaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, mapFragment);
+                    transaction.commit();
+                }
             }
         });
 
