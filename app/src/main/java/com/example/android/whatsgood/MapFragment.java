@@ -100,6 +100,7 @@ public class MapFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
+        // Map button sets map type to normal
         Button buttonMap = (Button) rootView.findViewById(R.id.button_map);
         buttonMap.setOnClickListener(new View.OnClickListener()
         {
@@ -111,6 +112,7 @@ public class MapFragment extends Fragment
             }
         });
 
+        // Satellite button sets map type to satellite
         Button buttonSatellite = (Button) rootView.findViewById(R.id.button_satellite);
         buttonSatellite.setOnClickListener(new View.OnClickListener()
         {
@@ -122,6 +124,7 @@ public class MapFragment extends Fragment
             }
         });
 
+        // Hybrid button sets map type to hybrid
         Button buttonHybrid = (Button) rootView.findViewById(R.id.button_hybrid);
         buttonHybrid.setOnClickListener(new View.OnClickListener()
         {
@@ -133,6 +136,7 @@ public class MapFragment extends Fragment
             }
         });
 
+        // Get the map fragment
         mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
@@ -257,7 +261,7 @@ public class MapFragment extends Fragment
         {
             LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
             CameraPosition target = CameraPosition.builder().target(latLng).zoom(12).build();
-            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 2000, null);
+            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 1000, null);
         }
     }
 
