@@ -256,12 +256,13 @@ public class MapFragment extends Fragment
         }
 
         // Get the current location when the map connects and fly to it
-        Location loc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (loc != null)
+        Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (currentLocation != null)
         {
-            LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
-            CameraPosition target = CameraPosition.builder().target(latLng).zoom(12).build();
-            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 1000, null);
+            LatLng currentPositionLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+            CameraPosition currentLocationCameraPosition = getCameraPosition(currentPositionLatLng);
+            flyTo(currentLocationCameraPosition);
+            //mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(currentLocationCameraPosition), 1000, null);
         }
     }
 
@@ -380,5 +381,21 @@ public class MapFragment extends Fragment
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+    /**
+     * Get a CameraPosition based on latitude and longitude
+     */
+    private CameraPosition getCameraPosition(LatLng latLng)
+    {
+        return CameraPosition.builder().target(latLng).zoom(12).build();
+    }
+
+    /**
+     * Fly to the cameraPosition by animating the camera
+     */
+    private void flyTo(CameraPosition target)
+    {
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 1000, null);
     }
 }
