@@ -1,11 +1,14 @@
 package com.example.android.whatsgood;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -110,6 +113,11 @@ public class MapFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
+
+        // Hide the FAB by first getting the context of the MainActivity
+        Context mainContext = inflater.getContext();
+        FloatingActionButton fab = ((Activity) mainContext).findViewById(R.id.fab);
+        fab.hide();
 
         // If a restaurant was clicked, get it in order to fly to it
         try
