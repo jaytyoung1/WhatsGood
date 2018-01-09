@@ -16,7 +16,6 @@
     <string name="restaurant_activity_title">Restaurant Activity</string>
 
     <!-- Days of the week -->
-    <string name="select_day">Pick a day</string>
     <string name="day_monday">Monday</string>
     <string name="day_tuesday">Tuesday</string>
     <string name="day_wednesday">Wednesday</string>

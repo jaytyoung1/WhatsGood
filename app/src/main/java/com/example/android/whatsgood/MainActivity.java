@@ -35,8 +35,11 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
@@ -348,6 +351,16 @@ public class MainActivity extends AppCompatActivity
             int spinnerPosition = daySpinnerAdapter.getPosition(dayString);
             mDaySpinner.setSelection(spinnerPosition);
         }
+        // If the spinner has not yet been set, set it to the current day
+        else
+        {
+            String weekDay;
+            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+            Calendar calendar = Calendar.getInstance();
+            weekDay = dayFormat.format(calendar.getTime());
+            int position = daySpinnerAdapter.getPosition(weekDay);
+            mDaySpinner.setSelection(position);
+        }
 
         // Set the integer mSelected to the constant values
         mDaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -373,12 +386,9 @@ public class MainActivity extends AppCompatActivity
                     else if (selection.equals(getString(R.string.day_sunday)))
                         dayString = getString(R.string.day_sunday);
 
-                    if (!selection.equals("Pick a day"))
-                    {
-                        restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
-                        //listView = (ListView) findViewById(R.id.list);
-                        listView.setAdapter(restaurantAdapter);
-                    }
+                    restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+                    //listView = (ListView) findViewById(R.id.list);
+                    listView.setAdapter(restaurantAdapter);
                 }
             }
 
