@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "207229306417",
+    "firebase_url": "https://whatsgood-1.firebaseio.com",
+    "project_id": "whatsgood-1",
+    "storage_bucket": "whatsgood-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207229306417:android:1ed3d4e0437ee4f6",
+        "android_client_info": {
+          "package_name": "com.example.android.whatsgood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207229306417-dr995vqa1nuvl2us98g74c1s03stdfn7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "207229306417-rgdjr36doqrm8j1ioabko44f5141jrbn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.whatsgood",
+            "certificate_hash": "426043656089f7c8647db6438daba74c42cd1744"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBppazeKL_uz7ojjnqWJiZPOWaRhhO9zT8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207229306417-dr995vqa1nuvl2us98g74c1s03stdfn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
