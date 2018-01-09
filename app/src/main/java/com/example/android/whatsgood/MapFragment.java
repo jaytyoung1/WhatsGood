@@ -207,6 +207,7 @@ public class MapFragment extends Fragment
     {
         super.onResume();
         isActive = true;
+        //mGoogleApiClient.connect();
     }
 
     @Override
@@ -216,10 +217,10 @@ public class MapFragment extends Fragment
         isActive = false;
 
         //stop location updates when Activity is no longer active
-        if (mGoogleApiClient != null)
-        {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+//        if (mGoogleApiClient != null)
+//        {
+//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+//        }
     }
 
     @Override
@@ -323,14 +324,14 @@ public class MapFragment extends Fragment
     {
     }
 
-    @Override
-    public void onStop()
-    {
-        // Disconnect the client
-        mGoogleApiClient.disconnect();
-
-        super.onStop();
-    }
+//    @Override
+//    public void onStop()
+//    {
+//        // Disconnect the client
+//        mGoogleApiClient.disconnect();
+//
+//        super.onStop();
+//    }
 
     @Override
     public void onLocationChanged(Location location)
