@@ -186,6 +186,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             {
                 if (!MapFragment.isActive)
                 {
+                    // Go to the MapFragment
                     Fragment mapFragment = new MapFragment();
 
                     // Bundle the restaurant that was clicked in order to fly to it

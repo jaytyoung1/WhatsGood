@@ -18,7 +18,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +33,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.Marker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -389,6 +389,17 @@ public class MainActivity extends AppCompatActivity
                     restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
                     //listView = (ListView) findViewById(R.id.list);
                     listView.setAdapter(restaurantAdapter);
+
+                    // If changing the day in the MapFragment, update the restaurant markers
+                    if (MapFragment.isActive)
+                    {
+                        // Remove the current Markers
+                        for (Marker m : MapFragment.markerArrayList)
+                            m.remove();
+
+                        // Add new MarkerOptions with the updated dayString
+                        MapFragment.addMarkersForRestaurants(restaurantsArrayList);
+                    }
                 }
             }
 

@@ -55,7 +55,7 @@ public class MapFragment extends Fragment
      * Google Map variables
      */
     GoogleApiClient mGoogleApiClient;
-    GoogleMap mGoogleMap;
+    public static GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
     boolean mapReady = false;
 
@@ -72,9 +72,14 @@ public class MapFragment extends Fragment
     Marker mCurrLocationMarker;
 
     /**
-     * ArrayList of marker options
+     * ArrayList of marker options (Accessed in MainActivity if user changes day spinner in MapFragment
      */
-    ArrayList<MarkerOptions> markerOptionsArrayList = new ArrayList<>();
+    public static ArrayList<MarkerOptions> markerOptionsArrayList;
+
+    /**
+     * ArrayList of Markers. Markers have a method to remove (Used in MainActivity when user changes day in spinner)
+     */
+    public static ArrayList<Marker> markerArrayList;
 
     /**
      * ArrayList for the restaurants
@@ -180,25 +185,6 @@ public class MapFragment extends Fragment
         {
 
         }
-
-        // Create a marker for each restaurant, with the special of today's day
-        for (Restaurant r : restaurantsArrayList)
-        {
-            // Get the day of the week as a string
-            String weekDay;
-            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-            Calendar calendar = Calendar.getInstance();
-            weekDay = dayFormat.format(calendar.getTime());
-
-            // Create a marker
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(new LatLng(r.getLatitude(), r.getLongitude()))
-                    .snippet(r.getSpecial(weekDay))
-                    .title(r.getName());
-
-            // Add the marker to the ArrayList
-            markerOptionsArrayList.add(markerOptions);
-        }
         return rootView;
     }
 
@@ -251,13 +237,39 @@ public class MapFragment extends Fragment
             mGoogleMap.setMyLocationEnabled(true);
         }
 
+        addMarkersForRestaurants(restaurantsArrayList);
+    }
+
+    /**
+     * Adds MarkerOptions for each restaurant. Method is public static because it is called in the
+     * MainActivity if the user changes the day spinner while in the MapFragment
+     *
+     * @param arrayList ArrayList of restaurants
+     */
+    public static void addMarkersForRestaurants(ArrayList<Restaurant> arrayList)
+    {
+        markerOptionsArrayList = new ArrayList<>();
+        markerArrayList = new ArrayList<>();
+
+        // Create a marker for each restaurant, with the special of today's day
+        for (Restaurant r : arrayList)
+        {
+            // Create a marker
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(new LatLng(r.getLatitude(), r.getLongitude()))
+                    .snippet(r.getSpecial(MainActivity.dayString))
+                    .title(r.getName());
+
+            // Add the marker to the ArrayList
+            markerOptionsArrayList.add(markerOptions);
+        }
+
         // Add all markers in the array list
         for (MarkerOptions m : markerOptionsArrayList)
-            mGoogleMap.addMarker(m);
-
-//        LatLng penArgyl = new LatLng(40.8687, -75.2549);
-//        CameraPosition target = CameraPosition.builder().target(penArgyl).zoom(12).build();
-//        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 2000, null);
+        {
+            Marker marker = mGoogleMap.addMarker(m);
+            markerArrayList.add(marker);
+        }
     }
 
     /**
@@ -285,7 +297,7 @@ public class MapFragment extends Fragment
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
 
-        // If the user clicked a miles away textView, fly to the restaurant
+        // If the user clicked a miles away textView, either on the ListView item or in the RestaurantActivity, fly to the restaurant
         if (isFlyingToRestaurant)
         {
             // Get the latitude and longitude of the restaurant that was clicked
@@ -296,7 +308,12 @@ public class MapFragment extends Fragment
 
             // Fly to the restaurant that was clicked
             flyTo(restaurantCameraPosition);
-        } else
+
+            // Reset the boolean
+            isFlyingToRestaurant = false;
+        }
+        // Fly to the user's current location
+        else
         {
             // Get the current location when the map connects and fly to it
             Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
@@ -310,6 +327,7 @@ public class MapFragment extends Fragment
 
                 // Fly to current location
                 flyTo(currentLocationCameraPosition);
+                isFlyingToRestaurant = false;
             }
         }
     }
@@ -444,6 +462,7 @@ public class MapFragment extends Fragment
      */
     private void flyTo(CameraPosition target)
     {
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(target), 1000, null);
+        // Use moveCamera, not animateCamera to jump right to target
+        mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
     }
 }
