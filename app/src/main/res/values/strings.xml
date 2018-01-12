@@ -12,6 +12,9 @@
     <string name="action_sort_by_location">Sort by location</string>
     <string name="action_reset">Reset</string>
 
+    <string name="login_email_label">Login with Email</string>
+    <string name="login_phone_label">Login with Phone Number</string>
+
     <!-- Bottom Navigation Bar Items -->
     <string name="nav_bar_list">List</string>
     <string name="nav_bar_map">Map</string>
