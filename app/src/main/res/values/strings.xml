@@ -2,6 +2,11 @@
     <string name="app_name">What\'s Good</string>
     <string name="hello_world">Hello World!</string>
 
+    <!-- API keys and tokens -->
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyA45heMbmn3sc00IAEcPx1BLWVWATRH4w8</string>
+    <string name="FACEBOOK_APP_ID">1770254476615573</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">c01bd59ec998ef509a889c963a39f0c0</string>
+
     <!-- Options menu strings -->
     <string name="action_sort_by_name">Sort by name</string>
     <string name="action_sort_by_location">Sort by location</string>
