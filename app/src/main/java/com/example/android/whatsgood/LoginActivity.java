@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitLoginResult;
@@ -13,6 +16,8 @@ import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 /**
  * Created by jyoun on 1/12/2018.
@@ -21,6 +26,13 @@ import com.facebook.appevents.AppEventsLogger;
 public class LoginActivity extends AppCompatActivity
 {
     public static int APP_REQUEST_CODE = 1;
+
+    LoginButton fbLoginButton;
+
+    /**
+     * Handles the result of the login attempt
+     */
+    CallbackManager callbackManager;
 
     // Event logger
     AppEventsLogger logger;
@@ -35,9 +47,38 @@ public class LoginActivity extends AppCompatActivity
         // Create a new logger
         logger = AppEventsLogger.newLogger(this);
 
+        // Get the Facebook login button
+        fbLoginButton = findViewById(R.id.facebook_login_button);
+        // Set the read permissions to email
+        fbLoginButton.setReadPermissions("email");
+
+        // Login button callback registration
+        callbackManager = CallbackManager.Factory.create();
+        fbLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>()
+        {
+            @Override
+            public void onSuccess(LoginResult loginResult)
+            {
+
+            }
+
+            @Override
+            public void onCancel()
+            {
+
+            }
+
+            @Override
+            public void onError(FacebookException exception)
+            {
+                // Display error
+                String toastMessage = exception.getMessage();
+                Toast.makeText(LoginActivity.this, toastMessage, Toast.LENGTH_LONG).show();
+            }
+        });
+
         // Check for an existing access token
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
-
         if (accessToken != null)
             // if previously logged in, proceed to the MainActivity
             launchMainActivity();
@@ -48,7 +89,10 @@ public class LoginActivity extends AppCompatActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Confirm that this response matches your request
+        // Forward the result to the callback manager for Login Button
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        // For Account Kit, confirm that this response matches your request
         if (requestCode == APP_REQUEST_CODE)
         {
             AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
