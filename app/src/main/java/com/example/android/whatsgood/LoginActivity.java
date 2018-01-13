@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
@@ -32,6 +34,27 @@ public class LoginActivity extends AppCompatActivity
         if (accessToken != null)
             // if previously logged in, proceed to the MainActivity
             launchMainActivity();
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Confirm that this response matches your request
+        if (requestCode == APP_REQUEST_CODE)
+        {
+            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+
+            if (loginResult.getError() != null)
+            {
+                // Display login error
+                String toastMessage = loginResult.getError().getErrorType().getMessage();
+                Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show();
+            } else if (loginResult.getAccessToken() != null)
+                // On successful login, proceed to the MainActivity
+                launchMainActivity();
+        }
     }
 
     private void onLogin(final LoginType loginType)
