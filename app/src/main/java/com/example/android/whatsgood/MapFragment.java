@@ -13,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * Created by jyoun on 11/9/2017.
@@ -101,11 +97,6 @@ public class MapFragment extends Fragment
      */
     private boolean isFlyingToRestaurant;
 
-    public static MapFragment newInstance()
-    {
-        return new MapFragment();
-    }
-
     /**
      * Empty Constructor
      */
@@ -117,7 +108,7 @@ public class MapFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.activity_map, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
         // Hide the FAB by first getting the context of the MainActivity
         Context mainContext = inflater.getContext();

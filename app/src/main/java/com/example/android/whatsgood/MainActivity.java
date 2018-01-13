@@ -274,19 +274,18 @@ public class MainActivity extends AppCompatActivity
 
                     // Start the MapFragment
                     case R.id.action_map:
-                        selectedFragment = MapFragment.newInstance();
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, selectedFragment);
-                        transaction.commit();
+                        selectedFragment = new MapFragment();
+                        FragmentTransaction mapTransaction = getSupportFragmentManager().beginTransaction();
+                        mapTransaction.replace(R.id.frame_layout, selectedFragment);
+                        mapTransaction.commit();
                         break;
 
-                    // For now, restart the MainActivity
+                    // Start the ProfileFragment
                     case R.id.action_profile:
-                        intent = new Intent(MainActivity.this, MainActivity.class);
-                        // If the spinner has been set to a day of the week, add it as an extra
-                        if (!dayString.isEmpty())
-                            intent.putExtra("dayString", dayString);
-                        startActivity(intent);
+                        selectedFragment = new ProfileFragment();
+                        FragmentTransaction profileTransaction = getSupportFragmentManager().beginTransaction();
+                        profileTransaction.replace(R.id.frame_layout, selectedFragment);
+                        profileTransaction.commit();
                         break;
                 }
                 return true;
