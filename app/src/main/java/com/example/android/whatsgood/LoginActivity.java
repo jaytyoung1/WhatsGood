@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.facebook.accountkit.AccessToken;
+import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
@@ -22,7 +24,14 @@ public class LoginActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //FontHelper.setCustomTypeface(findViewById(R.id.view_root));
+        FontHelper.setCustomTypeface(findViewById(R.id.view_root));
+
+        // Check for an existing access token
+        AccessToken accessToken = AccountKit.getCurrentAccessToken();
+
+        if (accessToken != null)
+            // if previously logged in, proceed to the MainActivity
+            launchMainActivity();
     }
 
     private void onLogin(final LoginType loginType)
@@ -53,10 +62,10 @@ public class LoginActivity extends AppCompatActivity
         onLogin(LoginType.EMAIL);
     }
 
-    private void launchAccountActivity()
+    private void launchMainActivity()
     {
-//        Intent intent = new Intent(this, AccountActivity.class);
-//        startActivity(intent);
-//        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

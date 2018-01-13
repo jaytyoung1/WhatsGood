@@ -11,6 +11,10 @@
     <!-- Login theme -->
     <style name="AppLoginTheme" parent="Theme.AccountKit"/>
 
+    <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <!-- No Action Bar theme - used in RestaurantActivity -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

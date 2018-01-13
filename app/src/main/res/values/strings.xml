@@ -6,6 +6,7 @@
     <string name="GOOGLE_MAPS_API_KEY">AIzaSyA45heMbmn3sc00IAEcPx1BLWVWATRH4w8</string>
     <string name="FACEBOOK_APP_ID">1770254476615573</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">c01bd59ec998ef509a889c963a39f0c0</string>
+    <string name="ak_login_protocol_scheme">ak1770254476615573</string>
 
     <!-- Options menu strings -->
     <string name="action_sort_by_name">Sort by name</string>
