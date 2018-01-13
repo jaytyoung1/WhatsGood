@@ -12,6 +12,7 @@ import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
+import com.facebook.appevents.AppEventsLogger;
 
 /**
  * Created by jyoun on 1/12/2018.
@@ -21,12 +22,18 @@ public class LoginActivity extends AppCompatActivity
 {
     public static int APP_REQUEST_CODE = 1;
 
+    // Event logger
+    AppEventsLogger logger;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FontHelper.setCustomTypeface(findViewById(R.id.view_root));
+
+        // Create a new logger
+        logger = AppEventsLogger.newLogger(this);
 
         // Check for an existing access token
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
@@ -77,11 +84,13 @@ public class LoginActivity extends AppCompatActivity
 
     public void onPhoneLogin(View view)
     {
+        logger.logEvent("onSMSLogin");
         onLogin(LoginType.PHONE);
     }
 
     public void onEmailLogin(View view)
     {
+        logger.logEvent("onEmailLogin");
         onLogin(LoginType.EMAIL);
     }
 
