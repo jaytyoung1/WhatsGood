@@ -14,11 +14,6 @@ import android.view.ViewGroup;
 
 public class MainFragment extends Fragment
 {
-    public static MainFragment newInstance()
-    {
-        return new MainFragment();
-    }
-
     public MainFragment()
     {
         // Requires empty public constructor

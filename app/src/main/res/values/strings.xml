@@ -23,6 +23,14 @@
 
     <!-- Title for the Restaurant activity -->
     <string name="restaurant_activity_title">Restaurant Activity</string>
+    <!-- RestaurantActivity: text to fill for specials if none are provided -->
+    <string name="no_specials_added">No specials added for this day.</string>
+
+    <!-- Labels for the ProfileFragment -->
+    <string name="id_label">Account ID</string>
+    <string name="phone_label">Phone Number</string>
+    <string name="email_label">Email</string>
+    <string name="logout_label">Log Out</string>
 
     <!-- Days of the week -->
     <string name="day_monday">Monday</string>
@@ -49,8 +57,5 @@
     <!-- Text to fill the comments EditText in the EditRestaurantActivity -->
     <string name="comments">Comments</string>
     <string name="comments_hint">Address change, logo change, etc.</string>
-
-    <!-- RestaurantActivity: text to fill for specials if none are provided -->
-    <string name="no_specials_added">No specials added for this day.</string>
 
 </resources>

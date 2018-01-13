@@ -12,9 +12,44 @@
     android:paddingTop="72dp">
 
     <TextView
+        android:id="@+id/id_label_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/id_label"/>
+
+    <TextView
+        android:id="@+id/id_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_label_text_view"
         android:text="In profileFragment"/>
+
+    <TextView
+        android:id="@+id/info_label_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_text_view"
+        android:text="In profileFragment"/>
+
+    <TextView
+        android:id="@+id/info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_label_text_view"
+        android:text="In profileFragment"/>
+
+    <Button
+        android:id="@+id/logout_button"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_text_view"
+        android:background="@color/colorLogoutLabel"
+        android:text="@string/logout_label"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        />
 
 </RelativeLayout>
 

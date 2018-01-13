@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity
      */
     ListView listView;
 
-
     /**
      * Spinner drop down arrow to enter day of the week
      */
@@ -186,40 +185,6 @@ public class MainActivity extends AppCompatActivity
 
         // Add a page change listener on the viewPager to show/hide fab depending on which tab is selected
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//        if (fragmentManager.findFragmentById(R.id.action_map) != null)
-//            fab.hide();
-//        else
-//            fab.show();
-
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-//        {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-//            {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position)
-//            {
-//                switch (position)
-//                {
-//                    case 0:
-//                        fab.show();
-//                        break;
-//                    case 1:
-//                        fab.hide();
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state)
-//            {
-//            }
-//        });
 
         // Get the floating action button by ID and set the on click listener
         fab.setOnClickListener(new View.OnClickListener()
