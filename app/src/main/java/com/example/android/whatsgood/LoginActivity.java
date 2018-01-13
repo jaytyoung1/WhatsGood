@@ -1,8 +1,13 @@
 package com.example.android.whatsgood;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +23,10 @@ import com.facebook.accountkit.ui.LoginType;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 /**
  * Created by jyoun on 1/12/2018.
@@ -59,7 +68,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onSuccess(LoginResult loginResult)
             {
-
+                launchMainActivity();
             }
 
             @Override
@@ -79,7 +88,8 @@ public class LoginActivity extends AppCompatActivity
 
         // Check for an existing access token
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
-        if (accessToken != null)
+        com.facebook.AccessToken loginToken = com.facebook.AccessToken.getCurrentAccessToken();
+        if (accessToken != null || loginToken != null)
             // if previously logged in, proceed to the MainActivity
             launchMainActivity();
     }

@@ -1,55 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    android:paddingBottom="72dp"
-    android:paddingLeft="@dimen/activity_margin"
-    android:paddingRight="@dimen/activity_margin"
-    android:paddingTop="72dp">
+    android:paddingBottom="72dp">
 
-    <TextView
-        android:id="@+id/id_label_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/id_label"/>
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        app:srcCompat="@drawable/icon_profile_empty"/>
 
-    <TextView
-        android:id="@+id/id_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_label_text_view"
-        android:text="In profileFragment"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="36dp"
+        android:layout_weight="1"
+        android:background="@color/colorWhite"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/info_label_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/id_text_view"
-        android:text="In profileFragment"/>
+        <TextView
+            android:id="@+id/id_label_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="@string/id_label"
+            android:textColor="@color/profileLabel"
+            android:textSize="14sp"/>
 
-    <TextView
-        android:id="@+id/info_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/info_label_text_view"
-        android:text="In profileFragment"/>
+        <TextView
+            android:id="@+id/id_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="1234567890"
+            android:textColor="@color/profileText"
+            android:textSize="16sp"/>
 
-    <Button
-        android:id="@+id/logout_button"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/info_text_view"
-        android:background="@color/colorLogoutLabel"
-        android:text="@string/logout_label"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        />
+        <TextView
+            android:id="@+id/info_label_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/phone_label"
+            android:textColor="@color/profileLabel"
+            android:textSize="14sp"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/info_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="(123) 456-7890"
+            android:textColor="@color/profileText"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/logout_button"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_label"
+            android:textAllCaps="false"
+            android:textColor="@color/logoutLabel"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
 

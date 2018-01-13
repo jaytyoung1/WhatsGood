@@ -5,5 +5,9 @@
     <color name="colorAccent">#1E88E5</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#AAA9BB</color>
-    <color name="colorLogoutLabel">#fc6240</color>
+
+    <color name="profileBackground">#61727f</color>
+    <color name="profileLabel">#7d97ad</color>
+    <color name="profileText">#61727f</color>
+    <color name="logoutLabel">#fc6240</color>
 </resources>

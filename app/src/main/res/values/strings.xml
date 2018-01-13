@@ -31,6 +31,7 @@
     <string name="id_label">Account ID</string>
     <string name="phone_label">Phone Number</string>
     <string name="email_label">Email</string>
+    <string name="name_label">Name</string>
     <string name="logout_label">Log Out</string>
 
     <!-- Days of the week -->

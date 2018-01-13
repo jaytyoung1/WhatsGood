@@ -3,28 +3,40 @@ package com.example.android.whatsgood;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
 import com.facebook.accountkit.AccountKitError;
 import com.facebook.accountkit.PhoneNumber;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.util.Locale;
+
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 /**
  * Created by jyoun on 1/12/2018.
@@ -37,6 +49,8 @@ public class ProfileFragment extends Fragment
      */
     public static boolean isActive;
 
+    ProfileTracker profileTracker;
+    ImageView profilePic;
     TextView idTextView;
     TextView infoLabelTextView;
     TextView infoTextView;
@@ -60,50 +74,84 @@ public class ProfileFragment extends Fragment
         FloatingActionButton fab = ((Activity) mainContext).findViewById(R.id.fab);
         fab.hide();
 
+        // Hide the toolbar
+        Toolbar toolbar = ((Activity) mainContext).findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.GONE);
+
         // Make the listView invisible
         ListView listView = ((Activity) mainContext).findViewById(R.id.list);
         listView.setVisibility(View.INVISIBLE);
 
-        // Get the textView
+        profilePic = rootView.findViewById(R.id.profile_image);
         idTextView = rootView.findViewById(R.id.id_text_view);
         infoLabelTextView = rootView.findViewById(R.id.info_label_text_view);
         infoTextView = rootView.findViewById(R.id.info_text_view);
         logoutButton = rootView.findViewById(R.id.logout_button);
 
-        AccountKit.getCurrentAccount(new AccountKitCallback<Account>()
+        // register a receiver for the onCurrentProfileChanged event
+        profileTracker = new ProfileTracker()
         {
             @Override
-            public void onSuccess(final Account account)
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile)
             {
-                // Get Account Kit ID
-                String accountKitId = account.getId();
-                idTextView.setText(accountKitId);
+                if (currentProfile != null)
+                {
+                    displayProfileInfo(currentProfile);
+                }
+            }
+        };
 
-                PhoneNumber phoneNumber = account.getPhoneNumber();
-                if (account.getPhoneNumber() != null)
+        if (AccessToken.getCurrentAccessToken() != null)
+        {
+            // If there is an access token then Login Button was used
+            // Check if the profile has already been fetched
+            Profile currentProfile = Profile.getCurrentProfile();
+            if (currentProfile != null)
+            {
+                displayProfileInfo(currentProfile);
+            } else
+            {
+                // Fetch the profile, which will trigger the onCurrentProfileChanged receiver
+                Profile.fetchProfileForCurrentAccessToken();
+            }
+        } else
+        {
+            // Otherwise, get Account Kit login information
+            AccountKit.getCurrentAccount(new AccountKitCallback<Account>()
+            {
+                @Override
+                public void onSuccess(final Account account)
                 {
-                    // if the phone number is available, display it
-                    String formattedPhoneNumber = formatPhoneNumber(phoneNumber.toString());
-                    infoTextView.setText(formattedPhoneNumber);
-                    infoLabelTextView.setText(R.string.phone_label);
-                } else
-                {
-                    // if the email address is available, display it
-                    String emailString = account.getEmail();
-                    infoTextView.setText(emailString);
-                    infoLabelTextView.setText(R.string.email_label);
+                    // Get Account Kit ID
+                    String accountKitId = account.getId();
+                    idTextView.setText(accountKitId);
+
+                    PhoneNumber phoneNumber = account.getPhoneNumber();
+                    if (account.getPhoneNumber() != null)
+                    {
+                        // if the phone number is available, display it
+                        String formattedPhoneNumber = formatPhoneNumber(phoneNumber.toString());
+                        infoTextView.setText(formattedPhoneNumber);
+                        infoLabelTextView.setText(R.string.phone_label);
+                    } else
+                    {
+                        // if the email address is available, display it
+                        String emailString = account.getEmail();
+                        infoTextView.setText(emailString);
+                        infoLabelTextView.setText(R.string.email_label);
+                    }
+
                 }
 
-            }
-
-            @Override
-            public void onError(final AccountKitError error)
-            {
-                // display error
-                String toastMessage = error.getErrorType().getMessage();
-                Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onError(final AccountKitError error)
+                {
+                    // display error
+                    String toastMessage = error.getErrorType().getMessage();
+                    Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
         logoutButton.setOnClickListener(new View.OnClickListener()
         {
@@ -117,12 +165,42 @@ public class ProfileFragment extends Fragment
         return rootView;
     }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        // unregister the profile tracker receiver
+        profileTracker.stopTracking();
+    }
+
     public void onLogout(View view)
     {
-        // logout of Account Kit
+        // Logout of Account Kit
         AccountKit.logOut();
+
+        // Logout of Login Button
+        LoginManager.getInstance().logOut();
+
         launchLoginActivity();
     }
+
+    private void displayProfileInfo(Profile profile)
+    {
+        // get Profile ID
+        String profileId = profile.getId();
+        idTextView.setText(profileId);
+
+        // display the Profile name
+        String name = profile.getName();
+        infoTextView.setText(name);
+        infoLabelTextView.setText(R.string.name_label);
+
+        // display the profile picture
+        Uri profilePicUri = profile.getProfilePictureUri(120, 120);
+        displayProfilePic(profilePicUri);
+    }
+
 
     private void launchLoginActivity()
     {
@@ -146,6 +224,20 @@ public class ProfileFragment extends Fragment
         return phoneNumber;
     }
 
+    private void displayProfilePic(Uri uri)
+    {
+        // helper method to load the profile pic in a circular imageview
+        Transformation transformation = new RoundedTransformationBuilder()
+                .cornerRadiusDp(30)
+                .oval(false)
+                .build();
+        Picasso.with(getContext())
+                .load(uri)
+                .transform(transformation)
+                .into(profilePic);
+    }
+
+
     @Override
     public void onResume()
     {
@@ -158,5 +250,7 @@ public class ProfileFragment extends Fragment
     {
         super.onPause();
         isActive = false;
+        // unregister the profile tracker receiver
+        profileTracker.stopTracking();
     }
 }
