@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class FontHelper
 {
-    private static final String CUSTOM_FONT = "fonts/avenir-black.ttf";
+    private static final String CUSTOM_FONT = "fonts/TitilliumWeb-Regular.ttf";
     private static Typeface customTypeface;
 
     /*
