@@ -50,10 +50,13 @@ public class ProfileFragment extends Fragment
     public static boolean isActive;
 
     ProfileTracker profileTracker;
+
     ImageView profilePic;
+
+    TextView idLabelTextView;
     TextView idTextView;
-    TextView infoLabelTextView;
-    TextView infoTextView;
+    //TextView infoLabelTextView;
+    //TextView locationTextView;
     Button logoutButton;
 
     /**
@@ -83,9 +86,10 @@ public class ProfileFragment extends Fragment
         listView.setVisibility(View.INVISIBLE);
 
         profilePic = rootView.findViewById(R.id.profile_image);
+        idLabelTextView = rootView.findViewById(R.id.id_label_text_view);
         idTextView = rootView.findViewById(R.id.id_text_view);
-        infoLabelTextView = rootView.findViewById(R.id.info_label_text_view);
-        infoTextView = rootView.findViewById(R.id.info_text_view);
+        //infoLabelTextView = rootView.findViewById(R.id.info_label_text_view);
+        //locationTextView = rootView.findViewById(R.id.location_text_view);
         logoutButton = rootView.findViewById(R.id.logout_button);
 
         // register a receiver for the onCurrentProfileChanged event
@@ -103,7 +107,7 @@ public class ProfileFragment extends Fragment
 
         if (AccessToken.getCurrentAccessToken() != null)
         {
-            // If there is an access token then Login Button was used
+            // If there is an access token then Facebook Login Button was used
             // Check if the profile has already been fetched
             Profile currentProfile = Profile.getCurrentProfile();
             if (currentProfile != null)
@@ -122,6 +126,9 @@ public class ProfileFragment extends Fragment
                 @Override
                 public void onSuccess(final Account account)
                 {
+                    // Set the ID label to 'Account ID'
+                    idLabelTextView.setText(R.string.account_id_label);
+
                     // Get Account Kit ID
                     String accountKitId = account.getId();
                     idTextView.setText(accountKitId);
@@ -131,14 +138,14 @@ public class ProfileFragment extends Fragment
                     {
                         // if the phone number is available, display it
                         String formattedPhoneNumber = formatPhoneNumber(phoneNumber.toString());
-                        infoTextView.setText(formattedPhoneNumber);
-                        infoLabelTextView.setText(R.string.phone_label);
+                        //locationTextView.setText(formattedPhoneNumber);
+                        //infoLabelTextView.setText(R.string.phone_label);
                     } else
                     {
                         // if the email address is available, display it
                         String emailString = account.getEmail();
-                        infoTextView.setText(emailString);
-                        infoLabelTextView.setText(R.string.email_label);
+                        //locationTextView.setText(emailString);
+                        //infoLabelTextView.setText(R.string.email_label);
                     }
 
                 }
@@ -187,14 +194,12 @@ public class ProfileFragment extends Fragment
 
     private void displayProfileInfo(Profile profile)
     {
-        // get Profile ID
-        String profileId = profile.getId();
-        idTextView.setText(profileId);
+        // Set the ID label to 'Name'
+        idLabelTextView.setText(R.string.name_label);
 
         // display the Profile name
         String name = profile.getName();
-        infoTextView.setText(name);
-        infoLabelTextView.setText(R.string.name_label);
+        idTextView.setText(name);
 
         // display the profile picture
         Uri profilePicUri = profile.getProfilePictureUri(120, 120);
