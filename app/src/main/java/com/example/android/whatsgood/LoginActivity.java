@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity
 {
     public static int APP_REQUEST_CODE = 1;
 
+    public static boolean isLoggedIn;
+
     LoginButton fbLoginButton;
 
     /**
@@ -68,6 +70,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onSuccess(LoginResult loginResult)
             {
+                isLoggedIn = true;
                 launchMainActivity();
             }
 
@@ -90,8 +93,11 @@ public class LoginActivity extends AppCompatActivity
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
         com.facebook.AccessToken loginToken = com.facebook.AccessToken.getCurrentAccessToken();
         if (accessToken != null || loginToken != null)
+        {
             // if previously logged in, proceed to the MainActivity
+            isLoggedIn = true;
             launchMainActivity();
+        }
     }
 
     @Override
@@ -113,8 +119,11 @@ public class LoginActivity extends AppCompatActivity
                 String toastMessage = loginResult.getError().getErrorType().getMessage();
                 Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show();
             } else if (loginResult.getAccessToken() != null)
+            {
                 // On successful login, proceed to the MainActivity
+                isLoggedIn = true;
                 launchMainActivity();
+            }
         }
     }
 
@@ -146,6 +155,13 @@ public class LoginActivity extends AppCompatActivity
     {
         logger.logEvent("onEmailLogin");
         onLogin(LoginType.EMAIL);
+    }
+
+    public void onContinueWithoutLoggingIn(View view)
+    {
+        logger.logEvent("onContinueWithoutLoggingIn");
+        isLoggedIn = false;
+        launchMainActivity();
     }
 
     private void launchMainActivity()

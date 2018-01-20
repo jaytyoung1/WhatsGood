@@ -18,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -247,10 +248,20 @@ public class MainActivity extends AppCompatActivity
 
                     // Start the ProfileFragment
                     case R.id.action_profile:
-                        selectedFragment = new ProfileFragment();
-                        FragmentTransaction profileTransaction = getSupportFragmentManager().beginTransaction();
-                        profileTransaction.replace(R.id.frame_layout, selectedFragment);
-                        profileTransaction.commit();
+                        if (LoginActivity.isLoggedIn)
+                        {
+                            selectedFragment = new ProfileFragment();
+                            FragmentTransaction profileTransaction = getSupportFragmentManager().beginTransaction();
+                            profileTransaction.replace(R.id.frame_layout, selectedFragment);
+                            profileTransaction.commit();
+                        } else
+                        {
+                            //Toast.makeText(MainActivity.this, "User is not logged in", Toast.LENGTH_LONG).show();
+                            selectedFragment = new NotLoggedInFragment();
+                            FragmentTransaction notLoggedInTransaction = getSupportFragmentManager().beginTransaction();
+                            notLoggedInTransaction.replace(R.id.frame_layout, selectedFragment);
+                            notLoggedInTransaction.commit();
+                        }
                         break;
                 }
                 return true;

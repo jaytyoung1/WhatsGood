@@ -99,6 +99,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
+        //FontHelper.setCustomTypeface(listItemView.findViewById(R.id.list_item));
+
         // Get the {@link Word} object located at this position in the list
         currentRestaurant = getItem(position);
         final Restaurant rest = currentRestaurant;

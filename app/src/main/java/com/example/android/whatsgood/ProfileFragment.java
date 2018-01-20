@@ -72,6 +72,12 @@ public class ProfileFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+//        if (LoginActivity.isLoggedIn)
+//            Toast.makeText(getContext(), "User is logged in", Toast.LENGTH_LONG).show();
+//        else
+//            Toast.makeText(getContext(), "User is not logged in", Toast.LENGTH_LONG).show();
+
+
         // Hide the FAB by first getting the context of the MainActivity
         Context mainContext = inflater.getContext();
         FloatingActionButton fab = ((Activity) mainContext).findViewById(R.id.fab);

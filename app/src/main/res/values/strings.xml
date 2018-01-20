@@ -14,8 +14,10 @@
     <string name="action_sort_by_location">Sort by location</string>
     <string name="action_reset">Reset</string>
 
-    <string name="login_email_label">Login with Email</string>
-    <string name="login_phone_label">Login with Phone Number</string>
+    <!-- Labels for the Log in buttons -->
+    <string name="login_email_label">Login with email</string>
+    <string name="login_phone_label">Login with phone number</string>
+    <string name="continue_without_logging_in">Continue without logging in</string>
 
     <!-- Bottom Navigation Bar Items -->
     <string name="nav_bar_list">List</string>
@@ -37,6 +39,10 @@
     <string name="phone_label">Phone Number</string>
     <string name="email_label">Email</string>
     <string name="logout_label">Log Out</string>
+
+    <!-- Labels for the NotLoggedInFragment -->
+    <string name="login_to_create_a_profile">Log in to create a profile</string>
+    <string name="login_label">Log In</string>
 
     <!-- Days of the week -->
     <string name="day_monday">Monday</string>
