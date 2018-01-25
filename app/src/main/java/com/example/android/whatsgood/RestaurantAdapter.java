@@ -2,9 +2,6 @@ package com.example.android.whatsgood;
 
 import android.Manifest;
 import android.app.Activity;
-//import android.app.Fragment;
-//import android.app.FragmentManager;
-//import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,12 +12,10 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -29,8 +24,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.*;
-//import com.google.android.gms.maps.MapFragment;
 
 import java.util.ArrayList;
 
@@ -105,12 +98,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         currentRestaurant = getItem(position);
         final Restaurant rest = currentRestaurant;
 
-        // Find the TextView in the list_item.xml layout with the ID restaurant_name_text_view
-        TextView restaurantNameTextView = (TextView) listItemView.findViewById(R.id.restaurant_name_text_view);
-        // Get the Restaurant name from the currentRestaurant object and set this text on the text view
-        restaurantNameTextView.setText(currentRestaurant.getName());
-        // Add an onClickListener to go to the RestaurantActivity
-        restaurantNameTextView.setOnClickListener(new View.OnClickListener()
+        // Add an onClickListener for the ListView item to take user to the RestaurantActivity
+        listItemView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -123,6 +112,11 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
                 }
             }
         });
+
+        // Find the TextView in the list_item.xml layout with the ID restaurant_name_text_view
+        TextView restaurantNameTextView = (TextView) listItemView.findViewById(R.id.restaurant_name_text_view);
+        // Get the Restaurant name from the currentRestaurant object and set this text on the text view
+        restaurantNameTextView.setText(currentRestaurant.getName());
 
         // Find the TextView in the list_item.xml layout with the specials
         TextView specialsTextView = (TextView) listItemView.findViewById(R.id.specials_text_view);
@@ -163,20 +157,6 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 
         // Find the ImageView in the list_item.xml layout with the ID image
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
-
-        // Add a click listener to the image to go to the Restaurant activity
-        imageView.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (!MapFragment.isActive)
-                {
-                    Intent intent = new Intent(getContext(), RestaurantActivity.class);
-                    intent.putExtra("currentRestaurant", rest);
-                    getContext().startActivity(intent);
-                }
-            }
-        });
 
         // Add on click listener to the miles away container to go to the MapFragment
         View miles_away_view = listItemView.findViewById(R.id.miles_away_container);
