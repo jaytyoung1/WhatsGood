@@ -13,8 +13,10 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
@@ -34,7 +36,8 @@ public class SelectRestaurantTest
     // The Slate Pub is the first restaurant in the list when testing from my house.
     // If my location were to change and The Slate is no longer closest to me,
     // the RESTAURANT_NAME will have to change accordingly in order for this test to pass.
-    public static final String RESTAURANT_NAME = "The Slate Pub";
+    public static final String FIRST_RESTAURANT_NAME = "The Slate Pub";
+    public static final String SECOND_RESTAURANT_NAME = "Detzi's Tavern";
 
     // Add the Activity test rule using the @Rule annotation
     // ActivityTestRule is a rule that provides functional testing for a specific single activity
@@ -55,6 +58,18 @@ public class SelectRestaurantTest
 
         // 3) Check if the View does what you expected
         // Check that the RestaurantActivity opens with the correct restaurant name displayed
-        onView(withId(R.id.restaurant_name)).check(matches(withText(RESTAURANT_NAME)));
+        onView(withId(R.id.restaurant_name)).check(matches(withText(FIRST_RESTAURANT_NAME)));
+
+        // Go back to the MainActivity
+        onView(isRoot()).perform(pressBack());
+
+        // click the first item in the list
+        onData(anything()).inAdapterView(withId(R.id.list)).atPosition(1).perform(click());
+
+        // Check that the RestaurantActivity opens with the correct restaurant name displayed
+        onView(withId(R.id.restaurant_name)).check(matches(withText(SECOND_RESTAURANT_NAME)));
+
+        // Go back to the MainActivity
+        onView(isRoot()).perform(pressBack());
     }
 }
