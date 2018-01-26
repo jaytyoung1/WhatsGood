@@ -1,8 +1,5 @@
 package com.example.android.whatsgood;
 
-import android.support.test.espresso.DataInteraction;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -15,27 +12,26 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.hasToString;
-import static org.hamcrest.Matchers.startsWith;
 
 /**
  * Created by jyoun on 1/25/2018.
  * AndroidJUnit4 is a class which will help us control launching the app as well as running UI Tests on it
  * We will be using annotations (i.e. @Override, @Rule, and @Test)
  * - annotations indicate to Android Studio that certain code will need special processing
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
 @RunWith(AndroidJUnit4.class)
 public class SelectRestaurantTest
 {
-    // The Slate Pub is the first restaurant in the list when testing from my house.
-    // If my location were to change and The Slate is no longer closest to me,
-    // the RESTAURANT_NAME will have to change accordingly in order for this test to pass.
+    // The Slate Pub and Detzi's Tavern are the 1st and 2nd restaurants in the list when testing from my house.
+    // If my location were to change and The Slate and Detzi's is no longer closest to me,
+    // the RESTAURANT_NAMEs will have to change accordingly in order for this test to pass.
     public static final String FIRST_RESTAURANT_NAME = "The Slate Pub";
     public static final String SECOND_RESTAURANT_NAME = "Detzi's Tavern";
 
