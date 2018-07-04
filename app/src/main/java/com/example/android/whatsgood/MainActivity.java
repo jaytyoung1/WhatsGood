@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity
                 // For navigating to the MapFragment
                 Fragment selectedFragment;
 
-                // For navigating to the MainFragment and ProfileFragment (Main)
+                // For navigating to the MainFragment
                 Intent intent;
 
                 switch (item.getItemId())

@@ -10,6 +10,12 @@ import android.provider.BaseColumns;
 
 /**
  * API Contract for the WhatsGood app
+ *
+ * What is a Contract Class?
+ *
+ * 1) Define schema and have a convention for where to find database constants
+ * 2) When generating SQL commands, remove possibility of introducing spelling errors
+ * 3)Ease of updating database schema
  */
 public final class WhatsGoodContract
 {
@@ -76,12 +82,12 @@ public final class WhatsGoodContract
         public final static String COLUMN_RESTAURANT_LATITUDE = "latitude";
         public final static String COLUMN_RESTAURANT_LONGITUDE = "longitude";
         public final static String COLUMN_RESTAURANT_IMAGE_RESOURCE_ID = "imageID";
-        public final static String COLUMN_RESTAURANT_MONDAY_SPECIALS = "monday specials";
-        public final static String COLUMN_RESTAURANT_TUESDAY_SPECIALS = "tuesday specials";
-        public final static String COLUMN_RESTAURANT_WEDNESDAY_SPECIALS = "wednesday specials";
-        public final static String COLUMN_RESTAURANT_THURSDAY_SPECIALS = "thursday specials";
-        public final static String COLUMN_RESTAURANT_FRIDAY_SPECIALS = "friday specials";
-        public final static String COLUMN_RESTAURANT_SATURDAY_SPECIALS = "saturday specials";
-        public final static String COLUMN_RESTAURANT_SUNDAY_SPECIALS = "sunday specials";
+        public final static String COLUMN_RESTAURANT_MONDAY_SPECIALS = "mondaySpecials";
+        public final static String COLUMN_RESTAURANT_TUESDAY_SPECIALS = "tuesdaySpecials";
+        public final static String COLUMN_RESTAURANT_WEDNESDAY_SPECIALS = "wednesdaySpecials";
+        public final static String COLUMN_RESTAURANT_THURSDAY_SPECIALS = "thursdaySpecials";
+        public final static String COLUMN_RESTAURANT_FRIDAY_SPECIALS = "fridaySpecials";
+        public final static String COLUMN_RESTAURANT_SATURDAY_SPECIALS = "saturdaySpecials";
+        public final static String COLUMN_RESTAURANT_SUNDAY_SPECIALS = "sundaySpecials";
     }
 }

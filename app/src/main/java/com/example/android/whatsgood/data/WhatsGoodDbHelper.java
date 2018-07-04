@@ -8,6 +8,12 @@ import com.example.android.whatsgood.data.WhatsGoodContract.RestaurantEntry;
 
 /**
  * Created by jyoun on 11/22/2017.
+ *
+ * What does SQLiteOpenHelper do?
+ *
+ * 1) Create a SQLite database when it is first accessed
+ * 2) Gives you a connection to that database
+ * 3) Manages updating the database schema if version changes
  */
 
 public class WhatsGoodDbHelper extends SQLiteOpenHelper
