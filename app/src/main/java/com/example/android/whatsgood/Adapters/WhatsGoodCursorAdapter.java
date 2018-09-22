@@ -1,4 +1,4 @@
-package com.example.android.whatsgood;
+package com.example.android.whatsgood.Adapters;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.whatsgood.MainActivity;
+import com.example.android.whatsgood.R;
 import com.example.android.whatsgood.data.WhatsGoodContract;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;

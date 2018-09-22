@@ -1,4 +1,4 @@
-package com.example.android.whatsgood;
+package com.example.android.whatsgood.Adapters;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,6 +19,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.example.android.whatsgood.MainActivity;
+import com.example.android.whatsgood.MapFragment;
+import com.example.android.whatsgood.R;
+import com.example.android.whatsgood.Restaurant;
+import com.example.android.whatsgood.RestaurantActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
