@@ -18,7 +18,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +27,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.android.whatsgood.Adapters.RestaurantAdapter;
 import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -363,6 +363,8 @@ public class MainActivity extends AppCompatActivity
 
                     restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
                     //listView = (ListView) findViewById(R.id.list);
+
+                    // NOTE: This is the entry point, this line sets the adapter first
                     listView.setAdapter(restaurantAdapter);
 
                     // If changing the day in the MapFragment, update the restaurant markers
@@ -373,6 +375,7 @@ public class MainActivity extends AppCompatActivity
                             m.remove();
 
                         // Add new MarkerOptions with the updated dayString
+                        // TODO: Pass Cursor of restaurants
                         MapFragment.addMarkersForRestaurants(restaurantsArrayList);
                     }
                 }
