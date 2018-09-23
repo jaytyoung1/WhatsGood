@@ -19,6 +19,10 @@
     <string name="login_phone_label">Login with phone number</string>
     <string name="continue_without_logging_in">Continue without logging in</string>
 
+    <!-- String for empty view in Main Activity -->
+    <string name="empty_view_title_text">No restaurants found</string>
+    <string name="empty_view_subtitle_text">Try connecting to the internet</string>
+
     <!-- Bottom Navigation Bar Items -->
     <string name="nav_bar_list">List</string>
     <string name="nav_bar_map">Map</string>
