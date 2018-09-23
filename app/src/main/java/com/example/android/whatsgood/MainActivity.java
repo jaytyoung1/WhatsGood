@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity
     /**
      * ArrayList of restaurants
      */
-    ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
+    //ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
 
     /**
      * RestaurantAdapter extends ArrayAdapter and provides the layout for each list
      */
-    RestaurantAdapter restaurantAdapter;
+    //RestaurantAdapter restaurantAdapter;
 
     /**
      * Restaurant ListView used to set the Adapter
@@ -198,20 +198,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // Get the restaurants ArrayList using an AsyncTask
-        try
-        {
-            restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
-        } catch (java.lang.InterruptedException e)
-        {
-
-        } catch (java.util.concurrent.ExecutionException e)
-        {
-
-        }
+//        // Get the restaurants ArrayList using an AsyncTask
+//        try
+//        {
+//            restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
+//        } catch (java.lang.InterruptedException e)
+//        {
+//
+//        } catch (java.util.concurrent.ExecutionException e)
+//        {
+//
+//        }
 
         // Find the ListView layout for the restaurants
         listView = (ListView) findViewById(R.id.list);
+
+        // If no records are in the db, set the list view to the empty view
+        View emptyView = findViewById(R.id.empty_view);
+        listView.setEmptyView(emptyView);
 
         // Set up Bottom Navigation Bar to create new instances of the fragments when clicked
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_bar);
@@ -361,11 +365,11 @@ public class MainActivity extends AppCompatActivity
                     else if (selection.equals(getString(R.string.day_sunday)))
                         dayString = getString(R.string.day_sunday);
 
-                    restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+                    //restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
                     //listView = (ListView) findViewById(R.id.list);
 
                     // NOTE: This is the entry point, this line sets the adapter first
-                    listView.setAdapter(restaurantAdapter);
+                    //listView.setAdapter(restaurantAdapter);
 
                     // If changing the day in the MapFragment, update the restaurant markers
                     if (MapFragment.isActive)
@@ -376,7 +380,7 @@ public class MainActivity extends AppCompatActivity
 
                         // Add new MarkerOptions with the updated dayString
                         // TODO: Pass Cursor of restaurants
-                        MapFragment.addMarkersForRestaurants(restaurantsArrayList);
+                        //MapFragment.addMarkersForRestaurants(restaurantsArrayList);
                     }
                 }
             }
@@ -408,37 +412,37 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_sort_by_name)
         {
             // Sort the ArrayList of restaurants by name
-            Collections.sort(restaurantsArrayList, new NameComparator());
-            restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+            //Collections.sort(restaurantsArrayList, new NameComparator());
+            //restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
             //listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(restaurantAdapter);
+            //listView.setAdapter(restaurantAdapter);
             return true;
         }
         if (id == R.id.action_sort_by_location)
         {
             // Sort the ArrayList of restaurants by location
-            Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
-            restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+            //Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
+            //restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
             //listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(restaurantAdapter);
+            //listView.setAdapter(restaurantAdapter);
             return true;
         }
         if (id == R.id.action_reset)
         {
-            try
-            {
-                restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
-            } catch (java.lang.InterruptedException e)
-            {
+//            try
+////            {
+////                restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
+////            } catch (java.lang.InterruptedException e)
+////            {
+////
+////            } catch (java.util.concurrent.ExecutionException e)
+////            {
+////
+////            }
 
-            } catch (java.util.concurrent.ExecutionException e)
-            {
-
-            }
-
-            restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+            //restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
             //listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(restaurantAdapter);
+            //listView.setAdapter(restaurantAdapter);
             return true;
         }
 
@@ -474,11 +478,11 @@ public class MainActivity extends AppCompatActivity
     {
         mCurrentLocation = location;
 
-        Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
+        //Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
 
         // Create an {@link RestaurantAdapter}, whose data source is a list of {@link Restaurant}s.
         // The adapter knows how to create list items for each item in the list.
-        restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
+        //restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -487,7 +491,7 @@ public class MainActivity extends AppCompatActivity
 
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.
-        listView.setAdapter(restaurantAdapter);
+        //listView.setAdapter(restaurantAdapter);
     }
 
     /**
