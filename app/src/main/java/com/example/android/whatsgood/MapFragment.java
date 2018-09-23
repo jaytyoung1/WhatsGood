@@ -247,6 +247,7 @@ public class MapFragment extends Fragment
      *
      * @param arrayList ArrayList of restaurants
      */
+    // TODO: Need to recode this to accept Cursor parameter
     public static void addMarkersForRestaurants(ArrayList<Restaurant> arrayList)
     {
         markerOptionsArrayList = new ArrayList<>();

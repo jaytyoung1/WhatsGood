@@ -15,7 +15,7 @@ import android.provider.BaseColumns;
  *
  * 1) Define schema and have a convention for where to find database constants
  * 2) When generating SQL commands, remove possibility of introducing spelling errors
- * 3)Ease of updating database schema
+ * 3) Ease of updating database schema
  */
 public final class WhatsGoodContract
 {
