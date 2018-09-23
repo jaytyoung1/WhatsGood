@@ -1,9 +1,12 @@
-package com.example.android.whatsgood;
+package com.example.android.whatsgood.Adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.android.whatsgood.MainFragment;
+import com.example.android.whatsgood.MapFragment;
 
 /**
  * Created by jyoun on 11/9/2017.
