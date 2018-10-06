@@ -110,6 +110,51 @@ public class CommonDataAccess
         return restaurantsArrayList.size();
     }
 
+    /**
+     * Maps input cursor to a Restaurant object.
+     *
+     * @param cursor - must contain all fields necessary to instantiate new Restaurant
+     * @return restaurant - new instance of Restaurant class
+     */
+    public Restaurant mapCursorToRestaurant(Cursor cursor)
+    {
+        // Find the columns of the restaurant attributes that we're interested in
+        int restaurantNameColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_NAME);
+        int addressColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_ADDRESS);
+        int latitudeColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_LATITUDE);
+        int longitudeColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_LONGITUDE);
+        int websiteLinkColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_LINK);
+        int restaurantImageColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_IMAGE_RESOURCE_ID);
+        int mondayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_MONDAY_SPECIALS);
+        int tuesdayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_TUESDAY_SPECIALS);
+        int wednesdayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_WEDNESDAY_SPECIALS);
+        int thursdayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_THURSDAY_SPECIALS);
+        int fridayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_FRIDAY_SPECIALS);
+        int saturdayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_SATURDAY_SPECIALS);
+        int sundayColumnIndex = cursor.getColumnIndex(RestaurantEntry.COLUMN_RESTAURANT_SUNDAY_SPECIALS);
+
+        String imageID = cursor.getString(restaurantImageColumnIndex);
+        int resID = mContext.getResources().getIdentifier(imageID, "drawable", mContext.getPackageName());
+
+        Restaurant restaurant = new Restaurant(
+                cursor.getString(restaurantNameColumnIndex),
+                cursor.getString(websiteLinkColumnIndex),
+                cursor.getString(addressColumnIndex),
+                cursor.getDouble(latitudeColumnIndex),
+                cursor.getDouble(longitudeColumnIndex),
+                resID);
+
+        restaurant.mSpecialsHashMap.put("Monday", cursor.getString(mondayColumnIndex));
+        restaurant.mSpecialsHashMap.put("Tuesday", cursor.getString(tuesdayColumnIndex));
+        restaurant.mSpecialsHashMap.put("Wednesday", cursor.getString(wednesdayColumnIndex));
+        restaurant.mSpecialsHashMap.put("Thursday", cursor.getString(thursdayColumnIndex));
+        restaurant.mSpecialsHashMap.put("Friday", cursor.getString(fridayColumnIndex));
+        restaurant.mSpecialsHashMap.put("Saturday", cursor.getString(saturdayColumnIndex));
+        restaurant.mSpecialsHashMap.put("Sunday", cursor.getString(sundayColumnIndex));
+
+        return restaurant;
+    }
+
     // TODO:
 //    public ArrayList<Restaurant> getArrayListOfRestaurantsFromDB()
 //    {
