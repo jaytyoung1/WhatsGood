@@ -67,6 +67,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
         super(context, 0, restaurants);
         mContext = context;
 
+        // What am I doing with this??
         mColorResourceId = colorResourceId;
 
         restaurantsArrayList = restaurants;

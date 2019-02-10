@@ -141,7 +141,7 @@ public class WhatsGoodCursorAdapter extends CursorAdapter
         restaurantNameTextView.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left));
         specialsTextView.setText(restaurantSpecials);
         // Find the color that the resource ID maps to
-        int color = ContextCompat.getColor(mContext, mColorResourceId);
+        int color = ContextCompat.getColor(context, mColorResourceId);
         // Set the background color of the text container View
         textContainer.setBackgroundColor(color);
 
@@ -195,7 +195,7 @@ public class WhatsGoodCursorAdapter extends CursorAdapter
                     //bundle.putSerializable("restaurantClicked", rest);
                     mapFragment.setArguments(bundle);
 
-                    FragmentTransaction transaction = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, mapFragment);
                     transaction.commit();
                 }

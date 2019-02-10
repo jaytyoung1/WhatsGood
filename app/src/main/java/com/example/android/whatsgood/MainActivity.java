@@ -1,10 +1,14 @@
 package com.example.android.whatsgood;
 
 import android.Manifest;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +17,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,8 +35,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.whatsgood.Adapters.RestaurantAdapter;
+//import com.example.android.whatsgood.Adapters.RestaurantAdapter;
+import com.example.android.whatsgood.Adapters.WhatsGoodCursorAdapter;
+//import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
+import com.example.android.whatsgood.data.CommonDataAccess;
 import com.example.android.whatsgood.data.GetRestaurantsAsyncTask;
+import com.example.android.whatsgood.data.WhatsGoodContract.RestaurantEntry;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -42,16 +54,17 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity
-        implements GoogleApiClient.ConnectionCallbacks,
+public class MainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor>,
+        GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener
 {
     /**
      * Database variables
      */
-    //private static final int WHATSGOOD_LOADER = 0;
-    //WhatsGoodCursorAdapter mCursorAdapter;
+    private static final int WHATSGOOD_LOADER = 0;
+    WhatsGoodCursorAdapter mCursorAdapter;
 
     /**
      * Location variables
@@ -61,19 +74,9 @@ public class MainActivity extends AppCompatActivity
     Location mCurrentLocation;
 
     /**
-     * ArrayList of restaurants
-     */
-    //ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
-
-    /**
-     * RestaurantAdapter extends ArrayAdapter and provides the layout for each list
-     */
-    //RestaurantAdapter restaurantAdapter;
-
-    /**
      * Restaurant ListView used to set the Adapter
      */
-    ListView listView;
+    ListView restaurantsListView;
 
     /**
      * Spinner drop down arrow to enter day of the week
@@ -90,6 +93,10 @@ public class MainActivity extends AppCompatActivity
      * Boolean set when MainActivity is active or not active (see onPause() and onResume())
      */
     public static boolean isActive;
+
+    /**
+     * Common data access class
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -198,25 +205,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-//        // Get the restaurants ArrayList using an AsyncTask
-//        try
-//        {
-//            restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
-//        } catch (java.lang.InterruptedException e)
-//        {
-//
-//        } catch (java.util.concurrent.ExecutionException e)
-//        {
-//
-//        }
-
-        // Find the ListView layout for the restaurants
-        listView = (ListView) findViewById(R.id.list);
-
-        // If no records are in the db, set the list view to the empty view
-        View emptyView = findViewById(R.id.empty_view);
-        listView.setEmptyView(emptyView);
-
         // Set up Bottom Navigation Bar to create new instances of the fragments when clicked
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_bar);
 
@@ -272,13 +260,119 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-//        // Setup an Adapter to create a list item for each row of restaurant data in the Cursor.
-//        // There is no restaurant data yet (until the loader finishes) so pass in null for the Cursor.
-//        mCursorAdapter = new WhatsGoodCursorAdapter(this, null);
-//        restaurantsListView.setAdapter(mCursorAdapter);
-//
-//        // Kick off the loader
-//        getLoaderManager().initLoader(WHATSGOOD_LOADER, null, this);
+        // Find the ListView layout for the restaurants
+        restaurantsListView = findViewById(R.id.list);
+
+        // If no records are in the db, set the list view to the empty view
+        View emptyView = findViewById(R.id.empty_view);
+        restaurantsListView.setEmptyView(emptyView);
+
+        // Setup an Adapter to create a list item for each row of restaurant data in the Cursor.
+        // There is no restaurant data yet (until the loader finishes) so pass in null for the Cursor.
+        mCursorAdapter = new WhatsGoodCursorAdapter(this, null);
+        CommonDataAccess commonDataAccess = new CommonDataAccess(this);
+
+        int dbCount = commonDataAccess.getRestaurantDBCount();
+
+        restaurantsListView.setAdapter(mCursorAdapter);
+
+        // Kick off the loader, onCreateLoader() is called as a result
+        getSupportLoaderManager().initLoader(WHATSGOOD_LOADER, null, this);
+
+
+        // This will be the first time user enters the app
+        // Grab the restaurants from google sheet and insert into db if db is empty
+        // If not empty, maybe check to see size of db equals size of google sheet table
+
+        // First query the db to see if db is empty
+        //Cursor cursorBefore = commonDataAccess.examineDataBaseInfo();
+
+        // Get the total number of restaurants in the database. At first run, this should be 0
+        int dbRestaurantCountBefore = commonDataAccess.getRestaurantDBCount();
+
+        // If the restaurants ArrayList is empty, grab them from the Google sheet
+        ArrayList<Restaurant> restaurantsArrayList = new ArrayList<>();
+        boolean isInsertingRestaurants = true;
+        if (restaurantsArrayList.size() == 0)
+        {
+            try
+            {
+                restaurantsArrayList = new GetRestaurantsAsyncTask(this).execute().get();
+            } catch (java.lang.InterruptedException e)
+            {
+
+            } catch (java.util.concurrent.ExecutionException e)
+            {
+
+            }
+        }
+
+        // If the # of restaurants in the DB equals the # of restaurants in the Google sheet, we don't need to insert into DB
+        if (dbRestaurantCountBefore == restaurantsArrayList.size() && restaurantsArrayList.size() > 0)
+            isInsertingRestaurants = false;
+
+        // If we are inserting restaurants into the DB, loop through each restaurant and insert into db
+        if (isInsertingRestaurants)
+        {
+            for (Restaurant restaurant : restaurantsArrayList)
+            {
+                // Create a ContentValues object where column names are the keys,
+                // and the Restaurant attributes are the values
+                ContentValues values = new ContentValues();
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_NAME, restaurant.getName());
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_LINK, restaurant.getLink());
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_ADDRESS, restaurant.getAddress());
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_LATITUDE, restaurant.getLatitude());
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_LONGITUDE, restaurant.getLongitude());
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_IMAGE_RESOURCE_ID, restaurant.getImageResourceId());
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_MONDAY_SPECIALS, restaurant.getSpecial("Monday"));
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_TUESDAY_SPECIALS, restaurant.getSpecial("Tuesday"));
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_WEDNESDAY_SPECIALS, restaurant.getSpecial("Wednesday"));
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_THURSDAY_SPECIALS, restaurant.getSpecial("Thursday"));
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_FRIDAY_SPECIALS, restaurant.getSpecial("Friday"));
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_SATURDAY_SPECIALS, restaurant.getSpecial("Saturday"));
+                values.put(RestaurantEntry.COLUMN_RESTAURANT_SUNDAY_SPECIALS, restaurant.getSpecial("Sunday"));
+
+                // Insert a new row for the restaurant into the provider using the ContentResolver.
+                // Use the {@link RestaurantEntry#CONTENT_URI} to indicate that we want to insert
+                // into the restaurants database table.
+                // Receive the new content URI that will allow us to access the restaurant's data in the future.
+                Uri newUri = getContentResolver().insert(RestaurantEntry.CONTENT_URI, values);
+
+                // Show a toast message depending on whether or not the insertion was successful
+                if (newUri == null)
+                    Toast.makeText(this, "Error with saving restaurant", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, "Restaurant saved", Toast.LENGTH_SHORT);
+            }
+        }
+
+        int dbRestaurantCountAfter = commonDataAccess.getRestaurantDBCount();
+
+
+
+
+        // Add an onClickListener for the ListView item to take user to the RestaurantActivity
+        restaurantsListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
+            {
+                // Create new intent to go to {@link RestaurantActivity}
+                Intent intent = new Intent(MainActivity.this, RestaurantActivity.class);
+
+                // Form the content URI that represents the specific Restaurant that was clicked on,
+                // by appending the id onto the {@link RestaurantEntry#CONTENT_URI}.
+                // Ex) "content://com.example.android.whatsgood/restaurants/2
+                Uri currentRestaurantUri = ContentUris.withAppendedId(RestaurantEntry.CONTENT_URI, id);
+
+                // Set the URI on the data field of the intent
+                intent.setData(currentRestaurantUri);
+
+                // Launch the {@link RestaurantActivity} to display the data for the current Restaurant
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -365,11 +459,9 @@ public class MainActivity extends AppCompatActivity
                     else if (selection.equals(getString(R.string.day_sunday)))
                         dayString = getString(R.string.day_sunday);
 
-                    //restaurantAdapter = new RestaurantAdapter(MainActivity.this, restaurantsArrayList, R.color.colorBackground);
-                    //listView = (ListView) findViewById(R.id.list);
-
-                    // NOTE: This is the entry point, this line sets the adapter first
-                    //listView.setAdapter(restaurantAdapter);
+                    // TODO: This is the entry point, this line sets the adapter first
+                    //restaurantsListView.setAdapter(mCursorAdapter);
+                    restaurantsListView.setAdapter(mCursorAdapter);
 
                     // If changing the day in the MapFragment, update the restaurant markers
                     if (MapFragment.isActive)
@@ -404,6 +496,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        // TODO: Need to figure out how to sort Cursor, not ArrayList anymore
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -476,6 +569,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location)
     {
+        // TODO:
         mCurrentLocation = location;
 
         //Collections.sort(restaurantsArrayList, new LocationComparator(mCurrentLocation));
@@ -566,49 +660,60 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    /**
-//     * Database methods
-//     */
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int id, Bundle args)
-//    {
-//        // Define a projection that specifies the columns from the table we care about
-//        String[] projection = {
-//                RestaurantEntry._ID,
-//                RestaurantEntry.COLUMN_RESTAURANT_NAME,
-//                RestaurantEntry.COLUMN_RESTAURANT_LINK,
-//                RestaurantEntry.COLUMN_RESTAURANT_ADDRESS,
-//                RestaurantEntry.COLUMN_RESTAURANT_LATITUDE,
-//                RestaurantEntry.COLUMN_RESTAURANT_LONGITUDE,
-//                RestaurantEntry.COLUMN_RESTAURANT_IMAGE_RESOURCE_ID,
-//                RestaurantEntry.COLUMN_RESTAURANT_MONDAY_SPECIALS,
-//                RestaurantEntry.COLUMN_RESTAURANT_TUESDAY_SPECIALS,
-//                RestaurantEntry.COLUMN_RESTAURANT_WEDNESDAY_SPECIALS,
-//                RestaurantEntry.COLUMN_RESTAURANT_THURSDAY_SPECIALS,
-//                RestaurantEntry.COLUMN_RESTAURANT_FRIDAY_SPECIALS,
-//                RestaurantEntry.COLUMN_RESTAURANT_SATURDAY_SPECIALS,
-//                RestaurantEntry.COLUMN_RESTAURANT_SUNDAY_SPECIALS};
-//
-//        // This loader will execute the ContentProvider's query method on a background thread
-//        return new CursorLoader(this,     // Parent activity context
-//                RestaurantEntry.CONTENT_URI,    // Provider content URI to query
-//                projection,
-//                null,
-//                null,
-//                null);
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<Cursor> loader, Cursor data)
-//    {
-//        // Update {@link WhatsGoodCursorAdapter} with this new cursor containing updated pet data
-//        mCursorAdapter.swapCursor(data);
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<Cursor> loader)
-//    {
-//        // Callback called when the data needs to be deleted
-//        mCursorAdapter.swapCursor(null);
-//    }
+    /**
+     * Callback that's invoked when the system has initialized the Loader and
+     * is ready to start the query. This usually happens when initLoader() is
+     * called. The loaderID argument contains the ID value passed to the
+     * initLoader() call.
+     */
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args)
+    {
+        // Define a projection that specifies the columns from the table we care about
+        String[] projection = {
+                RestaurantEntry._ID,
+                RestaurantEntry.COLUMN_RESTAURANT_NAME,
+                RestaurantEntry.COLUMN_RESTAURANT_LINK,
+                RestaurantEntry.COLUMN_RESTAURANT_ADDRESS,
+                RestaurantEntry.COLUMN_RESTAURANT_LATITUDE,
+                RestaurantEntry.COLUMN_RESTAURANT_LONGITUDE,
+                RestaurantEntry.COLUMN_RESTAURANT_IMAGE_RESOURCE_ID,
+                RestaurantEntry.COLUMN_RESTAURANT_MONDAY_SPECIALS,
+                RestaurantEntry.COLUMN_RESTAURANT_TUESDAY_SPECIALS,
+                RestaurantEntry.COLUMN_RESTAURANT_WEDNESDAY_SPECIALS,
+                RestaurantEntry.COLUMN_RESTAURANT_THURSDAY_SPECIALS,
+                RestaurantEntry.COLUMN_RESTAURANT_FRIDAY_SPECIALS,
+                RestaurantEntry.COLUMN_RESTAURANT_SATURDAY_SPECIALS,
+                RestaurantEntry.COLUMN_RESTAURANT_SUNDAY_SPECIALS};
+
+        // This loader will execute the ContentProvider's query method on a background thread
+        return new CursorLoader(this,     // Parent activity context
+                RestaurantEntry.CONTENT_URI,    // Provider content URI to query
+                projection,
+                null,
+                null,
+                null);
+    }
+
+    /**
+     * Defines the callback that CursorLoader calls
+     * when it's finished its query
+     */
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data)
+    {
+        // Update {@link WhatsGoodCursorAdapter} with this new cursor containing updated pet data
+        mCursorAdapter.swapCursor(data);
+    }
+
+    /**
+     * Invoked when the CursorLoader is being reset, For example, this is
+     * called if the data in the provider changes and the Cursor becomes stale
+     */
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader)
+    {
+        // Callback called when the data needs to be deleted
+        mCursorAdapter.swapCursor(null);
+    }
 }
